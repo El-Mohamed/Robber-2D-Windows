@@ -8,24 +8,29 @@ using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
-    class Player
+    class Player: ICollider
     {
         enum PlayerState { ToLeft, ToRight }
 
         private Controller controller;
         private Texture2D texture;
-        private Vector2 position;
+        public Vector2 position;
         private Animation animation;
         private bool isMoving;
         private PlayerState playerDirection;
+        private int walkSpeed;
 
-        public Player(Texture2D texture, Vector2 position, Controller controller, Animation animation)
+        public Rectangle CollisionRectangle { get; set ; }
+
+        public Player(Texture2D texture, Vector2 position, Controller controller, Animation animation, Rectangle collisionRectangle)
         {
             this.texture = texture;
             this.position = position;
             this.controller = controller;
             this.animation = animation;
             CreateAnimationFrames();
+            CollisionRectangle = collisionRectangle;
+            walkSpeed = 4;
         }
 
         public void Update(GameTime gameTime)
@@ -35,16 +40,12 @@ namespace Game_Development_Project
 
             if (controller.Left)
             {
-                MoveLeft();
-                isMoving = true;
-                playerDirection = PlayerState.ToLeft;
+                MoveLeft();           
             }
 
             if (controller.Right)
             {
                 MoveRight();
-                isMoving = true;
-                playerDirection = PlayerState.ToRight;
             }
 
             if (isMoving)
@@ -78,11 +79,15 @@ namespace Game_Development_Project
 
         public void MoveRight()
         {
-            position.X += 4;
+            isMoving = true;
+            playerDirection = PlayerState.ToRight;
+            position.X += walkSpeed;
         }
         public void MoveLeft()
         {
-            position.X -= 4;
+            isMoving = true;
+            playerDirection = PlayerState.ToLeft;
+            position.X -= walkSpeed;
         }
     }
 }
