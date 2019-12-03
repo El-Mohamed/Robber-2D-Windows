@@ -9,6 +9,6 @@ namespace Game_Development_Project
 {
     interface ICollider
     {
-        Rectangle CollisionRectangle { get; set ;}
+        Rectangle CollisionRectangle { get; set; }
     }
 }

@@ -13,11 +13,10 @@ namespace Game_Development_Project
         SpriteBatch spriteBatch;
         Player player;
         List<Level> AllLevels;
-
         private Camera camera;
-
         public static int ScreenHeight;
         public static int ScreenWidth;
+        public static int CurrentLevel;
 
         public Game1()
         {
@@ -42,23 +41,22 @@ namespace Game_Development_Project
 
             Texture2D playerTexture = Content.Load<Texture2D>("PlayerSpriteSheet");
             Controller playerController = new Controller();
-            Vector2 playerPosition = new Vector2(1000, 220);
+            Vector2 playerPosition = new Vector2(3000, 700);
+            Vector2 playerSpeed = new Vector2(4, 1);
             Animation playerAnimation = new Animation();
             Rectangle playerCollisonRectangle = new Rectangle((int)playerPosition.X, (int)playerPosition.Y, playerTexture.Width, playerTexture.Height);
-            player = new Player(playerTexture, playerPosition, playerController, playerAnimation, playerCollisonRectangle);
+            player = new Player(playerTexture, playerPosition, playerController, playerAnimation, playerCollisonRectangle, playerSpeed);
 
             // Level 1
 
             byte[,] MapLevel1 = new byte[,]
             {
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                 {1,0,1,0,1,1,0,1,1,1,1,0,1,1,0,1,1,0,0,1,1,1,0,1},
+                 {1,1,0,1,0,1,1,0,1,1,0,1,0,1,1,1,0,1,1,1,0,1,1,0},
+                 {1,0,1,0,1,1,0,1,1,1,1,0,1,1,0,1,1,0,0,1,1,1,0,1},
+                 {1,1,0,1,0,1,1,0,1,1,0,1,0,1,1,1,0,1,1,1,0,1,1,0},
+                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1},
             };
 
             Level level1 = new StartLevel(MapLevel1, new List<Block>());
@@ -66,8 +64,9 @@ namespace Game_Development_Project
             AllLevels = new List<Level>();
             AllLevels.Add(level1);
 
-            // Camera
+            // Other
 
+            CurrentLevel = 0;
             camera = new Camera();
 
         }
@@ -94,7 +93,7 @@ namespace Game_Development_Project
 
             spriteBatch.Begin(transformMatrix: camera.Transform);
 
-            AllLevels[0].Draw(spriteBatch);
+            AllLevels[CurrentLevel].Draw(spriteBatch);
             player.Draw(spriteBatch);
 
             spriteBatch.End();

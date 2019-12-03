@@ -13,7 +13,7 @@ namespace Game_Development_Project
         public Matrix Transform { get; set; }
 
         public void Follow(Player player)
-        {       
+        {
             var position = Matrix.CreateTranslation(
                -player.position.X - (player.CollisionRectangle.Height / 2),
                -player.position.Y - (player.CollisionRectangle.Height / 2),

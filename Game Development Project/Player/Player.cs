@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
-    class Player: ICollider
+    class Player : ICollider
     {
         enum PlayerState { ToLeft, ToRight }
 
@@ -18,11 +18,10 @@ namespace Game_Development_Project
         private Animation animation;
         private bool isMoving;
         private PlayerState playerDirection;
-        private int walkSpeed;
+        public Vector2 Speed;
+        public Rectangle CollisionRectangle { get; set; }
 
-        public Rectangle CollisionRectangle { get; set ; }
-
-        public Player(Texture2D texture, Vector2 position, Controller controller, Animation animation, Rectangle collisionRectangle)
+        public Player(Texture2D texture, Vector2 position, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed)
         {
             this.texture = texture;
             this.position = position;
@@ -30,7 +29,7 @@ namespace Game_Development_Project
             this.animation = animation;
             CreateAnimationFrames();
             CollisionRectangle = collisionRectangle;
-            walkSpeed = 4;
+            Speed = speed;
         }
 
         public void Update(GameTime gameTime)
@@ -40,7 +39,7 @@ namespace Game_Development_Project
 
             if (controller.Left)
             {
-                MoveLeft();           
+                MoveLeft();
             }
 
             if (controller.Right)
@@ -52,6 +51,10 @@ namespace Game_Development_Project
             {
                 animation.Update(gameTime);
             }
+
+            CollisionRectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+
+
 
         }
 
@@ -81,13 +84,15 @@ namespace Game_Development_Project
         {
             isMoving = true;
             playerDirection = PlayerState.ToRight;
-            position.X += walkSpeed;
+            position.X += Speed.X;
         }
         public void MoveLeft()
         {
             isMoving = true;
             playerDirection = PlayerState.ToLeft;
-            position.X -= walkSpeed;
+            position.X -= Speed.X;
         }
+
+
     }
 }
