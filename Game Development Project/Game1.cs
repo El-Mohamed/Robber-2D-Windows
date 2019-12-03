@@ -49,7 +49,7 @@ namespace Game_Development_Project
 
             // Level 1
 
-            byte[,] MapLevel1 = new byte[,]
+            byte[,] ObstaclesLevel1 = new byte[,]
             {
                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                  {1,0,1,0,1,1,0,1,1,1,1,0,1,1,0,1,1,0,0,1,1,1,0,1},
@@ -59,8 +59,19 @@ namespace Game_Development_Project
                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1},
             };
 
-            Level level1 = new StartLevel(MapLevel1, new List<Block>());
-            level1.CreateWorld(Content);
+            byte[,] DoorKeysLevel1 = new byte[,]
+           {
+                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                 {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                 {0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
+                 {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                
+           };
+
+            Level level1 = new StartLevel(ObstaclesLevel1, new List<Block>(), DoorKeysLevel1, new List<DoorKey>());
+            level1.Create(Content);
             AllLevels = new List<Level>();
             AllLevels.Add(level1);
 

@@ -50,12 +50,13 @@
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\StartLevel.cs" />
     <Compile Include="Other\Camera.cs" />
+    <Compile Include="Terrain\Pickables\DoorKey.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Terrain\Block.cs" />
-    <Compile Include="Terrain\Door.cs" />
-    <Compile Include="Terrain\Platform.cs" />
+    <Compile Include="Terrain\Obstacles\Door.cs" />
+    <Compile Include="Terrain\Obstacles\Platform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
