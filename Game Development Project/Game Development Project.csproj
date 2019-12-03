@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
   <PropertyGroup>
@@ -46,9 +46,10 @@
     <Compile Include="Collider\ICollider.cs" />
     <Compile Include="Controls\Controller.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Other\Sprite.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\StartLevel.cs" />
-    <Compile Include="Player\Camera.cs" />
+    <Compile Include="Other\Camera.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

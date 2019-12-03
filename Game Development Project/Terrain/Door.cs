@@ -15,9 +15,6 @@ namespace Game_Development_Project
             ID = 2;
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(Texture1, Position, Color.White);
-        }
+       
     }
 }

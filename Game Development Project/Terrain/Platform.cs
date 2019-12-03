@@ -13,11 +13,9 @@ namespace Game_Development_Project
         public Platform(Texture2D texture, Vector2 position, Rectangle collisonRectangle) : base(texture, position, collisonRectangle)
         {
             ID = 1;
+
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(Texture1, Position, Color.White);
-        }
+     
     }
 }

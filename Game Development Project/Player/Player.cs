@@ -8,29 +8,26 @@ using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
-    class Player : ICollider
+    class Player : Sprite, ICollider
     {
         enum PlayerState { ToLeft, ToRight }
 
         private Controller controller;
-        private Texture2D texture;
-        public Vector2 position;
         private Animation animation;
         private bool isMoving;
         private PlayerState playerDirection;
-        public Vector2 Speed;
-        public Rectangle CollisionRectangle { get; set; }
+        public Vector2 Speed { get; set; }
 
-        public Player(Texture2D texture, Vector2 position, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed)
+        public Player(Texture2D texture, Vector2 position, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed) : base(texture, position)
         {
-            this.texture = texture;
-            this.position = position;
             this.controller = controller;
             this.animation = animation;
             CreateAnimationFrames();
             CollisionRectangle = collisionRectangle;
             Speed = speed;
         }
+
+        public Rectangle CollisionRectangle { get; set; }
 
         public void Update(GameTime gameTime)
         {
@@ -52,9 +49,7 @@ namespace Game_Development_Project
                 animation.Update(gameTime);
             }
 
-            CollisionRectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
-
-
+            CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Texture1.Width, Texture1.Height);
 
         }
 
@@ -67,16 +62,16 @@ namespace Game_Development_Project
             animation.AddFrame(new Rectangle(530, 0, 106, 150));
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             if (playerDirection == PlayerState.ToLeft)
             {
-                spriteBatch.Draw(texture, position, animation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
+                spriteBatch.Draw(Texture1, Position, animation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
             }
 
             if (playerDirection == PlayerState.ToRight)
             {
-                spriteBatch.Draw(texture, position, animation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(Texture1, Position, animation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
             }
         }
 
@@ -84,13 +79,13 @@ namespace Game_Development_Project
         {
             isMoving = true;
             playerDirection = PlayerState.ToRight;
-            position.X += Speed.X;
+            Position = new Vector2(Position.X + Speed.X, Position.Y);
         }
         public void MoveLeft()
         {
             isMoving = true;
             playerDirection = PlayerState.ToLeft;
-            position.X -= Speed.X;
+            Position = new Vector2(Position.X - Speed.X, Position.Y);
         }
 
 
