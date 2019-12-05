@@ -43,13 +43,16 @@
   <ItemGroup>
     <Compile Include="Animations\Animation.cs" />
     <Compile Include="Animations\AnimationFrame.cs" />
+    <Compile Include="Collider\CollisionManager.cs" />
     <Compile Include="Collider\ICollider.cs" />
     <Compile Include="Controls\Controller.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Other\IMover.cs" />
     <Compile Include="Other\Sprite.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\StartLevel.cs" />
     <Compile Include="Other\Camera.cs" />
+    <Compile Include="Player\Inventory.cs" />
     <Compile Include="Terrain\Pickables\DoorKey.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Program.cs" />

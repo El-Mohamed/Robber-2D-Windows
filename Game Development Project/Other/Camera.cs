@@ -15,8 +15,8 @@ namespace Game_Development_Project
         public void Follow(Player player)
         {
             var position = Matrix.CreateTranslation(
-               -player.Position.X - (player.CollisionRectangle.Height / 2),
-               -player.Position.Y - (player.CollisionRectangle.Height / 2),
+               -player.SpriteSheet.Position.X - (player.CollisionRectangle.Height / 2),
+               -player.SpriteSheet.Position.Y - (player.CollisionRectangle.Height / 2),
                0);
 
             var offset = Matrix.CreateTranslation(

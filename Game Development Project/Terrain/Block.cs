@@ -8,21 +8,17 @@ using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
-    abstract class Block : Sprite, ICollider
+    abstract class Block : ICollider
     {
         public Rectangle CollisionRectangle { get; set; }
+        public Sprite SpriteImage { get; set; }
 
-        public Block(Texture2D texture, Vector2 position, Rectangle collisionRectangle) : base(texture, position)
+        public Block(Sprite sprite, Rectangle collisionRectangle)
         {
+            SpriteImage = sprite;
             CollisionRectangle = collisionRectangle;
         }
 
         public int ID { get; protected set; }
-        
-
-       
-
-      
-
     }
 }

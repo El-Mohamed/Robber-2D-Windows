@@ -11,12 +11,12 @@ namespace Game_Development_Project
 {
     class StartLevel : Level
     {
-        public List<DoorKey> AllKeys { get; set; }
+        public List<Block> AllPickables { get; set; }
         public byte[,] DoorKeyArray { get; set; }
-  
-        public StartLevel(byte[,] map, List<Block> allBlocks, byte[,] doorKeyArray, List<DoorKey> allKeys) : base(map, allBlocks)
+
+        public StartLevel(byte[,] map, List<Block> allBlocks, byte[,] doorKeyArray, List<Block> allPickables) : base(map, allBlocks)
         {
-            AllKeys = allKeys;
+            AllPickables = allPickables;
             DoorKeyArray = doorKeyArray;
         }
 
@@ -26,23 +26,27 @@ namespace Game_Development_Project
             {
                 for (int y = 0; y < LevelHeight; y++)
                 {
-                    if(DoorKeyArray[y,x] == 1)
+                    if (DoorKeyArray[y, x] == 1)
                     {
                         Texture2D tempTexture = contentManager.Load<Texture2D>("Key");
-                        Vector2 tempVector = new Vector2((x * 150) + tempTexture.Width, (y * SpaceBetweenPlatforms) - tempTexture.Height); 
+                        Vector2 tempVector = new Vector2((x * 150) + tempTexture.Width, (y * SpaceBetweenPlatforms) - tempTexture.Height);
                         Rectangle tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
-                        DoorKey tempDoorKey = new DoorKey(tempTexture, tempVector, tempCollisonRectangle);
-                        AllKeys.Add(tempDoorKey);
+                        Sprite tempSprite = new Sprite(tempTexture, 1, tempVector);
+                        DoorKey tempDoorKey = new DoorKey(tempSprite, tempCollisonRectangle)
+                        {
+                            IsRightKey = true // TODO CREATE RANDOM
+                        };
+                        AllPickables.Add(tempDoorKey);
                     }
                 }
             }
         }
 
-        private void DrawDoorKeys(SpriteBatch spriteBatch)
+        private void DrawPickables(SpriteBatch spriteBatch)
         {
-            foreach (DoorKey key in AllKeys)
+            foreach (Block pickable in AllPickables)
             {
-                key.Draw(spriteBatch);
+                pickable.SpriteImage.Draw(spriteBatch);
             }
         }
 
@@ -55,8 +59,7 @@ namespace Game_Development_Project
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.DrawWorld(spriteBatch);
-            DrawDoorKeys(spriteBatch);
-
+            DrawPickables(spriteBatch);
         }
     }
 }

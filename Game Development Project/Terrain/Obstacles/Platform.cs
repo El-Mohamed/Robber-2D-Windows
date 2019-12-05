@@ -10,12 +10,9 @@ namespace Game_Development_Project
 {
     class Platform : Block
     {
-        public Platform(Texture2D texture, Vector2 position, Rectangle collisonRectangle) : base(texture, position, collisonRectangle)
+        public Platform(Sprite sprite, Rectangle collisionRectangle) : base(sprite, collisionRectangle)
         {
             ID = 1;
-
         }
-
-     
     }
 }

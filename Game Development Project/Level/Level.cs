@@ -9,7 +9,7 @@ namespace Game_Development_Project
     class Level
     {
         protected int SpaceBetweenPlatforms = 210;
-        protected List<Block> AllObstacles { get; set; }
+        public List<Block> AllObstacles { get; set; }
         protected byte[,] ObstaclesArray { get; set; }
         protected long LevelHeight { get; }
         protected long MapWidth { get; }
@@ -37,7 +37,8 @@ namespace Game_Development_Project
             Texture2D tempTexture = contentManager.Load<Texture2D>("Block1");
             Vector2 tempVector = new Vector2();
             Rectangle tempCollisonRectangle = new Rectangle();
-            Block tempObstacle = new Platform(tempTexture, tempVector, tempCollisonRectangle);
+            Sprite tempSprite = new Sprite(tempTexture, 1, tempVector);
+            Block tempObstacle = new Platform(tempSprite, tempCollisonRectangle);
 
             for (int x = 0; x < MapWidth; x++)
             {
@@ -50,18 +51,20 @@ namespace Game_Development_Project
                     {
                         tempTexture = contentManager.Load<Texture2D>("Block" + ID_STRING);
                     }
-                  
+
                     switch (ObstaclesArray[y, x])
                     {
                         case 1:
                             tempVector = new Vector2(x * tempTexture.Width, y * SpaceBetweenPlatforms);
                             tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
-                            tempObstacle = new Platform(tempTexture, tempVector, tempCollisonRectangle);
+                            tempSprite = new Sprite(tempTexture, 1, tempVector);
+                            tempObstacle = new Platform(tempSprite, tempCollisonRectangle);
                             break;
                         case 2:
                             tempVector = new Vector2((x * tempTexture.Width), (y * tempTexture.Width) + 140);
                             tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
-                            tempObstacle = new Door(tempTexture, tempVector, tempCollisonRectangle);
+                            tempSprite = new Sprite(tempTexture, 1, tempVector);
+                            tempObstacle = new Door(tempSprite, tempCollisonRectangle);
                             break;
                         default:
                             break;
@@ -76,7 +79,7 @@ namespace Game_Development_Project
         {
             foreach (Block obstacle in AllObstacles)
             {
-                obstacle.Draw(spriteBatch);
+                obstacle.SpriteImage.Draw(spriteBatch);
             }
         }
     }

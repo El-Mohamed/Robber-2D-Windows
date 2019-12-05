@@ -8,86 +8,119 @@ using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
-    class Player : Sprite, ICollider
+    class Player : ICollider, IMover
     {
         enum PlayerState { ToLeft, ToRight }
 
-        private Controller controller;
-        private Animation animation;
-        private bool isMoving;
-        private PlayerState playerDirection;
+        private Controller Controller { get; set; }
+        private Animation Animation { get; set; }
+        private bool IsMoving { get; set; }
+        public Sprite SpriteSheet { get; set; }
+        private PlayerState PlayerDirection { get; set; }
         public Vector2 Speed { get; set; }
-
-        public Player(Texture2D texture, Vector2 position, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed) : base(texture, position)
-        {
-            this.controller = controller;
-            this.animation = animation;
-            CreateAnimationFrames();
-            CollisionRectangle = collisionRectangle;
-            Speed = speed;
-        }
+        public Inventory Inventory { get; set; }
 
         public Rectangle CollisionRectangle { get; set; }
 
+
+        public Player(Sprite spriteSheet, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed, Inventory inventory)
+        {
+            SpriteSheet = spriteSheet;
+            Controller = controller;
+            Animation = animation;
+            CollisionRectangle = collisionRectangle;
+            Speed = speed;
+            Inventory = inventory;
+            CreateAnimationFrames();
+        }
+
         public void Update(GameTime gameTime)
         {
-            controller.Update();
-            isMoving = false;
+            FallDown();
+            Controller.Update();
+            IsMoving = false;
 
-            if (controller.Left)
+            if (Controller.Left)
             {
                 MoveLeft();
             }
 
-            if (controller.Right)
+            if (Controller.Right)
             {
                 MoveRight();
             }
 
-            if (isMoving)
+            if (IsMoving)
             {
-                animation.Update(gameTime);
+                Animation.Update(gameTime);
             }
 
-            CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Texture1.Width, Texture1.Height);
+            CollisionRectangle = new Rectangle((int)SpriteSheet.Position.X, (int)SpriteSheet.Position.Y, SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites, SpriteSheet.Texture1.Height);
 
         }
 
         public void CreateAnimationFrames()
         {
-            animation.AddFrame(new Rectangle(0, 0, 106, 150));
-            animation.AddFrame(new Rectangle(106, 0, 106, 150));
-            animation.AddFrame(new Rectangle(212, 0, 106, 150));
-            animation.AddFrame(new Rectangle(318, 0, 106, 150));
-            animation.AddFrame(new Rectangle(530, 0, 106, 150));
+            int OffSet = 0;
+            int IndividualSpirteLength = SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites;
+
+            for (int i = 0; i < SpriteSheet.NumberOfSprites - 1; i++)
+            {
+                OffSet = (SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites) * i;
+                Animation.AddFrame(new Rectangle(OffSet, 0, IndividualSpirteLength, SpriteSheet.Texture1.Height));
+            }
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            if (playerDirection == PlayerState.ToLeft)
+            if (PlayerDirection == PlayerState.ToLeft)
             {
-                spriteBatch.Draw(Texture1, Position, animation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
+                spriteBatch.Draw(SpriteSheet.Texture1, SpriteSheet.Position, Animation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
             }
 
-            if (playerDirection == PlayerState.ToRight)
+            if (PlayerDirection == PlayerState.ToRight)
             {
-                spriteBatch.Draw(Texture1, Position, animation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(SpriteSheet.Texture1, SpriteSheet.Position, Animation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
             }
         }
 
         public void MoveRight()
         {
-            isMoving = true;
-            playerDirection = PlayerState.ToRight;
-            Position = new Vector2(Position.X + Speed.X, Position.Y);
-        }
-        public void MoveLeft()
-        {
-            isMoving = true;
-            playerDirection = PlayerState.ToLeft;
-            Position = new Vector2(Position.X - Speed.X, Position.Y);
+          
+                IsMoving = true;
+                SpriteSheet.Position = new Vector2(SpriteSheet.Position.X + Speed.X, SpriteSheet.Position.Y);
+         
+
+            PlayerDirection = PlayerState.ToRight;
         }
 
+        public void MoveLeft()
+        {
+           
+                IsMoving = true;
+                SpriteSheet.Position = new Vector2(SpriteSheet.Position.X - Speed.X, SpriteSheet.Position.Y);
+           
+
+            PlayerDirection = PlayerState.ToLeft;
+
+        }
+
+        public void FallDown()
+        {
+            SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y + Speed.Y);
+        }
+
+        public void SetFallSpeed(bool state)
+        {
+            if (state)
+            {
+                Speed = new Vector2(Speed.X, 0);
+            }
+            else
+            {
+                Speed = new Vector2(Speed.X, 1);
+            }
+        }
 
     }
 }

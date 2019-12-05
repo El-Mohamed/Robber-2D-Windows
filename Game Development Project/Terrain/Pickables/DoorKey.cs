@@ -8,12 +8,20 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game_Development_Project
 {
-    class DoorKey : Block
+    class DoorKey : Block, ICloneable
     {
+        public DoorKey(Sprite sprite, Rectangle collisionRectangle) : base(sprite, collisionRectangle)
+        {
+        }
+
         public bool IsRightKey { get; set; }
 
-        public DoorKey(Texture2D texture, Vector2 position, Rectangle collisionRectangle) : base(texture, position, collisionRectangle)
+        public object Clone()
         {
+            return new DoorKey(this.SpriteImage, this.CollisionRectangle)
+            {
+                IsRightKey = this.IsRightKey
+            }; ;
         }
     }
 }

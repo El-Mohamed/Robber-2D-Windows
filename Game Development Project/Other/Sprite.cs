@@ -10,11 +10,13 @@ namespace Game_Development_Project
 {
     class Sprite
     {
+        public int NumberOfSprites { get; set; }
         public Texture2D Texture1 { get; set; }
         public Vector2 Position { get; set; }
 
-        public Sprite(Texture2D texture, Vector2 position)
+        public Sprite(Texture2D texture, int spriteSheetLength, Vector2 position)
         {
+            NumberOfSprites = spriteSheetLength;
             Texture1 = texture;
             Position = position;
         }

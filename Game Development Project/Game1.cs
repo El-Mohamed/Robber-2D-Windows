@@ -17,12 +17,15 @@ namespace Game_Development_Project
         public static int ScreenHeight;
         public static int ScreenWidth;
         public static int CurrentLevel;
+        CollisionManager collisionManager;
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+                PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height
+            };
             Content.RootDirectory = "Content";
             ScreenHeight = graphics.PreferredBackBufferHeight;
             ScreenWidth = graphics.PreferredBackBufferWidth;
@@ -39,13 +42,16 @@ namespace Game_Development_Project
 
             // Player 1
 
+            int spriteSheetLength = 6;
             Texture2D playerTexture = Content.Load<Texture2D>("PlayerSpriteSheet");
             Controller playerController = new Controller();
-            Vector2 playerPosition = new Vector2(3000, 700);
+            Vector2 playerPosition = new Vector2(3000, 200);
             Vector2 playerSpeed = new Vector2(4, 1);
             Animation playerAnimation = new Animation();
-            Rectangle playerCollisonRectangle = new Rectangle((int)playerPosition.X, (int)playerPosition.Y, playerTexture.Width, playerTexture.Height);
-            player = new Player(playerTexture, playerPosition, playerController, playerAnimation, playerCollisonRectangle, playerSpeed);
+            Sprite playerSprite = new Sprite(playerTexture, 6, playerPosition);
+            Rectangle playerCollisonRectangle = new Rectangle((int)playerPosition.X, (int)playerPosition.Y, playerTexture.Width / spriteSheetLength, playerTexture.Height);
+            Inventory playerInventory = new Inventory();
+            player = new Player(playerSprite, playerController, playerAnimation, playerCollisonRectangle, playerSpeed, playerInventory);
 
             // Level 1
 
@@ -67,18 +73,22 @@ namespace Game_Development_Project
                  {0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
                  {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},
                  {0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-                
+
            };
 
-            Level level1 = new StartLevel(ObstaclesLevel1, new List<Block>(), DoorKeysLevel1, new List<DoorKey>());
+            List<Block> PickablesLevel1 = new List<Block>();
+            Level level1 = new StartLevel(ObstaclesLevel1, new List<Block>(), DoorKeysLevel1, PickablesLevel1);
             level1.Create(Content);
-            AllLevels = new List<Level>();
-            AllLevels.Add(level1);
+            AllLevels = new List<Level>
+            {
+                level1
+            };
 
             // Other
 
             CurrentLevel = 0;
             camera = new Camera();
+            collisionManager = new CollisionManager();
 
         }
 
@@ -105,6 +115,7 @@ namespace Game_Development_Project
             spriteBatch.Begin(transformMatrix: camera.Transform);
 
             AllLevels[CurrentLevel].Draw(spriteBatch);
+            collisionManager.CheckCollision(player, AllLevels[CurrentLevel]);
             player.Draw(spriteBatch);
 
             spriteBatch.End();

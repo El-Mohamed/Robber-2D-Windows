@@ -10,11 +10,9 @@ namespace Game_Development_Project
 {
     class Door : Block
     {
-        public Door(Texture2D texture, Vector2 position, Rectangle collisonRectangle) : base(texture, position, collisonRectangle)
+        public Door(Sprite sprite, Rectangle collisionRectangle) : base(sprite, collisionRectangle)
         {
             ID = 2;
         }
-
-       
     }
 }
