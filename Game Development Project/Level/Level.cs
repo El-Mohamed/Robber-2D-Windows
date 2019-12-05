@@ -8,7 +8,7 @@ namespace Game_Development_Project
 {
     class Level
     {
-        public int  NextLevel { get; set; }
+        public int NextLevel { get; set; }
         public Vector2 StartPosition { get; set; }
         protected int SpaceBetweenPlatforms = 210;
         public List<Block> AllObstacles { get; set; }
@@ -43,7 +43,7 @@ namespace Game_Development_Project
 
         private void CreatePickables(ContentManager contentManager)
         {
-            Texture2D tempTexture = contentManager.Load<Texture2D>("Key");
+            Texture2D tempTexture = contentManager.Load<Texture2D>("Pickable1");
             Vector2 tempVector = new Vector2();
             Rectangle tempCollisonRectangle = new Rectangle();
             Sprite tempSprite = new Sprite(tempTexture, 1, tempVector);
@@ -51,17 +51,45 @@ namespace Game_Development_Project
             {
                 for (int y = 0; y < LevelHeight; y++)
                 {
-                    if (PickablesArray[y, x] == 1)
+                    int BLOCK_ID = PickablesArray[y, x];
+                    string ID_STRING = Convert.ToString(BLOCK_ID);
+
+                    if (ID_STRING != "0")
                     {
-                        tempTexture = contentManager.Load<Texture2D>("Key");
-                        tempVector = new Vector2((x * 150) + tempTexture.Width, (y * SpaceBetweenPlatforms) - tempTexture.Height);
-                        tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
-                        tempSprite = new Sprite(tempTexture, 1, tempVector);
-                        DoorKey tempDoorKey = new DoorKey(tempSprite, tempCollisonRectangle)
-                        {
-                            IsCorrect = true // TODO CREATE RANDOM
-                        };
-                        AllPickables.Add(tempDoorKey);
+                        tempTexture = contentManager.Load<Texture2D>("Pickable" + ID_STRING);
+                    }
+
+                    const int marginBottom = 10; // Margin between pickable and platform                                     
+                    int maginLeft = (150 - tempTexture.Width) / 2; // Calculate margin to center Pickable on the platform
+                    tempVector = new Vector2((x * 150) + maginLeft, (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom);
+                    tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
+                    tempSprite = new Sprite(tempTexture, 1, tempVector);
+
+                    switch (PickablesArray[y, x])
+                    {
+                        case 1:                                 
+                            DoorKey tempDoorKey = new DoorKey(tempSprite, tempCollisonRectangle)
+                            {
+                                IsCorrect = true // TODO CREATE RANDOM
+                            };
+                            AllPickables.Add(tempDoorKey as Block);
+                            break;
+                        case 2:             
+                            Coin tempCoin = new Coin(tempSprite, tempCollisonRectangle)
+                            {
+                                Value = 100 // TODO CREATE RANDOM
+                            };
+                            AllPickables.Add(tempCoin);
+                            break;
+                        case 3:                        
+                            Potion tempPotion= new Potion(tempSprite, tempCollisonRectangle)
+                            {
+                                SpeedAcceleration = 2 // TODO CREATE RANDOM
+                            };
+                            AllPickables.Add(tempPotion);
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -107,7 +135,7 @@ namespace Game_Development_Project
                             tempVector = new Vector2((x * tempTexture.Width), (y * tempTexture.Width) + 140);
                             tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
                             tempSprite = new Sprite(tempTexture, 1, tempVector);
-                            tempObstacle = new Door(tempSprite, tempCollisonRectangle);                                          
+                            tempObstacle = new Door(tempSprite, tempCollisonRectangle);
                             break;
                         default:
                             break;

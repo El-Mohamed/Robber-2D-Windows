@@ -53,6 +53,7 @@
     <Compile Include="Level\StartLevel.cs" />
     <Compile Include="Other\Camera.cs" />
     <Compile Include="Player\Inventory.cs" />
+    <Compile Include="Terrain\Pickables\Coin.cs" />
     <Compile Include="Terrain\Pickables\DoorKey.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Program.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Terrain\Block.cs" />
     <Compile Include="Terrain\Obstacles\Door.cs" />
     <Compile Include="Terrain\Obstacles\Platform.cs" />
+    <Compile Include="Terrain\Pickables\Potion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

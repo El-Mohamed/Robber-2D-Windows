@@ -45,7 +45,7 @@ namespace Game_Development_Project
             int spriteSheetLength = 6;
             Texture2D playerTexture = Content.Load<Texture2D>("PlayerSpriteSheet");
             Controller playerController = new Controller();
-            Vector2 playerPosition = new Vector2(3000, 400);
+            Vector2 playerPosition = new Vector2(0, 0);
             Vector2 playerSpeed = new Vector2(4, 1);
             Animation playerAnimation = new Animation();
             Sprite playerSprite = new Sprite(playerTexture, 6, playerPosition);
@@ -93,7 +93,7 @@ namespace Game_Development_Project
             byte[,] ObstaclesLevel2 = new byte[,]
             {
                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                   {1,1,0,0,1,0,0,1,1,0,0,1,1,0,0,0,1,0,1,1,0,1,0,1},
+                 {1,1,0,0,1,0,0,1,1,0,0,1,1,0,0,0,1,0,1,1,0,1,0,1},
                  {0,1,1,1,0,0,1,1,0,1,1,0,0,1,1,1,0,1,1,0,1,1,1,1},
                  {1,1,0,0,1,0,0,1,1,0,0,1,1,0,0,0,1,0,1,1,0,1,0,1},
                  {0,1,1,1,0,0,1,1,0,1,1,0,0,1,1,1,0,1,1,0,1,1,1,1},
@@ -103,14 +103,14 @@ namespace Game_Development_Project
             byte[,] PickablesLevel2 = new byte[,]
             {
                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},
+                 {0,2,0,0,3,0,0,2,0,0,0,0,2,0,0,0,3,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0},
+                 {0,3,2,0,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2},
+                 {2,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,0},
                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             };
 
-            Level level2 = new StartLevel(ObstaclesLevel2, PickablesLevel2, new List<Block>(), new List<Block>());
+            Level level2 = new Level(ObstaclesLevel2, PickablesLevel2, new List<Block>(), new List<Block>());
             level2.Create(Content);
             level2.NextLevel = AllLevels.Count + 1;
             AllLevels.Add(level2);

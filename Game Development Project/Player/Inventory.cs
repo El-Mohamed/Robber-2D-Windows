@@ -9,10 +9,14 @@ namespace Game_Development_Project
     class Inventory
     {
         public List<DoorKey> MyKeys { get; set; }
+        public List<Coin> MyCoins { get; set; }
+        public List<Potion> MyPotion { get; set; }
 
         public Inventory()
         {
             MyKeys = new List<DoorKey>();
+            MyCoins = new List<Coin>();
+            MyPotion = new List<Potion>();
         }
 
         public bool HasCorrectDoorkey()
@@ -38,6 +42,18 @@ namespace Game_Development_Project
                 DoorKey doorKey = Item as DoorKey;
                 DoorKey clone = (doorKey.Clone()) as DoorKey;
                 MyKeys.Add(clone);
+            }
+            if (Item is Coin)
+            {
+                Coin coin = Item as Coin;
+                Coin clone = (coin.Clone()) as Coin;
+                MyCoins.Add(clone);
+            }
+            if (Item is Potion)
+            {
+                Potion potion = Item as Potion;
+                Potion clone = (potion.Clone()) as Potion;
+                MyPotion.Add(clone);
             }
 
         }
