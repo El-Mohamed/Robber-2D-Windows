@@ -14,13 +14,13 @@ namespace Game_Development_Project
         {
         }
 
-        public bool IsRightKey { get; set; }
+        public bool IsCorrect { get; set; }
 
         public object Clone()
         {
             return new DoorKey(this.SpriteImage, this.CollisionRectangle)
             {
-                IsRightKey = this.IsRightKey
+                IsCorrect = this.IsCorrect
             }; ;
         }
     }

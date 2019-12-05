@@ -34,6 +34,11 @@ namespace Game_Development_Project
             CreateAnimationFrames();
         }
 
+        public void ResetPositon()
+        {
+            SpriteSheet.Position = new Vector2(0, 0);
+        }
+
         public void Update(GameTime gameTime)
         {
             FallDown();

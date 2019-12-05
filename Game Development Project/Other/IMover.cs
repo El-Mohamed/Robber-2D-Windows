@@ -12,5 +12,6 @@ namespace Game_Development_Project
         Vector2 Speed { get; set; }
         void MoveRight();
         void MoveLeft();
+        void Update(GameTime gameTime);
     }
 }

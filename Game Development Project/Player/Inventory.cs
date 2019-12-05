@@ -15,6 +15,21 @@ namespace Game_Development_Project
             MyKeys = new List<DoorKey>();
         }
 
+        public bool HasCorrectDoorkey()
+        {
+            bool CorrectKeyFound = false;
+
+            foreach (DoorKey doorKey in MyKeys)
+            {
+                if(doorKey.IsCorrect)
+                {
+                    CorrectKeyFound = true;
+                }
+            }
+
+            return CorrectKeyFound;
+        }
+
         public void AddItem(Block Item)
         {
 

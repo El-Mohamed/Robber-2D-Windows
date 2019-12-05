@@ -12,14 +12,14 @@ namespace Game_Development_Project
 
         public void CheckCollision(Player player, Level currentLevel)
         {
-            if (currentLevel is StartLevel)
-            {
-                StartLevel startLevel = currentLevel as StartLevel;
-                CheckPickablesCollision(player, startLevel);
+            if (currentLevel is Level)
+            {                
+                CheckPickablesCollision(player, currentLevel);
+                CheckDoorCollision(player, currentLevel);
             }
         }
 
-        private void CheckPickablesCollision(Player player, StartLevel currentLevel)
+        private void CheckPickablesCollision(Player player, Level currentLevel)
         {
             bool hasCollided = false;
             int itemIndex = 0;
@@ -37,6 +37,23 @@ namespace Game_Development_Project
             {
                 player.Inventory.AddItem(currentLevel.AllPickables[itemIndex]);
                 currentLevel.AllPickables.RemoveAt(itemIndex);
+            }
+        }
+
+        private void CheckDoorCollision(Player player, Level currentLevel)
+        {
+            foreach (Block obstacle in currentLevel.AllObstacles)
+            {
+                if(obstacle is Door)
+                {
+                    Door door = obstacle as Door;
+                    if (player.CollisionRectangle.Intersects(door.CollisionRectangle) && player.Inventory.HasCorrectDoorkey())
+                    {                       
+                        Game1.CurrentLevel = currentLevel.NextLevel;
+                        player.ResetPositon();
+                    }
+
+                }
             }
         }
 

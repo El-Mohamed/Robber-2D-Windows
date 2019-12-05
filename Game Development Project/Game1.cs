@@ -45,13 +45,20 @@ namespace Game_Development_Project
             int spriteSheetLength = 6;
             Texture2D playerTexture = Content.Load<Texture2D>("PlayerSpriteSheet");
             Controller playerController = new Controller();
-            Vector2 playerPosition = new Vector2(3000, 200);
+            Vector2 playerPosition = new Vector2(3000, 400);
             Vector2 playerSpeed = new Vector2(4, 1);
             Animation playerAnimation = new Animation();
             Sprite playerSprite = new Sprite(playerTexture, 6, playerPosition);
             Rectangle playerCollisonRectangle = new Rectangle((int)playerPosition.X, (int)playerPosition.Y, playerTexture.Width / spriteSheetLength, playerTexture.Height);
             Inventory playerInventory = new Inventory();
             player = new Player(playerSprite, playerController, playerAnimation, playerCollisonRectangle, playerSpeed, playerInventory);
+
+            // Other
+
+            AllLevels = new List<Level>();
+            CurrentLevel = 0;
+            camera = new Camera();
+            collisionManager = new CollisionManager();
 
             // Level 1
 
@@ -65,7 +72,7 @@ namespace Game_Development_Project
                  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1},
             };
 
-            byte[,] DoorKeysLevel1 = new byte[,]
+            byte[,] PickablesLevel1 = new byte[,]
            {
                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                  {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
@@ -76,20 +83,37 @@ namespace Game_Development_Project
 
            };
 
-            List<Block> PickablesLevel1 = new List<Block>();
-            Level level1 = new StartLevel(ObstaclesLevel1, new List<Block>(), DoorKeysLevel1, PickablesLevel1);
+            Level level1 = new Level(ObstaclesLevel1, PickablesLevel1, new List<Block>(), new List<Block>());
             level1.Create(Content);
-            AllLevels = new List<Level>
+            level1.NextLevel = AllLevels.Count + 1;
+            AllLevels.Add(level1);
+
+            // Level 2
+
+            byte[,] ObstaclesLevel2 = new byte[,]
             {
-                level1
+                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                   {1,1,0,0,1,0,0,1,1,0,0,1,1,0,0,0,1,0,1,1,0,1,0,1},
+                 {0,1,1,1,0,0,1,1,0,1,1,0,0,1,1,1,0,1,1,0,1,1,1,1},
+                 {1,1,0,0,1,0,0,1,1,0,0,1,1,0,0,0,1,0,1,1,0,1,0,1},
+                 {0,1,1,1,0,0,1,1,0,1,1,0,0,1,1,1,0,1,1,0,1,1,1,1},
+                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1},
             };
 
-            // Other
+            byte[,] PickablesLevel2 = new byte[,]
+            {
+                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                 {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+            };
 
-            CurrentLevel = 0;
-            camera = new Camera();
-            collisionManager = new CollisionManager();
-
+            Level level2 = new StartLevel(ObstaclesLevel2, PickablesLevel2, new List<Block>(), new List<Block>());
+            level2.Create(Content);
+            level2.NextLevel = AllLevels.Count + 1;
+            AllLevels.Add(level2);
         }
 
         protected override void UnloadContent()
