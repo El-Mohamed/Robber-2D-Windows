@@ -14,9 +14,9 @@ namespace Game_Development_Project
         public Texture2D Texture1 { get; set; }
         public Vector2 Position { get; set; }
 
-        public Sprite(Texture2D texture, int spriteSheetLength, Vector2 position)
+        public Sprite(Texture2D texture, int numberOfSprites, Vector2 position)
         {
-            NumberOfSprites = spriteSheetLength;
+            NumberOfSprites = numberOfSprites;
             Texture1 = texture;
             Position = position;
         }

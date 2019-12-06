@@ -41,6 +41,11 @@ namespace Game_Development_Project
             DrawPickables(spritebatch);
         }
 
+        public virtual void Update(GameTime gameTime, ContentManager contentManager)
+        {
+
+        }
+
         private void CreatePickables(ContentManager contentManager)
         {
             Texture2D tempTexture = contentManager.Load<Texture2D>("Pickable1");

@@ -110,7 +110,17 @@ namespace Game_Development_Project
                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             };
 
-            Level level2 = new Level(ObstaclesLevel2, PickablesLevel2, new List<Block>(), new List<Block>());
+            byte[,] EnemiesLevel2 = new byte[,]
+             {
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0},
+            };
+
+            HardLevel level2 = new HardLevel(ObstaclesLevel2, PickablesLevel2, EnemiesLevel2, new List<Block>(), new List<Block>(), new List<Tank>());
             level2.Create(Content);
             //level2.NextLevel = AllLevels.Count + 1;
             level2.NextLevel = 0; // Go back to first level
@@ -129,6 +139,9 @@ namespace Game_Development_Project
 
             camera.Follow(player);
             player.Update(gameTime);
+
+            AllLevels[CurrentLevel].Update(gameTime, Content);
+
 
             base.Update(gameTime);
         }
