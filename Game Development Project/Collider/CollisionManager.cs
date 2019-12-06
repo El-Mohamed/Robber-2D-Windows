@@ -12,10 +12,30 @@ namespace Game_Development_Project
 
         public void CheckCollision(Player player, Level currentLevel)
         {
-            if (currentLevel is Level)
-            {                
-                CheckPickablesCollision(player, currentLevel);
-                CheckDoorCollision(player, currentLevel);
+
+            CheckPickablesCollision(player, currentLevel);
+            CheckDoorCollision(player, currentLevel);
+
+
+            if (currentLevel is HardLevel)
+            {
+                HardLevel hardLevel = currentLevel as HardLevel;
+                CheckBulletsCollison(player, hardLevel);
+            }
+        }
+
+        private void CheckBulletsCollison(Player player, HardLevel hardLevel)
+        {
+            foreach (Tank tank in hardLevel.AllTanks)
+            {
+                for (int i = 0; i < tank.ShootedBullets.Count; i++)
+                {
+                    if (tank.ShootedBullets[i].CollisionRectangle.Intersects(player.CollisionRectangle))
+                    {
+                        player.UpdateHealth(tank.ShootedBullets[i]);
+                        tank.ShootedBullets.RemoveAt(i);
+                    }
+                }
             }
         }
 
@@ -44,11 +64,11 @@ namespace Game_Development_Project
         {
             foreach (Block obstacle in currentLevel.AllObstacles)
             {
-                if(obstacle is Door)
+                if (obstacle is Door)
                 {
                     Door door = obstacle as Door;
                     if (player.CollisionRectangle.Intersects(door.CollisionRectangle) && player.Inventory.HasCorrectDoorkey())
-                    {                       
+                    {
                         Game1.CurrentLevel = currentLevel.NextLevel;
                         player.Respawn();
                     }

@@ -18,7 +18,7 @@ namespace Game_Development_Project
             this.Inventory = inventory;
         }
 
-        public void ShowInventroy(ContentManager content, Vector2 position, SpriteBatch spriteBatch)
+        public void ShowInventroy(Player player,ContentManager content, SpriteBatch spriteBatch)
         {
             Texture2D keyTexture = content.Load<Texture2D>("Pickable1");
             Texture2D coinTexture = content.Load<Texture2D>("Pickable2");
@@ -28,6 +28,9 @@ namespace Game_Development_Project
 
             Vector2 tempVector;
             Sprite tempSprite;
+
+            // Get the position of the screen corner
+            Vector2 position = new Vector2(player.SpriteSheet.Position.X - (Game1.ScreenWidth / 2) + 100, player.SpriteSheet.Position.Y - (Game1.ScreenHeight / 2) + 100);
 
             int NextYPos = 0;
 

@@ -22,6 +22,7 @@ namespace Game_Development_Project
 
         public Rectangle CollisionRectangle { get; set; }
 
+        public int Health { get; set; }
 
         public Player(Sprite spriteSheet, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed, Inventory inventory)
         {
@@ -32,6 +33,7 @@ namespace Game_Development_Project
             Speed = speed;
             Inventory = inventory;
             CreateAnimationFrames();
+            Health = 100;
         }
 
         public void Respawn()
@@ -140,6 +142,11 @@ namespace Game_Development_Project
             {
                 Speed = new Vector2(Speed.X, 1);
             }
+        }
+
+        public void UpdateHealth(Bullet bullet)
+        {
+            Health -= bullet.Damage;
         }
 
     }

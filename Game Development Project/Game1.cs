@@ -19,7 +19,8 @@ namespace Game_Development_Project
         public static int CurrentLevel;
         CollisionManager collisionManager;
         InventoryHelper inventroyHelper;
-        Vector2 inventoryPosition;
+        Healtbar healtbar;
+
 
         public Game1()
         {
@@ -62,10 +63,10 @@ namespace Game_Development_Project
             camera = new Camera();
             collisionManager = new CollisionManager();
 
-            // Inventory Helper
+            // Inventory Helper & Healthbar
 
             inventroyHelper = new InventoryHelper(player.Inventory);
-            inventoryPosition = new Vector2();
+            healtbar = new Healtbar();
 
             // Level 1
 
@@ -148,7 +149,7 @@ namespace Game_Development_Project
             player.Update(gameTime);
 
             AllLevels[CurrentLevel].Update(gameTime, Content);
-            inventoryPosition = new Vector2(player.SpriteSheet.Position.X - (ScreenWidth / 2) + 100, player.SpriteSheet.Position.Y - (ScreenHeight / 2) + 100);
+
 
             base.Update(gameTime);
         }
@@ -163,7 +164,8 @@ namespace Game_Development_Project
             collisionManager.CheckCollision(player, AllLevels[CurrentLevel]);
             player.Draw(spriteBatch);
 
-            inventroyHelper.ShowInventroy(Content, inventoryPosition, spriteBatch);
+            inventroyHelper.ShowInventroy(player, Content, spriteBatch);
+            healtbar.ShowHealth(player, Content, spriteBatch);
 
             spriteBatch.End();
 
