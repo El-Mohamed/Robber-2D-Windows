@@ -18,6 +18,8 @@ namespace Game_Development_Project
         public static int ScreenWidth;
         public static int CurrentLevel;
         CollisionManager collisionManager;
+        InventoryHelper inventroyHelper;
+        Vector2 inventoryPosition;
 
         public Game1()
         {
@@ -59,6 +61,11 @@ namespace Game_Development_Project
             CurrentLevel = 0;
             camera = new Camera();
             collisionManager = new CollisionManager();
+
+            // Inventory Helper
+
+            inventroyHelper = new InventoryHelper(player.Inventory);
+            inventoryPosition = new Vector2();
 
             // Level 1
 
@@ -141,7 +148,7 @@ namespace Game_Development_Project
             player.Update(gameTime);
 
             AllLevels[CurrentLevel].Update(gameTime, Content);
-
+            inventoryPosition = new Vector2(player.SpriteSheet.Position.X - (ScreenWidth / 2) + 100, player.SpriteSheet.Position.Y - (ScreenHeight / 2) + 100);
 
             base.Update(gameTime);
         }
@@ -155,6 +162,8 @@ namespace Game_Development_Project
             AllLevels[CurrentLevel].Draw(spriteBatch);
             collisionManager.CheckCollision(player, AllLevels[CurrentLevel]);
             player.Draw(spriteBatch);
+
+            inventroyHelper.ShowInventroy(Content, inventoryPosition, spriteBatch);
 
             spriteBatch.End();
 

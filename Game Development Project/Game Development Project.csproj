@@ -47,6 +47,7 @@
     <Compile Include="Collider\ICollider.cs" />
     <Compile Include="Controls\Controller.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Player\InventoryHelper.cs" />
     <Compile Include="Terrain\Enemies\Bullet.cs" />
     <Compile Include="Other\IMover.cs" />
     <Compile Include="Other\Sprite.cs" />
