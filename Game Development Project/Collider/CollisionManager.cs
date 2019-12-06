@@ -50,7 +50,7 @@ namespace Game_Development_Project
                     if (player.CollisionRectangle.Intersects(door.CollisionRectangle) && player.Inventory.HasCorrectDoorkey())
                     {                       
                         Game1.CurrentLevel = currentLevel.NextLevel;
-                        player.ResetPositon();
+                        player.Respawn();
                     }
 
                 }

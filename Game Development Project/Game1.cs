@@ -112,7 +112,8 @@ namespace Game_Development_Project
 
             Level level2 = new Level(ObstaclesLevel2, PickablesLevel2, new List<Block>(), new List<Block>());
             level2.Create(Content);
-            level2.NextLevel = AllLevels.Count + 1;
+            //level2.NextLevel = AllLevels.Count + 1;
+            level2.NextLevel = 0; // Go back to first level
             AllLevels.Add(level2);
         }
 

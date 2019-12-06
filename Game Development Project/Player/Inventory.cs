@@ -10,13 +10,13 @@ namespace Game_Development_Project
     {
         public List<DoorKey> MyKeys { get; set; }
         public List<Coin> MyCoins { get; set; }
-        public List<Potion> MyPotion { get; set; }
+        public List<Potion> MyPotions { get; set; }
 
         public Inventory()
         {
             MyKeys = new List<DoorKey>();
             MyCoins = new List<Coin>();
-            MyPotion = new List<Potion>();
+            MyPotions = new List<Potion>();
         }
 
         public bool HasCorrectDoorkey()
@@ -53,7 +53,7 @@ namespace Game_Development_Project
             {
                 Potion potion = Item as Potion;
                 Potion clone = (potion.Clone()) as Potion;
-                MyPotion.Add(clone);
+                MyPotions.Add(clone);
             }
 
         }

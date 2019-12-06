@@ -34,9 +34,19 @@ namespace Game_Development_Project
             CreateAnimationFrames();
         }
 
-        public void ResetPositon()
+        public void Respawn()
         {
             SpriteSheet.Position = new Vector2(0, 0);
+        }
+
+        public void DrinkPotion()
+        {
+            if(Inventory.MyPotions.Count > 0)
+            {
+                Potion potionToDrink = Inventory.MyPotions[0];
+                Speed = new Vector2(Speed.X + potionToDrink.SpeedAcceleration, Speed.Y);
+                Inventory.MyPotions.RemoveAt(0); // Remove Drinked Potion
+            }
         }
 
         public void Update(GameTime gameTime)
@@ -58,6 +68,11 @@ namespace Game_Development_Project
             if (IsMoving)
             {
                 Animation.Update(gameTime);
+            }
+
+            if(Controller.D)
+            {
+                DrinkPotion();
             }
 
             CollisionRectangle = new Rectangle((int)SpriteSheet.Position.X, (int)SpriteSheet.Position.Y, SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites, SpriteSheet.Texture1.Height);

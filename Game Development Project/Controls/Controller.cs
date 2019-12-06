@@ -13,7 +13,8 @@ namespace Game_Development_Project
         public bool Right { get; set; }
         public bool Down { get; set; }
         public bool Left { get; set; }
-        public bool Jump { get; set; }
+        public bool Space { get; set; }
+        public bool D { get; set; }
 
         public void Update()
         {
@@ -53,6 +54,15 @@ namespace Game_Development_Project
             if (stateKey.IsKeyUp(Keys.Left))
             {
                 Left = false;
+            }
+
+            if (stateKey.IsKeyDown(Keys.D))
+            {
+                D = true;
+            }
+            if (stateKey.IsKeyUp(Keys.D))
+            {
+                D = false;
             }
 
         }
