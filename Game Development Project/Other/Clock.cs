@@ -12,32 +12,29 @@ namespace Game_Development_Project
     class Clock
     {
         public int Time { get; set; }
+        public SpriteFont SpriteFont { get; set; }
+        public Vector2 Position { get; set; }
 
-
-        public Clock()
+        public Clock(SpriteFont spriteFont)
         {
+            SpriteFont = spriteFont;
             Time = 0;
         }
 
-
-        public void Update(GameTime gameTime)
+        public void UpdateTime(GameTime gameTime)
         {
             Time += gameTime.ElapsedGameTime.Milliseconds;
         }
 
-
-        public void ShowTime(ContentManager contentManager,SpriteBatch spriteBatch, Player player)
+        public void UpdatePosition(Player player)
         {
-            Vector2 position = new Vector2(player.SpriteSheet.Position.X +10, player.SpriteSheet.Position.Y - (Game1.ScreenHeight / 2) + 100);
-            SpriteFont font;
-           
-            font = contentManager.Load<SpriteFont>("ClockFont"); 
-         
-
-            spriteBatch.DrawString(font, "Time: " + Time/1000, position, Color.Black);
-
+            Position = new Vector2(player.SpriteSheet.Position.X + 10, player.SpriteSheet.Position.Y - (Game1.ScreenHeight / 2) + 100);
         }
 
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(SpriteFont, "Time: " + Time / 1000, Position, Color.Black);
+        }
 
     }
 }

@@ -9,10 +9,8 @@ namespace Game_Development_Project
 {
     class CollisionManager
     {
-
         public void CheckCollision(Player player, Level currentLevel)
         {
-
             CheckPickablesCollision(player, currentLevel);
             CheckDoorCollision(player, currentLevel);
             CheckPlatformCollision(player, currentLevel);
@@ -41,25 +39,14 @@ namespace Game_Development_Project
 
         private void CheckPickablesCollision(Player player, Level currentLevel)
         {
-            bool hasCollided = false;
-            int itemIndex = 0;
-
             for (int i = 0; i < currentLevel.AllPickables.Count; i++)
             {
                 if (player.CollisionRectangle.Intersects(currentLevel.AllPickables[i].CollisionRectangle))
                 {
-                    itemIndex = i;
-                    hasCollided = true;
+                    player.Inventory.AddItem(currentLevel.AllPickables[i]);
+                    currentLevel.AllPickables.RemoveAt(i);
                 }
             }
-
-            if (hasCollided)
-            {
-                player.Inventory.AddItem(currentLevel.AllPickables[itemIndex]);
-                currentLevel.AllPickables.RemoveAt(itemIndex);
-            }
-
-            // kan korter
         }
 
         private void CheckDoorCollision(Player player, Level currentLevel)
@@ -75,46 +62,41 @@ namespace Game_Development_Project
                         player.Inventory.MyKeys.RemoveAt(0);
                         player.Respawn();
                     }
-
                 }
             }
         }
 
         private void CheckPlatformCollision(Player player, Level level)
         {
-            bool onSurface = false;
-            bool Left = true;
-            bool Right = true;
+            bool canMoveDown = true;
+            bool canMoveLeft = true;
+            bool canMoveRight = true;
 
             foreach (Block block in level.AllObstacles)
             {
-
                 if (!(block is Door))
                 {
-                   
-
-                    if (onSurface == false)
+                    if (canMoveDown == true)
                     {
-                        onSurface = CheckTopCollision(player, block);
+                        canMoveDown = !(CheckTopCollision(player, block));
                     }
 
-                    if (Right == true  )
+                    if (canMoveRight == true)
                     {
-                        Right = !(CheckLeftCollision(player, block));
+                        canMoveRight = !(CheckLeftCollision(player, block));
                     }
-                  
-                    if (Left == true )
+
+                    if (canMoveLeft == true)
                     {
-                        Left = !(CheckRightCollision(player, block));
+                        canMoveLeft = !(CheckRightCollision(player, block));
                     }
 
                 }
-
             }
 
-            player.SetFallSpeed(onSurface);
-            player.canGoLeft = Left;
-            player.canGoRight = Right;
+            player.CanMoveDown = canMoveDown;
+            player.CanMoveLeft = canMoveLeft;
+            player.CanMoveRight = canMoveRight;
 
         }
 
@@ -136,23 +118,18 @@ namespace Game_Development_Project
 
         private bool CheckRightCollision(Player player, Block block)
         {
-            return (player.CollisionRectangle.Left - player.Speed.X +1 < block.CollisionRectangle.Right &&
+            return (player.CollisionRectangle.Left - player.Speed.X + 1 < block.CollisionRectangle.Right &&
                  player.CollisionRectangle.Right > block.CollisionRectangle.Right &&
                  player.CollisionRectangle.Bottom > block.CollisionRectangle.Top &&
                  player.CollisionRectangle.Top < block.CollisionRectangle.Bottom);
         }
 
-
         private bool CheckLeftCollision(Player player, Block block)
         {
-            return (player.CollisionRectangle.Right + player.Speed.X +1 > block.CollisionRectangle.Left &&
+            return (player.CollisionRectangle.Right + player.Speed.X + 1 > block.CollisionRectangle.Left &&
                 player.CollisionRectangle.Left < block.CollisionRectangle.Left &&
                 player.CollisionRectangle.Bottom > block.CollisionRectangle.Top &&
                 player.CollisionRectangle.Top < block.CollisionRectangle.Bottom);
         }
-
-
-
-
     }
 }

@@ -12,56 +12,59 @@ namespace Game_Development_Project
     class InventoryHelper
     {
         public Inventory Inventory { get; set; }
+        private Texture2D CoinTexture { get; set; }
+        private Texture2D PotionTexture { get; set; }
+        private Texture2D KeyTexture { get; set; }
 
-        public InventoryHelper(Inventory inventory)
+        public Vector2 Position { get; set; }
+
+        public InventoryHelper(Inventory inventory, Texture2D keyTexture, Texture2D coinTexture, Texture2D potionTexture)
         {
-            this.Inventory = inventory;
+            CoinTexture = coinTexture;
+            KeyTexture = keyTexture;
+            PotionTexture = potionTexture;
+            Inventory = inventory;
         }
 
-        public void ShowInventroy(Player player,ContentManager content, SpriteBatch spriteBatch)
+        public void UpdatePosition(Player player)
         {
-            Texture2D keyTexture = content.Load<Texture2D>("Pickable1");
-            Texture2D coinTexture = content.Load<Texture2D>("Pickable2");
-            Texture2D potionTexture = content.Load<Texture2D>("Pickable3");
+           Position = new Vector2(player.SpriteSheet.Position.X - (Game1.ScreenWidth / 2) + 100, player.SpriteSheet.Position.Y - (Game1.ScreenHeight / 2) + 100);
+        }
+
+        public void Draw( SpriteBatch spriteBatch)
+        {          
             const int marginHorizontal = 10;
             const int marginVertical = 20;
 
             Vector2 tempVector;
             Sprite tempSprite;
-
-            // Get the position of the screen corner
-            Vector2 position = new Vector2(player.SpriteSheet.Position.X - (Game1.ScreenWidth / 2) + 100, player.SpriteSheet.Position.Y - (Game1.ScreenHeight / 2) + 100);
-
+            
             int NextYPos = 0;
 
             for (int i = 0; i < Inventory.MyKeys.Count; i++)
             {
-                tempVector = new Vector2(position.X + (i * (keyTexture.Width + marginHorizontal)), position.Y + NextYPos);
-                tempSprite = new Sprite(keyTexture, 1, tempVector);
-                tempSprite.Draw(spriteBatch);            
+                tempVector = new Vector2(Position.X + (i * (KeyTexture.Width + marginHorizontal)), Position.Y + NextYPos);
+                tempSprite = new Sprite(KeyTexture, 1, tempVector);
+                tempSprite.Draw(spriteBatch);
             }
 
-            NextYPos += keyTexture.Height + marginVertical;
+            NextYPos += KeyTexture.Height + marginVertical;
 
             for (int i = 0; i < Inventory.MyCoins.Count; i++)
             {
-                tempVector = new Vector2(position.X + (i * (coinTexture.Width + marginHorizontal)), position.Y + NextYPos);
-                tempSprite = new Sprite(coinTexture, 1, tempVector);
+                tempVector = new Vector2(Position.X + (i * (CoinTexture.Width + marginHorizontal)), Position.Y + NextYPos);
+                tempSprite = new Sprite(CoinTexture, 1, tempVector);
                 tempSprite.Draw(spriteBatch);
-               
             }
 
-            NextYPos += coinTexture.Height + marginVertical;
+            NextYPos += CoinTexture.Height + marginVertical;
 
             for (int i = 0; i < Inventory.MyPotions.Count; i++)
             {
-                tempVector = new Vector2(position.X + (i * (potionTexture.Width + marginHorizontal)), position.Y +NextYPos);
-                tempSprite = new Sprite(potionTexture, 1, tempVector);
+                tempVector = new Vector2(Position.X + (i * (PotionTexture.Width + marginHorizontal)), Position.Y + NextYPos);
+                tempSprite = new Sprite(PotionTexture, 1, tempVector);
                 tempSprite.Draw(spriteBatch);
             }
         }
     }
-
-
-
 }

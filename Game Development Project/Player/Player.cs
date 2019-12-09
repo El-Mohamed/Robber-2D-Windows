@@ -12,20 +12,19 @@ namespace Game_Development_Project
     {
         enum PlayerState { ToLeft, ToRight }
 
-        private Controller Controller { get; set; }
-        private Animation Animation { get; set; }
-        private bool IsMoving { get; set; }
         public Sprite SpriteSheet { get; set; }
-        private PlayerState PlayerDirection { get; set; }
+        private Animation Animation { get; set; }
+        private Controller Controller { get; set; }
         public Vector2 Speed { get; set; }
         public Inventory Inventory { get; set; }
-
         public Rectangle CollisionRectangle { get; set; }
-
+        private PlayerState PlayerDirection { get; set; }
         public int Health { get; set; }
 
-        public bool canGoLeft;
-        public bool canGoRight;
+        private bool IsMoving { get; set; }
+        public bool CanMoveLeft { get; set; }
+        public bool CanMoveRight { get; set; }
+        public bool CanMoveDown { get; set; }
 
         public Player(Sprite spriteSheet, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed, Inventory inventory)
         {
@@ -37,29 +36,43 @@ namespace Game_Development_Project
             Inventory = inventory;
             CreateAnimationFrames();
             Health = 100;
-            canGoLeft = false;
-            canGoRight = false;
+            CanMoveLeft = false;
+            CanMoveRight = false;
+            CanMoveDown = false;
         }
 
-        public void Respawn()
+        private void CreateAnimationFrames()
         {
-            SpriteSheet.Position = new Vector2(0, 0);
-        }
+            int OffSet = 0;
+            int IndividualSpirteLength = SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites;
 
-        public void DrinkPotion()
-        {
-            if(Inventory.MyPotions.Count > 0)
+            for (int i = 0; i < SpriteSheet.NumberOfSprites - 1; i++)
             {
-                Potion potionToDrink = Inventory.MyPotions[0];
-                Speed = new Vector2(Speed.X + potionToDrink.SpeedAcceleration, Speed.Y);
-                Inventory.MyPotions.RemoveAt(0); // Remove Drinked Potion
+                OffSet = (SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites) * i;
+                Animation.AddFrame(new Rectangle(OffSet, 0, IndividualSpirteLength, SpriteSheet.Texture1.Height));
             }
         }
 
         public void Update(GameTime gameTime)
         {
-            FallDown();
             Controller.Update();
+            UpdateAnimation(gameTime);
+            UpdateMovement(gameTime);
+            UpdateCollisionRectangle();
+        }
+
+        private void UpdateAnimation(GameTime gameTime)
+        {
+            if (IsMoving)
+            {
+                Animation.Update(gameTime);
+            }
+        }
+
+        private void UpdateMovement(GameTime gameTime)
+        {
+            MoveDown();
+
             IsMoving = false;
 
             if (Controller.Left)
@@ -72,30 +85,15 @@ namespace Game_Development_Project
                 MoveRight();
             }
 
-            if (IsMoving)
-            {
-                Animation.Update(gameTime);
-            }
-
-            if(Controller.D)
+            if (Controller.D)
             {
                 DrinkPotion();
             }
-
-            CollisionRectangle = new Rectangle((int)SpriteSheet.Position.X, (int)SpriteSheet.Position.Y, SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites, SpriteSheet.Texture1.Height);
-
         }
 
-        public void CreateAnimationFrames()
+        private void UpdateCollisionRectangle()
         {
-            int OffSet = 0;
-            int IndividualSpirteLength = SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites;
-
-            for (int i = 0; i < SpriteSheet.NumberOfSprites - 1; i++)
-            {
-                OffSet = (SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites) * i;
-                Animation.AddFrame(new Rectangle(OffSet, 0, IndividualSpirteLength, SpriteSheet.Texture1.Height));
-            }
+            CollisionRectangle = new Rectangle((int)SpriteSheet.Position.X, (int)SpriteSheet.Position.Y, SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites, SpriteSheet.Texture1.Height);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -113,46 +111,31 @@ namespace Game_Development_Project
 
         public void MoveRight()
         {
-          if(canGoRight)
+            if (CanMoveRight)
             {
                 IsMoving = true;
                 SpriteSheet.Position = new Vector2(SpriteSheet.Position.X + Speed.X, SpriteSheet.Position.Y);
-
             }
-
 
             PlayerDirection = PlayerState.ToRight;
         }
 
         public void MoveLeft()
         {
-            if(canGoLeft)
+            if (CanMoveLeft)
             {
-
                 IsMoving = true;
                 SpriteSheet.Position = new Vector2(SpriteSheet.Position.X - Speed.X, SpriteSheet.Position.Y);
             }
-           
-           
 
             PlayerDirection = PlayerState.ToLeft;
-
         }
 
-        public void FallDown()
+        public void MoveDown()
         {
-            SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y + Speed.Y);
-        }
-
-        public void SetFallSpeed(bool state)
-        {
-            if (state)
+            if (CanMoveDown)
             {
-                Speed = new Vector2(Speed.X, 0);
-            }
-            else
-            {
-                Speed = new Vector2(Speed.X, 2);
+                SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y + 2);
             }
         }
 
@@ -161,5 +144,19 @@ namespace Game_Development_Project
             Health -= bullet.Damage;
         }
 
+        public void Respawn()
+        {
+            SpriteSheet.Position = new Vector2(0, 50);
+        }
+
+        public void DrinkPotion()
+        {
+            if (Inventory.MyPotions.Count > 0)
+            {
+                Potion potionToDrink = Inventory.MyPotions[0];
+                Speed = new Vector2(Speed.X + potionToDrink.SpeedAcceleration, Speed.Y);
+                Inventory.MyPotions.RemoveAt(0); // Remove Drinked Potion
+            }
+        }
     }
 }
