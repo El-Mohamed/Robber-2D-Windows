@@ -14,7 +14,7 @@ namespace Game_Development_Project
             CheckPickablesCollision(player, currentLevel);
             CheckDoorCollision(player, currentLevel);
             CheckPlatformCollision(player, currentLevel);
-
+            CheckMapRange(player, currentLevel);
             if (currentLevel is HardLevel)
             {
                 HardLevel hardLevel = currentLevel as HardLevel;
@@ -99,6 +99,15 @@ namespace Game_Development_Project
             player.CanMoveRight = canMoveRight;
 
         }
+
+        private void CheckMapRange(Player player, Level currentlevel)
+        {
+            if(player.CollisionRectangle.Top > 1100)
+            {
+                player.Respawn();
+            }
+        }
+
 
         private bool CheckTopCollision(Player player, Block block)
         {

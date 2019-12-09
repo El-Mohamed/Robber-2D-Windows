@@ -54,13 +54,14 @@ namespace Game_Development_Project
             int spriteSheetLength = 6;
             Texture2D playerTexture = Content.Load<Texture2D>("PlayerSpriteSheet");
             Controller playerController = new Controller();
-            Vector2 playerPosition = new Vector2(0, 0);
+            Vector2 playerPosition = new Vector2();
             Vector2 playerSpeed = new Vector2(5, 4);
             Animation playerAnimation = new Animation();
             Sprite playerSprite = new Sprite(playerTexture, 6, playerPosition);
             Rectangle playerCollisonRectangle = new Rectangle((int)playerPosition.X, (int)playerPosition.Y, playerTexture.Width / spriteSheetLength, playerTexture.Height);
             Inventory playerInventory = new Inventory();
             player = new Player(playerSprite, playerController, playerAnimation, playerCollisonRectangle, playerSpeed, playerInventory);
+            player.Respawn();
 
             // Other
 
@@ -99,7 +100,7 @@ namespace Game_Development_Project
             };
 
             byte[,] PickablesLevel1 = new byte[,]
-           {
+            {
                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                  {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
                  {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -107,7 +108,7 @@ namespace Game_Development_Project
                  {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},
                  {0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 
-           };
+            };
 
             Level level1 = new Level(ObstaclesLevel1, PickablesLevel1, new List<Block>(), new List<Block>());
             level1.Create(Content);
@@ -195,6 +196,9 @@ namespace Game_Development_Project
 
             spriteBatch.Begin(transformMatrix: camera.Transform);
 
+            // Levels
+            AllLevels[CurrentLevel].Draw(spriteBatch);
+           
             // Player
             player.Draw(spriteBatch);
 
@@ -206,11 +210,8 @@ namespace Game_Development_Project
 
             // Inventory
             inventroyHelper.Draw(spriteBatch);
-         
-            // Levels
-            AllLevels[CurrentLevel].Draw(spriteBatch);
-            spriteBatch.End();
 
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
