@@ -9,7 +9,7 @@ namespace Game_Development_Project
 {
     class Animation
     {
-        private List<AnimationFrame> allFrames;
+        public List<AnimationFrame> allFrames;
         public AnimationFrame currentFrame;
         private double xOffset;
         int counter = 0;

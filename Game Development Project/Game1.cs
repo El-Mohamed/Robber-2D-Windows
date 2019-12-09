@@ -55,7 +55,7 @@ namespace Game_Development_Project
             Texture2D playerTexture = Content.Load<Texture2D>("PlayerSpriteSheet");
             Controller playerController = new Controller();
             Vector2 playerPosition = new Vector2(0, 0);
-            Vector2 playerSpeed = new Vector2(4, 1);
+            Vector2 playerSpeed = new Vector2(5, 4);
             Animation playerAnimation = new Animation();
             Sprite playerSprite = new Sprite(playerTexture, 6, playerPosition);
             Rectangle playerCollisonRectangle = new Rectangle((int)playerPosition.X, (int)playerPosition.Y, playerTexture.Width / spriteSheetLength, playerTexture.Height);

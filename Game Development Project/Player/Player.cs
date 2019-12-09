@@ -63,9 +63,17 @@ namespace Game_Development_Project
 
         private void UpdateAnimation(GameTime gameTime)
         {
-            if (IsMoving)
+            if (!IsMoving && !CanMoveDown)
+            {
+                Animation.currentFrame = Animation.allFrames[0];
+            }
+            else if (IsMoving && !CanMoveDown)
             {
                 Animation.Update(gameTime);
+            }
+            else
+            {
+                Animation.currentFrame = Animation.allFrames[4];
             }
         }
 
@@ -135,7 +143,7 @@ namespace Game_Development_Project
         {
             if (CanMoveDown)
             {
-                SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y + 2);
+                SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y + 4);
             }
         }
 
