@@ -24,6 +24,9 @@ namespace Game_Development_Project
 
         public int Health { get; set; }
 
+        public bool canGoLeft;
+        public bool canGoRight;
+
         public Player(Sprite spriteSheet, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed, Inventory inventory)
         {
             SpriteSheet = spriteSheet;
@@ -34,6 +37,8 @@ namespace Game_Development_Project
             Inventory = inventory;
             CreateAnimationFrames();
             Health = 100;
+            canGoLeft = false;
+            canGoRight = false;
         }
 
         public void Respawn()
@@ -108,19 +113,26 @@ namespace Game_Development_Project
 
         public void MoveRight()
         {
-          
+          if(canGoRight)
+            {
                 IsMoving = true;
                 SpriteSheet.Position = new Vector2(SpriteSheet.Position.X + Speed.X, SpriteSheet.Position.Y);
-         
+
+            }
+
 
             PlayerDirection = PlayerState.ToRight;
         }
 
         public void MoveLeft()
         {
-           
+            if(canGoLeft)
+            {
+
                 IsMoving = true;
                 SpriteSheet.Position = new Vector2(SpriteSheet.Position.X - Speed.X, SpriteSheet.Position.Y);
+            }
+           
            
 
             PlayerDirection = PlayerState.ToLeft;
@@ -140,7 +152,7 @@ namespace Game_Development_Project
             }
             else
             {
-                Speed = new Vector2(Speed.X, 1);
+                Speed = new Vector2(Speed.X, 2);
             }
         }
 

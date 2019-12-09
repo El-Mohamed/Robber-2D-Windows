@@ -20,6 +20,7 @@ namespace Game_Development_Project
         CollisionManager collisionManager;
         InventoryHelper inventroyHelper;
         Healtbar healtbar;
+        Clock clock;
 
 
         public Game1()
@@ -62,6 +63,7 @@ namespace Game_Development_Project
             CurrentLevel = 0;
             camera = new Camera();
             collisionManager = new CollisionManager();
+            clock = new Clock();
 
             // Inventory Helper & Healthbar
 
@@ -145,11 +147,13 @@ namespace Game_Development_Project
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            camera.Follow(player);
+            clock.Update(gameTime);
+
+
             player.Update(gameTime);
-
+            camera.Follow(player);
             AllLevels[CurrentLevel].Update(gameTime, Content);
-
+            collisionManager.CheckCollision(player, AllLevels[CurrentLevel]);
 
             base.Update(gameTime);
         }
@@ -161,11 +165,13 @@ namespace Game_Development_Project
             spriteBatch.Begin(transformMatrix: camera.Transform);
 
             AllLevels[CurrentLevel].Draw(spriteBatch);
-            collisionManager.CheckCollision(player, AllLevels[CurrentLevel]);
+           
             player.Draw(spriteBatch);
 
             inventroyHelper.ShowInventroy(player, Content, spriteBatch);
             healtbar.ShowHealth(player, Content, spriteBatch);
+
+            clock.ShowTime(Content, spriteBatch, player);
 
             spriteBatch.End();
 

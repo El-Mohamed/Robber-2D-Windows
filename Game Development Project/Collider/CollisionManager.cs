@@ -15,7 +15,7 @@ namespace Game_Development_Project
 
             CheckPickablesCollision(player, currentLevel);
             CheckDoorCollision(player, currentLevel);
-
+            CheckPlatformCollision(player, currentLevel);
 
             if (currentLevel is HardLevel)
             {
@@ -58,6 +58,8 @@ namespace Game_Development_Project
                 player.Inventory.AddItem(currentLevel.AllPickables[itemIndex]);
                 currentLevel.AllPickables.RemoveAt(itemIndex);
             }
+
+            // kan korter
         }
 
         private void CheckDoorCollision(Player player, Level currentLevel)
@@ -70,12 +72,87 @@ namespace Game_Development_Project
                     if (player.CollisionRectangle.Intersects(door.CollisionRectangle) && player.Inventory.HasCorrectDoorkey())
                     {
                         Game1.CurrentLevel = currentLevel.NextLevel;
+                        player.Inventory.MyKeys.RemoveAt(0);
                         player.Respawn();
                     }
 
                 }
             }
         }
+
+        private void CheckPlatformCollision(Player player, Level level)
+        {
+            bool onSurface = false;
+            bool Left = true;
+            bool Right = true;
+
+            foreach (Block block in level.AllObstacles)
+            {
+
+                if (!(block is Door))
+                {
+                   
+
+                    if (onSurface == false)
+                    {
+                        onSurface = CheckTopCollision(player, block);
+                    }
+
+                    if (Right == true  )
+                    {
+                        Right = !(CheckLeftCollision(player, block));
+                    }
+                  
+                    if (Left == true )
+                    {
+                        Left = !(CheckRightCollision(player, block));
+                    }
+
+                }
+
+            }
+
+            player.SetFallSpeed(onSurface);
+            player.canGoLeft = Left;
+            player.canGoRight = Right;
+
+        }
+
+        private bool CheckTopCollision(Player player, Block block)
+        {
+            return (player.CollisionRectangle.Bottom + player.Speed.Y + 2 > block.CollisionRectangle.Top &&
+                 player.CollisionRectangle.Top < block.CollisionRectangle.Top &&
+                 player.CollisionRectangle.Right > block.CollisionRectangle.Left &&
+                 player.CollisionRectangle.Left < block.CollisionRectangle.Right);
+        }
+
+        private bool CheckBottomCollision(Player player, Block block)
+        {
+            return (player.CollisionRectangle.Top + player.Speed.Y + 2 < block.CollisionRectangle.Bottom &&
+                 player.CollisionRectangle.Bottom > block.CollisionRectangle.Bottom &&
+                 player.CollisionRectangle.Right > block.CollisionRectangle.Left &&
+                 player.CollisionRectangle.Left < block.CollisionRectangle.Right);
+        }
+
+        private bool CheckRightCollision(Player player, Block block)
+        {
+            return (player.CollisionRectangle.Left - player.Speed.X +1 < block.CollisionRectangle.Right &&
+                 player.CollisionRectangle.Right > block.CollisionRectangle.Right &&
+                 player.CollisionRectangle.Bottom > block.CollisionRectangle.Top &&
+                 player.CollisionRectangle.Top < block.CollisionRectangle.Bottom);
+        }
+
+
+        private bool CheckLeftCollision(Player player, Block block)
+        {
+            return (player.CollisionRectangle.Right + player.Speed.X +1 > block.CollisionRectangle.Left &&
+                player.CollisionRectangle.Left < block.CollisionRectangle.Left &&
+                player.CollisionRectangle.Bottom > block.CollisionRectangle.Top &&
+                player.CollisionRectangle.Top < block.CollisionRectangle.Bottom);
+        }
+
+
+
 
     }
 }

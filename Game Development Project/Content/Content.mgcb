@@ -49,6 +49,13 @@
 /processorParam:TextureFormat=Color
 /build:Bullet.png
 
+#begin ClockFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:ClockFont.spritefont
+
 #begin Enemy1.png
 /importer:TextureImporter
 /processor:TextureProcessor
