@@ -60,13 +60,14 @@
     <Compile Include="Player\Inventory.cs" />
     <Compile Include="Terrain\Enemies\Tank.cs" />
     <Compile Include="Terrain\Pickables\Coin.cs" />
-    <Compile Include="Terrain\Pickables\DoorKey.cs" />
+    <Compile Include="Terrain\Pickables\MoneySafeKey.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Terrain\Block.cs" />
     <Compile Include="Terrain\Obstacles\Door.cs" />
     <Compile Include="Terrain\Obstacles\Platform.cs" />
+    <Compile Include="Terrain\Pickables\MoneySafe.cs" />
     <Compile Include="Terrain\Pickables\Potion.cs" />
   </ItemGroup>
   <ItemGroup>

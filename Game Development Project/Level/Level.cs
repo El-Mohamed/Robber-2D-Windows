@@ -13,15 +13,17 @@ namespace Game_Development_Project
         protected int SpaceBetweenPlatforms = 210;
         public List<Block> AllObstacles { get; set; }
         public List<Block> AllPickables { get; set; }
+        public List<int> MoneySafeIndentifiers { get; set; }
         protected byte[,] ObstaclesArray { get; set; }
         protected byte[,] PickablesArray { get; set; }
         protected long LevelHeight { get; }
         protected long MapWidth { get; }
 
-        public Level(byte[,] obstaclesArray, byte[,] pickablesArray, List<Block> allObstacles, List<Block> allPickables)
+        public Level(byte[,] obstaclesArray, byte[,] pickablesArray,List<int> moneySafeIdentiefiers ,List<Block> allObstacles, List<Block> allPickables)
         {
             ObstaclesArray = obstaclesArray;
             PickablesArray = pickablesArray;
+            MoneySafeIndentifiers = moneySafeIdentiefiers;
             AllObstacles = allObstacles;
             AllPickables = allPickables;
             MapWidth = ObstaclesArray.GetLength(1);
@@ -48,6 +50,8 @@ namespace Game_Development_Project
 
         private void CreatePickables(ContentManager contentManager)
         {
+            int totalKeys = 0;
+            int totalMoneySafes = 0;
             Texture2D tempTexture = contentManager.Load<Texture2D>("Pickable1");
             Vector2 tempVector = new Vector2();
             Rectangle tempCollisonRectangle = new Rectangle();
@@ -72,12 +76,13 @@ namespace Game_Development_Project
 
                     switch (PickablesArray[y, x])
                     {
-                        case 1:                                 
-                            DoorKey tempDoorKey = new DoorKey(tempSprite, tempCollisonRectangle)
+                        case 1:                        
+                            MoneySafeKey tempMoneySafeKey = new MoneySafeKey(tempSprite, tempCollisonRectangle)
                             {
-                                IsCorrect = true // TODO CREATE RANDOM
-                            };
-                            AllPickables.Add(tempDoorKey as Block);
+                                MoneySafeID = MoneySafeIndentifiers[totalKeys]
+                            };                           
+                            AllPickables.Add(tempMoneySafeKey as Block);
+                            totalKeys++;
                             break;
                         case 2:             
                             Coin tempCoin = new Coin(tempSprite, tempCollisonRectangle)
@@ -92,6 +97,14 @@ namespace Game_Development_Project
                                 SpeedAcceleration = 2 // TODO CREATE RANDOM
                             };
                             AllPickables.Add(tempPotion);
+                            break;
+                        case 4:                       
+                            MoneySafe tempMoneySafe = new MoneySafe(tempSprite, tempCollisonRectangle)
+                            {
+                                KeyID = MoneySafeIndentifiers[totalMoneySafes], NumberOfDiamonds = 3 // TODO CREATE RANDOM
+                            };
+                            AllPickables.Add(tempMoneySafe);
+                            totalMoneySafes++;
                             break;
                         default:
                             break;

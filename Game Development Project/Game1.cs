@@ -19,7 +19,7 @@ namespace Game_Development_Project
         public static int ScreenHeight, ScreenWidth, CurrentLevel;
         CollisionManager collisionManager;
         InventoryHelper inventroyHelper;
-        Texture2D potionTexture, coinTexture, keyTexture, healtTexture;
+        Texture2D potionTexture, coinTexture, keyTexture, diamondTexture, healtTexture;
         Healtbar healtbar;
         GameSounds gameSounds;
         Clock clock;
@@ -85,12 +85,17 @@ namespace Game_Development_Project
             keyTexture = Content.Load<Texture2D>("Pickable1");
             coinTexture = Content.Load<Texture2D>("Pickable2");
             potionTexture = Content.Load<Texture2D>("Pickable3");
-            inventroyHelper = new InventoryHelper(player.Inventory, keyTexture, coinTexture, potionTexture);
+            diamondTexture = Content.Load<Texture2D>("Diamond");
+            inventroyHelper = new InventoryHelper(player.Inventory, keyTexture, coinTexture, potionTexture, diamondTexture);
 
             // Healthbar
 
             healtTexture = Content.Load<Texture2D>("Health");
             healtbar = new Healtbar(healtTexture);
+
+            // Level 1&2 MoneySafe and Keys ID's
+
+            List<int> MoneySafeIndetifiers = new List<int>() { 1000, 1001, 1002, 1003 };
 
             // Level 1
 
@@ -107,15 +112,14 @@ namespace Game_Development_Project
             byte[,] PickablesLevel1 = new byte[,]
             {
                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0},
-                 {0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1},
-                 {0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0},
-                 {0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-
+                 {0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0},
+                 {0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             };
 
-            Level level1 = new Level(ObstaclesLevel1, PickablesLevel1, new List<Block>(), new List<Block>());
+            Level level1 = new Level(ObstaclesLevel1, PickablesLevel1, MoneySafeIndetifiers, new List<Block>(), new List<Block>());
             level1.Create(Content);
             level1.NextLevel = AllLevels.Count + 1;
             AllLevels.Add(level1);
@@ -136,9 +140,9 @@ namespace Game_Development_Project
             {
                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                  {0,2,0,0,3,0,0,2,0,0,0,0,2,0,0,0,3,0,0,0,0,0,0,0},
-                 {0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0},
-                 {0,3,2,0,0,0,3,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2},
-                 {2,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,4,0,0,0,2,0,0,0,0,0,4,0,2,0,0,0,0,0,0},
+                 {0,3,2,0,0,0,3,0,4,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2},
+                 {2,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,4,0,0,0},
                  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
             };
 
@@ -152,7 +156,7 @@ namespace Game_Development_Project
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0},
             };
 
-            HardLevel level2 = new HardLevel(ObstaclesLevel2, PickablesLevel2, EnemiesLevel2, new List<Block>(), new List<Block>(), new List<Tank>());
+            HardLevel level2 = new HardLevel(ObstaclesLevel2, PickablesLevel2, MoneySafeIndetifiers, EnemiesLevel2, new List<Block>(), new List<Block>(), new List<Tank>());
             level2.Create(Content);
             //level2.NextLevel = AllLevels.Count + 1;
             level2.NextLevel = 0; // Go back to first level
@@ -191,7 +195,7 @@ namespace Game_Development_Project
             // Levels
             AllLevels[CurrentLevel].Update(gameTime);
             collisionManager.CheckCollision(player, AllLevels[CurrentLevel]);
-            if(AllLevels[CurrentLevel] is HardLevel)
+            if (AllLevels[CurrentLevel] is HardLevel)
             {
                 HardLevel hardLevel = AllLevels[CurrentLevel] as HardLevel;
                 hardLevel.CreateBullets(Content);

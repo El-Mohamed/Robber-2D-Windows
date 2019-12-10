@@ -8,22 +8,34 @@ namespace Game_Development_Project
 {
     class Inventory
     {
-        public List<DoorKey> MyKeys { get; set; }
+        public List<MoneySafeKey> MyKeys { get; set; }
         public List<Coin> MyCoins { get; set; }
         public List<Potion> MyPotions { get; set; }
+        public int MyDiamonds { get; set; }
 
         public Inventory()
         {
-            MyKeys = new List<DoorKey>();
+            MyKeys = new List<MoneySafeKey>();
             MyCoins = new List<Coin>();
             MyPotions = new List<Potion>();
+            MyDiamonds = 0;
+        }
+
+        public bool HasWorkingKey(MoneySafe moneySafe)
+        {
+            if(MyKeys.Count > 0 &&MyKeys[0].MoneySafeID.Equals( moneySafe.KeyID))
+            {
+                return true;
+            }
+            return false;
+           
         }
 
         public bool HasPlace(Block pickable)
         {
-            if(pickable is DoorKey)
+            if(pickable is MoneySafeKey)
             {
-                return (MyKeys.Count < 2);
+                return (MyKeys.Count < 1);
             }
             if(pickable is Potion)
             {
@@ -31,33 +43,19 @@ namespace Game_Development_Project
             }
             else
             {
-                return true; // Coins have always place
+                return true; // Coins && Diamonds have always place
             }         
         }
 
-        public bool HasCorrectDoorkey()
-        {
-            bool CorrectKeyFound = false;
-
-            foreach (DoorKey doorKey in MyKeys)
-            {
-                if(doorKey.IsCorrect)
-                {
-                    CorrectKeyFound = true;
-                }
-            }
-
-            return CorrectKeyFound;
-        }
 
         public void AddItem(Block Item)
         {
             GameSounds.PlayPickSound();
 
-            if (Item is DoorKey)
+            if (Item is MoneySafeKey)
             {
-                DoorKey doorKey = Item as DoorKey;
-                DoorKey clone = (doorKey.Clone()) as DoorKey;
+                MoneySafeKey doorKey = Item as MoneySafeKey;
+                MoneySafeKey clone = (doorKey.Clone()) as MoneySafeKey;
                 MyKeys.Add(clone);
             }
             if (Item is Coin)
@@ -71,6 +69,11 @@ namespace Game_Development_Project
                 Potion potion = Item as Potion;
                 Potion clone = (potion.Clone()) as Potion;
                 MyPotions.Add(clone);
+            }
+            if(Item is MoneySafe)
+            {
+                MoneySafe moneySafe = Item as MoneySafe;
+                MyDiamonds += moneySafe.NumberOfDiamonds;              
             }
 
         }

@@ -16,7 +16,7 @@ namespace Game_Development_Project
         protected byte[,] EnemiesArray { get; set; }
 
         private int LastTimeShooted = 0;
-        public HardLevel(byte[,] obstaclesArray, byte[,] pickablesArray, byte[,] enemiesArray, List<Block> allObstacles, List<Block> allPickables, List<Tank> allTanks) : base(obstaclesArray, pickablesArray, allObstacles, allPickables)
+        public HardLevel(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, byte[,] enemiesArray, List<Block> allObstacles, List<Block> allPickables, List<Tank> allTanks) : base(obstaclesArray, pickablesArray, moneySafeIdentiefiers, allObstacles, allPickables)
         {
             AllTanks = allTanks;
             EnemiesArray = enemiesArray;

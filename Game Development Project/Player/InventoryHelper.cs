@@ -15,14 +15,15 @@ namespace Game_Development_Project
         private Texture2D CoinTexture { get; set; }
         private Texture2D PotionTexture { get; set; }
         private Texture2D KeyTexture { get; set; }
-
+        private Texture2D DiamondTexture { get; set; }
         public Vector2 Position { get; set; }
 
-        public InventoryHelper(Inventory inventory, Texture2D keyTexture, Texture2D coinTexture, Texture2D potionTexture)
+        public InventoryHelper(Inventory inventory, Texture2D keyTexture, Texture2D coinTexture, Texture2D potionTexture, Texture2D diamondTexture)
         {
             CoinTexture = coinTexture;
             KeyTexture = keyTexture;
             PotionTexture = potionTexture;
+            DiamondTexture = diamondTexture;
             Inventory = inventory;
         }
 
@@ -41,14 +42,15 @@ namespace Game_Development_Project
             
             int NextYPos = 0;
 
-            for (int i = 0; i < Inventory.MyKeys.Count; i++)
+
+            for (int i = 0; i < Inventory.MyDiamonds; i++)
             {
-                tempVector = new Vector2(Position.X + (i * (KeyTexture.Width + marginHorizontal)), Position.Y + NextYPos);
-                tempSprite = new Sprite(KeyTexture, 1, tempVector);
+                tempVector = new Vector2(Position.X + (i * (DiamondTexture.Width + marginHorizontal)), Position.Y + NextYPos);
+                tempSprite = new Sprite(DiamondTexture, 1, tempVector);
                 tempSprite.Draw(spriteBatch);
             }
 
-            NextYPos += KeyTexture.Height + marginVertical;
+            NextYPos += DiamondTexture.Height + marginVertical;
 
             for (int i = 0; i < Inventory.MyCoins.Count; i++)
             {
@@ -59,12 +61,22 @@ namespace Game_Development_Project
 
             NextYPos += CoinTexture.Height + marginVertical;
 
+            for (int i = 0; i < Inventory.MyKeys.Count; i++)
+            {
+                tempVector = new Vector2(Position.X + (i * (KeyTexture.Width + marginHorizontal)), Position.Y + NextYPos);
+                tempSprite = new Sprite(KeyTexture, 1, tempVector);
+                tempSprite.Draw(spriteBatch);
+            }
+
+            NextYPos += KeyTexture.Height + marginVertical;
+
             for (int i = 0; i < Inventory.MyPotions.Count; i++)
             {
                 tempVector = new Vector2(Position.X + (i * (PotionTexture.Width + marginHorizontal)), Position.Y + NextYPos);
                 tempSprite = new Sprite(PotionTexture, 1, tempVector);
                 tempSprite.Draw(spriteBatch);
             }
+
         }
     }
 }

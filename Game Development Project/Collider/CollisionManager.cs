@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,13 +41,23 @@ namespace Game_Development_Project
         {
             for (int i = 0; i < currentLevel.AllPickables.Count; i++)
             {
-                if (player.CollisionRectangle.Intersects(currentLevel.AllPickables[i].CollisionRectangle))
+                if (player.CollisionRectangle.Intersects(currentLevel.AllPickables[i].CollisionRectangle) && player.Inventory.HasPlace(currentLevel.AllPickables[i]))
                 {
-                    if (player.Inventory.HasPlace(currentLevel.AllPickables[i]))
+                    if (currentLevel.AllPickables[i] is MoneySafe)
+                    {
+                        MoneySafe temp = currentLevel.AllPickables[i] as MoneySafe;
+                        if (player.Inventory.HasWorkingKey(temp))
+                        {
+                            player.Inventory.AddItem(currentLevel.AllPickables[i]);
+                            currentLevel.AllPickables.RemoveAt(i);
+                            player.Inventory.MyKeys.RemoveAt(0);
+                        }
+                    }
+                    else
                     {
                         player.Inventory.AddItem(currentLevel.AllPickables[i]);
                         currentLevel.AllPickables.RemoveAt(i);
-                    }                  
+                    }
                 }
             }
         }
@@ -59,10 +69,9 @@ namespace Game_Development_Project
                 if (obstacle is Door)
                 {
                     Door door = obstacle as Door;
-                    if (player.CollisionRectangle.Intersects(door.CollisionRectangle) && player.Inventory.HasCorrectDoorkey())
+                    if (player.CollisionRectangle.Intersects(door.CollisionRectangle))
                     {
                         Game1.CurrentLevel = currentLevel.NextLevel;
-                        player.Inventory.MyKeys.RemoveAt(0);
                         player.Respawn();
                     }
                 }
