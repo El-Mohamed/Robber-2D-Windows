@@ -89,36 +89,28 @@ namespace Game_Development_Project
 
         }
 
-        public void ShootAllTanks(ContentManager contentManager)
-        {
-            foreach (Tank tank in AllTanks)
-            {
-                tank.Shoot(contentManager, tank.SpriteImage.Position);
-
-            }
-        }
-
-        public override void Update(GameTime gameTime, ContentManager contentManager)
-        {
-            UpdateTanks(gameTime, contentManager);
-
-            base.Update(gameTime,contentManager);
-        }
-
-        public void UpdateTanks(GameTime gameTime, ContentManager contentManager)
-        {
-            // Shooting
-
-            LastTimeShooted += 100 * gameTime.ElapsedGameTime.Milliseconds / 500;
-
+        public void CreateBullets(ContentManager contentManager)
+        {            
             if (LastTimeShooted >= 100)
             {
-                LastTimeShooted = 0;
-                ShootAllTanks(contentManager);
+                foreach (Tank tank in AllTanks)
+                {
+                    tank.Shoot(contentManager, tank.SpriteImage.Position);
+
+                }
+                LastTimeShooted = 0;            
             }
+        }
 
-            //Update  
-
+        public override void Update(GameTime gameTime)
+        {
+            UpdateBullets(gameTime);
+            LastTimeShooted += 100 * gameTime.ElapsedGameTime.Milliseconds / 500;
+            base.Update(gameTime);
+        }
+        
+        public void UpdateBullets(GameTime gameTime)
+        {          
             foreach (Tank tank in AllTanks)
             {              
                 foreach (Bullet bullet in tank.ShootedBullets)

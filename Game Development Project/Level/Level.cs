@@ -41,7 +41,7 @@ namespace Game_Development_Project
             DrawPickables(spritebatch);
         }
 
-        public virtual void Update(GameTime gameTime, ContentManager contentManager)
+        public virtual void Update(GameTime gameTime)
         {
 
         }

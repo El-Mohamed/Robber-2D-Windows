@@ -189,8 +189,13 @@ namespace Game_Development_Project
             camera.Follow(player);
 
             // Levels
-            AllLevels[CurrentLevel].Update(gameTime, Content);
+            AllLevels[CurrentLevel].Update(gameTime);
             collisionManager.CheckCollision(player, AllLevels[CurrentLevel]);
+            if(AllLevels[CurrentLevel] is HardLevel)
+            {
+                HardLevel hardLevel = AllLevels[CurrentLevel] as HardLevel;
+                hardLevel.CreateBullets(Content);
+            }
 
             base.Update(gameTime);
         }
