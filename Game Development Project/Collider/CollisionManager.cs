@@ -43,8 +43,11 @@ namespace Game_Development_Project
             {
                 if (player.CollisionRectangle.Intersects(currentLevel.AllPickables[i].CollisionRectangle))
                 {
-                    player.Inventory.AddItem(currentLevel.AllPickables[i]);
-                    currentLevel.AllPickables.RemoveAt(i);
+                    if (player.Inventory.HasPlace(currentLevel.AllPickables[i]))
+                    {
+                        player.Inventory.AddItem(currentLevel.AllPickables[i]);
+                        currentLevel.AllPickables.RemoveAt(i);
+                    }                  
                 }
             }
         }

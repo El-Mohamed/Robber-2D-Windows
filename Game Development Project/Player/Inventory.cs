@@ -19,6 +19,22 @@ namespace Game_Development_Project
             MyPotions = new List<Potion>();
         }
 
+        public bool HasPlace(Block pickable)
+        {
+            if(pickable is DoorKey)
+            {
+                return (MyKeys.Count < 2);
+            }
+            if(pickable is Potion)
+            {
+                return (MyPotions.Count < 1);
+            }
+            else
+            {
+                return true; // Coins have always place
+            }         
+        }
+
         public bool HasCorrectDoorkey()
         {
             bool CorrectKeyFound = false;
