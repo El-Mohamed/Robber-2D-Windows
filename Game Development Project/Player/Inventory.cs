@@ -36,6 +36,7 @@ namespace Game_Development_Project
 
         public void AddItem(Block Item)
         {
+            GameSounds.PlayPickSound();
 
             if (Item is DoorKey)
             {

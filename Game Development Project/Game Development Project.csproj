@@ -48,6 +48,7 @@
     <Compile Include="Controls\Controller.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Other\Clock.cs" />
+    <Compile Include="Other\GameSounds.cs" />
     <Compile Include="Player\Healtbar.cs" />
     <Compile Include="Player\InventoryHelper.cs" />
     <Compile Include="Terrain\Enemies\Bullet.cs" />

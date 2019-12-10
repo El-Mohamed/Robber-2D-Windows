@@ -149,6 +149,7 @@ namespace Game_Development_Project
 
         public void UpdateHealth(Bullet bullet)
         {
+            GameSounds.PlayHitSound();
             Health -= bullet.Damage;
         }
 
@@ -164,6 +165,7 @@ namespace Game_Development_Project
                 Potion potionToDrink = Inventory.MyPotions[0];
                 Speed = new Vector2(Speed.X + potionToDrink.SpeedAcceleration, Speed.Y);
                 Inventory.MyPotions.RemoveAt(0); // Remove Drinked Potion
+                GameSounds.PlayDrinkSound();
             }
         }
     }

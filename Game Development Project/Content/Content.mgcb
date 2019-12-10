@@ -56,6 +56,12 @@
 /processorParam:TextureFormat=Compressed
 /build:ClockFont.spritefont
 
+#begin DrinkSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:DrinkSound.wav
+
 #begin Enemy1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -79,6 +85,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Health.png
+
+#begin HitSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:HitSound.wav
 
 #begin Pickable1.png
 /importer:TextureImporter
@@ -115,6 +127,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Pickable3.png
+
+#begin PickSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:PickSound.wav
 
 #begin PlayerSpriteSheet.png
 /importer:TextureImporter

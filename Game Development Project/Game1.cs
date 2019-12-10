@@ -1,6 +1,8 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 
@@ -14,19 +16,15 @@ namespace Game_Development_Project
         Player player;
         List<Level> AllLevels;
         private Camera camera;
-        public static int ScreenHeight;
-        public static int ScreenWidth;
-        public static int CurrentLevel;
+        public static int ScreenHeight, ScreenWidth, CurrentLevel;
         CollisionManager collisionManager;
         InventoryHelper inventroyHelper;
-        Texture2D potionTexture;
-        Texture2D coinTexture;
-        Texture2D keyTexture;
+        Texture2D potionTexture, coinTexture, keyTexture, healtTexture;
         Healtbar healtbar;
-        Texture2D healtTexture;
+        GameSounds gameSounds;
         Clock clock;
         SpriteFont clockFont;
-
+        SoundEffect pickSound, hitSound, drinkSound;
 
         public Game1()
         {
@@ -69,6 +67,13 @@ namespace Game_Development_Project
             CurrentLevel = 0;
             camera = new Camera();
             collisionManager = new CollisionManager();
+
+            // SoundEffects
+            pickSound = Content.Load<SoundEffect>("PickSound");
+            hitSound = Content.Load<SoundEffect>("HitSound");
+            drinkSound = Content.Load<SoundEffect>("DrinkSound");
+            gameSounds = new GameSounds(pickSound, hitSound, drinkSound);
+
 
             // Clock
 
