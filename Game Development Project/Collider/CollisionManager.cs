@@ -50,7 +50,7 @@ namespace Game_Development_Project
                         {
                             player.Inventory.AddItem(currentLevel.AllPickables[i]);
                             currentLevel.AllPickables.RemoveAt(i);
-                            player.Inventory.MyKeys.RemoveAt(0);
+                            player.Inventory.MyKey = null;
                         }
                     }
                     else

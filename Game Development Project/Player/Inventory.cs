@@ -8,22 +8,20 @@ namespace Game_Development_Project
 {
     class Inventory
     {
-        public List<MoneySafeKey> MyKeys { get; set; }
+        public MoneySafeKey MyKey { get; set; }
         public List<Coin> MyCoins { get; set; }
-        public List<Potion> MyPotions { get; set; }
+        public Potion MyPotion { get; set; }
         public int MyDiamonds { get; set; }
 
         public Inventory()
-        {
-            MyKeys = new List<MoneySafeKey>();
-            MyCoins = new List<Coin>();
-            MyPotions = new List<Potion>();
+        {     
+            MyCoins = new List<Coin>();          
             MyDiamonds = 0;
         }
 
         public bool HasWorkingKey(MoneySafe moneySafe)
         {
-            if(MyKeys.Count > 0 &&MyKeys[0].MoneySafeID.Equals( moneySafe.KeyID))
+            if(MyKey != null &&MyKey.MoneySafeID.Equals( moneySafe.KeyID))
             {
                 return true;
             }
@@ -35,11 +33,11 @@ namespace Game_Development_Project
         {
             if(pickable is MoneySafeKey)
             {
-                return (MyKeys.Count < 1);
+                return (MyKey == null);
             }
             if(pickable is Potion)
             {
-                return (MyPotions.Count < 1);
+                return (MyPotion == null);
             }
             else
             {
@@ -56,7 +54,7 @@ namespace Game_Development_Project
             {
                 MoneySafeKey doorKey = Item as MoneySafeKey;
                 MoneySafeKey clone = (doorKey.Clone()) as MoneySafeKey;
-                MyKeys.Add(clone);
+                MyKey = clone;
             }
             if (Item is Coin)
             {
@@ -68,7 +66,7 @@ namespace Game_Development_Project
             {
                 Potion potion = Item as Potion;
                 Potion clone = (potion.Clone()) as Potion;
-                MyPotions.Add(clone);
+                MyPotion = clone;
             }
             if(Item is MoneySafe)
             {

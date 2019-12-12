@@ -160,11 +160,11 @@ namespace Game_Development_Project
 
         public void DrinkPotion()
         {
-            if (Inventory.MyPotions.Count > 0)
+            if (Inventory.MyPotion != null)
             {
-                Potion potionToDrink = Inventory.MyPotions[0];
+                Potion potionToDrink = Inventory.MyPotion;
                 Speed = new Vector2(Speed.X + potionToDrink.SpeedAcceleration, Speed.Y);
-                Inventory.MyPotions.RemoveAt(0); // Remove Drinked Potion
+                Inventory.MyPotion = null; // Remove Drinked Potion
                 GameSounds.PlayDrinkSound();
             }
         }
