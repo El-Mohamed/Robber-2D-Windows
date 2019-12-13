@@ -43,13 +43,13 @@ namespace Game_Development_Project
 
         private void CreateAnimationFrames()
         {
-            int OffSet = 0;
+            double OffSet = 0;
             int IndividualSpirteLength = SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites;
 
             for (int i = 0; i < SpriteSheet.NumberOfSprites - 1; i++)
             {
-                OffSet = (SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites) * i;
-                Animation.AddFrame(new Rectangle(OffSet, 0, IndividualSpirteLength, SpriteSheet.Texture1.Height));
+                OffSet = ((SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites) * i);
+                Animation.AddFrame(new Rectangle((int)OffSet, 0, IndividualSpirteLength, SpriteSheet.Texture1.Height));
             }
         }
 

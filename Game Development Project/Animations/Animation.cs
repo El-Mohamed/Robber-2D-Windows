@@ -33,7 +33,7 @@ namespace Game_Development_Project
 
         public void Update(GameTime gameTime)
         {
-            xOffset += currentFrame.SourceRectangle.Width * gameTime.ElapsedGameTime.Milliseconds / 60;
+            xOffset += currentFrame.SourceRectangle.Width * gameTime.ElapsedGameTime.Milliseconds / 50;
             if (xOffset >= currentFrame.SourceRectangle.Width)
             {
                 counter++;

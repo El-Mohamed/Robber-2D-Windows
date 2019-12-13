@@ -10,7 +10,8 @@ namespace Game_Development_Project
     {
         public int NextLevel { get; set; }
         public Vector2 StartPosition { get; set; }
-        protected int SpaceBetweenPlatforms = 210;
+
+        protected int SpaceBetweenPlatforms = 250;
         public List<Block> AllObstacles { get; set; }
         public List<Block> AllPickables { get; set; }
         public List<int> MoneySafeIndentifiers { get; set; }
@@ -127,7 +128,7 @@ namespace Game_Development_Project
             Vector2 tempVector = new Vector2();
             Rectangle tempCollisonRectangle = new Rectangle();
             Sprite tempSprite = new Sprite(tempTexture, 1, tempVector);
-            Block tempObstacle = new Platform(tempSprite, tempCollisonRectangle);
+            Block platform = new Platform(tempSprite, tempCollisonRectangle);
 
             for (int x = 0; x < MapWidth; x++)
             {
@@ -141,25 +142,41 @@ namespace Game_Development_Project
                         tempTexture = contentManager.Load<Texture2D>("Block" + ID_STRING);
                     }
 
+                    // Creat Platform
+                    Texture2D platformTexture = contentManager.Load<Texture2D>("Block1");
+                    tempVector = new Vector2(x * platformTexture.Width, y * SpaceBetweenPlatforms);
+                    tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, platformTexture.Width, platformTexture.Height);
+                    tempSprite = new Sprite(platformTexture, 1, tempVector);
+                    platform = new Platform(tempSprite, tempCollisonRectangle);
+
+
                     switch (ObstaclesArray[y, x])
                     {
                         case 1:
-                            tempVector = new Vector2(x * tempTexture.Width, y * SpaceBetweenPlatforms);
-                            tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
-                            tempSprite = new Sprite(tempTexture, 1, tempVector);
-                            tempObstacle = new Platform(tempSprite, tempCollisonRectangle);
+                            // Add Platform 
+                            AllObstacles.Add(platform);
+
                             break;
                         case 2:
-                            tempVector = new Vector2((x * tempTexture.Width), (y * tempTexture.Width) + 140);
-                            tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
-                            tempSprite = new Sprite(tempTexture, 1, tempVector);
-                            tempObstacle = new Door(tempSprite, tempCollisonRectangle);
+                            // Add platform
+                            AllObstacles.Add(platform);
+
+                            // Create Door on the platform
+                            Texture2D doorTexture = contentManager.Load<Texture2D>("Block2");
+
+                            int maginLeft = (150 - doorTexture.Width) / 2; // Calculate margin to center the door on the platform
+                            Vector2 doorVector = new Vector2((x * platformTexture.Width) + maginLeft, (y * SpaceBetweenPlatforms) - doorTexture.Height);
+                            Rectangle doorCollisonRectangle = new Rectangle((int)doorVector.X, (int)doorVector.Y, doorTexture.Width, doorTexture.Height);
+                            Sprite doorSprite = new Sprite(doorTexture, 1, doorVector);
+                            Block door = new Door(doorSprite, doorCollisonRectangle);
+
+                            // Add Door
+                            AllObstacles.Add(door);
                             break;
                         default:
                             break;
                     }
 
-                    AllObstacles.Add(tempObstacle);
                 }
             }
         }
