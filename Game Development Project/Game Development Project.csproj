@@ -47,6 +47,12 @@
     <Compile Include="Collider\ICollider.cs" />
     <Compile Include="Controls\Controller.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameStates\Button.cs" />
+    <Compile Include="GameStates\IGameState.cs" />
+    <Compile Include="GameStates\InGame.cs" />
+    <Compile Include="GameStates\GameState.cs" />
+    <Compile Include="GameStates\StartMenu.cs" />
+    <Compile Include="GameStates\GameStateManager.cs" />
     <Compile Include="Other\Clock.cs" />
     <Compile Include="Other\GameSounds.cs" />
     <Compile Include="Player\Healtbar.cs" />

@@ -71,7 +71,7 @@ namespace Game_Development_Project
                     Door door = obstacle as Door;
                     if (player.CollisionRectangle.Intersects(door.CollisionRectangle))
                     {
-                        Game1.CurrentLevel = currentLevel.NextLevel;
+                        InGame.CurrentLevel = currentLevel.NextLevel;
                         player.Respawn();
                     }
                 }
