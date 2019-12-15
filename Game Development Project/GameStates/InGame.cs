@@ -13,7 +13,7 @@ namespace Game_Development_Project
     class InGame : GameState
     {
         #region Fields
-        Player player;
+        public static Player player;
 
         public static int CurrentLevel;
         List<Level> AllLevels;
@@ -191,6 +191,12 @@ namespace Game_Development_Project
         public override void Update(GameTime gameTime)
         {
             // Player
+
+            if(player.IsDead)
+            {
+                GameStateManager.Instance.SetCurrentState(new GameOverScreen(contentManager, graphicsDevice, game));
+            }
+
             player.Update(gameTime);
 
             // Clock

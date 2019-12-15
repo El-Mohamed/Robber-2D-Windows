@@ -25,6 +25,20 @@ namespace Game_Development_Project
         public bool CanMoveLeft { get; set; }
         public bool CanMoveRight { get; set; }
         public bool CanMoveDown { get; set; }
+        public bool IsDead
+        {
+            get
+            {
+                if (Health > 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
 
         public Player(Sprite spriteSheet, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed, Inventory inventory)
         {

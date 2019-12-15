@@ -51,7 +51,7 @@ namespace Game_Development_Project
 
             // Mouse
 
-            if (GameStateManager.Instance.GetCurrentState() is StartMenu)
+            if (!(GameStateManager.Instance.GetCurrentState() is InGame))
             {
                 IsMouseVisible = true;
             }

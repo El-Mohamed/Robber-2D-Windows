@@ -36,7 +36,7 @@ namespace Game_Development_Project
             AllButtons = new List<Button>();
 
             buttonBorder = contentManager.Load<Texture2D>("ButtonBorder");
-            buttonFont = contentManager.Load<SpriteFont>("ClockFont");
+            buttonFont = contentManager.Load<SpriteFont>("ButtonFont");
             logo = contentManager.Load<Texture2D>("Logo");
 
             int leftMarginButton = (Game1.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
