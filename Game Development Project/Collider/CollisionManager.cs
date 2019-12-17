@@ -90,17 +90,17 @@ namespace Game_Development_Project
                 {
                     if (canMoveDown == true)
                     {
-                        canMoveDown = !(CheckTopCollision(player, block));
+                        canMoveDown = !(RectangleHelper.CheckTopCollision(player, block));
                     }
 
                     if (canMoveRight == true)
                     {
-                        canMoveRight = !(CheckLeftCollision(player, block));
+                        canMoveRight = !(RectangleHelper.CheckLeftCollision(player, block));
                     }
 
                     if (canMoveLeft == true)
                     {
-                        canMoveLeft = !(CheckRightCollision(player, block));
+                        canMoveLeft = !(RectangleHelper.CheckRightCollision(player, block));
                     }
 
                 }
@@ -121,36 +121,5 @@ namespace Game_Development_Project
         }
 
 
-        private bool CheckTopCollision(Player player, Block block)
-        {
-            return (player.CollisionRectangle.Bottom + player.Speed.Y + 2 > block.CollisionRectangle.Top &&
-                 player.CollisionRectangle.Top < block.CollisionRectangle.Top &&
-                 player.CollisionRectangle.Right > block.CollisionRectangle.Left &&
-                 player.CollisionRectangle.Left < block.CollisionRectangle.Right);
-        }
-
-        private bool CheckBottomCollision(Player player, Block block)
-        {
-            return (player.CollisionRectangle.Top + player.Speed.Y + 2 < block.CollisionRectangle.Bottom &&
-                 player.CollisionRectangle.Bottom > block.CollisionRectangle.Bottom &&
-                 player.CollisionRectangle.Right > block.CollisionRectangle.Left &&
-                 player.CollisionRectangle.Left < block.CollisionRectangle.Right);
-        }
-
-        private bool CheckRightCollision(Player player, Block block)
-        {
-            return (player.CollisionRectangle.Left - player.Speed.X + 1 < block.CollisionRectangle.Right &&
-                 player.CollisionRectangle.Right > block.CollisionRectangle.Right &&
-                 player.CollisionRectangle.Bottom > block.CollisionRectangle.Top &&
-                 player.CollisionRectangle.Top < block.CollisionRectangle.Bottom);
-        }
-
-        private bool CheckLeftCollision(Player player, Block block)
-        {
-            return (player.CollisionRectangle.Right + player.Speed.X + 1 > block.CollisionRectangle.Left &&
-                player.CollisionRectangle.Left < block.CollisionRectangle.Left &&
-                player.CollisionRectangle.Bottom > block.CollisionRectangle.Top &&
-                player.CollisionRectangle.Top < block.CollisionRectangle.Bottom);
-        }
     }
 }

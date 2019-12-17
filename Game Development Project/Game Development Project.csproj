@@ -45,6 +45,7 @@
     <Compile Include="Animations\AnimationFrame.cs" />
     <Compile Include="Collider\CollisionManager.cs" />
     <Compile Include="Collider\ICollider.cs" />
+    <Compile Include="Collider\RectangleHelper.cs" />
     <Compile Include="Controls\Controller.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Interface\Button.cs" />
