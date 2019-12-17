@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
-    class Camera
+    class Camera2D
     {
         public Matrix Transform { get; set; }
 

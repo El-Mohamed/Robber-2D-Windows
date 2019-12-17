@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
-    class Healtbar
+    class HealthBar
     {
         public Texture2D Heart { get; set; }
         public Vector2 Position { get; set; }
         public int HealthLevel { get; set; }
 
-        public Healtbar(Texture2D heart)
+        public HealthBar(Texture2D heart)
         {
             Heart = heart;
             HealthLevel = 0;

@@ -19,10 +19,10 @@ namespace Game_Development_Project
         List<Level> AllLevels;
         CollisionManager collisionManager;
 
-        Camera camera;
+        Camera2D camera;
         Clock clock;
-        InventoryHelper inventroyHelper;
-        Healtbar healtbar;
+        InventoryBar inventroyHelper;
+        HealthBar healtbar;
 
         GameSounds gameSounds;
         SpriteFont clockFont;
@@ -85,7 +85,7 @@ namespace Game_Development_Project
 
             AllLevels = new List<Level>();
             CurrentLevel = 0;
-            camera = new Camera();
+            camera = new Camera2D();
             collisionManager = new CollisionManager();
 
             // SoundEffects
@@ -106,12 +106,12 @@ namespace Game_Development_Project
             coinTexture = contentManager.Load<Texture2D>("Pickable2");
             potionTexture = contentManager.Load<Texture2D>("Pickable3");
             diamondTexture = contentManager.Load<Texture2D>("Diamond");
-            inventroyHelper = new InventoryHelper(player.Inventory, keyTexture, coinTexture, potionTexture, diamondTexture);
+            inventroyHelper = new InventoryBar(player.Inventory, keyTexture, coinTexture, potionTexture, diamondTexture);
 
             // Healthbar
 
             healtTexture = contentManager.Load<Texture2D>("Health");
-            healtbar = new Healtbar(healtTexture);
+            healtbar = new HealthBar(healtTexture);
 
             // Level 1&2 MoneySafe and Keys ID's
 
@@ -194,7 +194,7 @@ namespace Game_Development_Project
 
             if(player.IsDead)
             {
-                GameStateManager.Instance.SetCurrentState(new GameOverScreen(contentManager, graphicsDevice, game));
+                GameStateManager.Instance.SetCurrentState(new EndScreen(contentManager, graphicsDevice, game));
             }
 
             player.Update(gameTime);

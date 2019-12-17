@@ -36,7 +36,7 @@ namespace Game_Development_Project
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);    
-            GameStateManager.Instance.SetCurrentState(new StartMenu(Content, GraphicsDevice, this));
+            GameStateManager.Instance.SetCurrentState(new StartScreen(Content, GraphicsDevice, this));
         }
 
         protected override void UnloadContent()

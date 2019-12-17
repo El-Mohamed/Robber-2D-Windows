@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game_Development_Project
 {
-    class StartMenu : GameState
+    class StartScreen : GameState
     {
         #region Fields
 
@@ -21,7 +21,7 @@ namespace Game_Development_Project
         private int leftMarginLogo;
 
         #endregion
-        public StartMenu(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game) : base(contentManager, graphicsDevice, game)
+        public StartScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game) : base(contentManager, graphicsDevice, game)
         {
         
         }

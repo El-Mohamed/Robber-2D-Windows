@@ -47,23 +47,23 @@
     <Compile Include="Collider\ICollider.cs" />
     <Compile Include="Controls\Controller.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="GameStates\Button.cs" />
-    <Compile Include="GameStates\GameOverScreen.cs" />
+    <Compile Include="Interface\Button.cs" />
+    <Compile Include="GameStates\Menu\EndScreen.cs" />
     <Compile Include="GameStates\IGameState.cs" />
-    <Compile Include="GameStates\InGame.cs" />
+    <Compile Include="GameStates\Levels\InGame.cs" />
     <Compile Include="GameStates\GameState.cs" />
-    <Compile Include="GameStates\StartMenu.cs" />
+    <Compile Include="GameStates\Menu\StartScreen.cs" />
     <Compile Include="GameStates\GameStateManager.cs" />
-    <Compile Include="Other\Clock.cs" />
-    <Compile Include="Other\GameSounds.cs" />
-    <Compile Include="Player\Healtbar.cs" />
-    <Compile Include="Player\InventoryHelper.cs" />
+    <Compile Include="Utilities\Clock.cs" />
+    <Compile Include="Utilities\GameSounds.cs" />
+    <Compile Include="Player\HealthBar.cs" />
+    <Compile Include="Player\InventoryBar.cs" />
     <Compile Include="Terrain\Enemies\Bullet.cs" />
     <Compile Include="Other\IMover.cs" />
     <Compile Include="Other\Sprite.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\HardLevel.cs" />
-    <Compile Include="Other\Camera.cs" />
+    <Compile Include="Utilities\Camera2D.cs" />
     <Compile Include="Player\Inventory.cs" />
     <Compile Include="Terrain\Enemies\Tank.cs" />
     <Compile Include="Terrain\Pickables\Coin.cs" />
@@ -91,6 +91,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

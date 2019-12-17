@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
-    class GameOverScreen : GameState
+    class EndScreen : GameState
     {
 
         SpriteFont buttonFont;
@@ -19,7 +19,7 @@ namespace Game_Development_Project
         string EndScore;
         public List<Button> AllButtons { get; set; }
 
-        public GameOverScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game) : base(contentManager, graphicsDevice, game)
+        public EndScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game) : base(contentManager, graphicsDevice, game)
         {
 
         }

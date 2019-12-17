@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
-    class InventoryHelper
+    class InventoryBar
     {
         public Inventory Inventory { get; set; }
         private Texture2D CoinTexture { get; set; }
@@ -19,7 +19,7 @@ namespace Game_Development_Project
         public Vector2 ScreenCornerPosition { get; set; }
         public Vector2 PlayerPosition { get; set; }
 
-        public InventoryHelper(Inventory inventory, Texture2D keyTexture, Texture2D coinTexture, Texture2D potionTexture, Texture2D diamondTexture)
+        public InventoryBar(Inventory inventory, Texture2D keyTexture, Texture2D coinTexture, Texture2D potionTexture, Texture2D diamondTexture)
         {
             CoinTexture = coinTexture;
             KeyTexture = keyTexture;
