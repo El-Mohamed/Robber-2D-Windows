@@ -10,9 +10,9 @@ namespace Game_Development_Project
 {
     class Camera2D
     {
-        public Matrix Transform { get; set; }
+        static public Matrix Transform { get; set; }
 
-        public void Follow(Player player)
+        static public void Follow(Player player)
         {
             var position = Matrix.CreateTranslation(
                -player.SpriteSheet.Position.X - (player.CollisionRectangle.Height / 2),

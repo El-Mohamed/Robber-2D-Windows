@@ -19,8 +19,6 @@ namespace Game_Development_Project
         List<Level> AllLevels;
         CollisionManager collisionManager;
 
-        Camera2D camera;
-        Clock clock;
         InventoryBar inventroyHelper;
         HealthBar healtbar;
 
@@ -40,7 +38,7 @@ namespace Game_Development_Project
         {
             graphicsDevice.Clear(Color.White);
 
-            spriteBatch.Begin(transformMatrix: camera.Transform);
+            spriteBatch.Begin(transformMatrix: Camera2D.Transform);
 
             // Levels
             AllLevels[CurrentLevel].Draw(spriteBatch);
@@ -49,7 +47,7 @@ namespace Game_Development_Project
             player.Draw(spriteBatch);
 
             // Clock
-            clock.Draw(spriteBatch);
+            Clock.Draw(spriteBatch);
 
             // Healtbar
             healtbar.Draw(spriteBatch);
@@ -85,7 +83,6 @@ namespace Game_Development_Project
 
             AllLevels = new List<Level>();
             CurrentLevel = 0;
-            camera = new Camera2D();
             collisionManager = new CollisionManager();
 
             // SoundEffects
@@ -98,7 +95,7 @@ namespace Game_Development_Project
             // Clock
 
             clockFont = contentManager.Load<SpriteFont>("ClockFont");
-            clock = new Clock(clockFont);
+            Clock.SpriteFont = clockFont;
 
             // Inventory Helper 
 
@@ -200,8 +197,8 @@ namespace Game_Development_Project
             player.Update(gameTime);
 
             // Clock
-            clock.UpdateTime(gameTime);
-            clock.UpdatePosition(player);
+            Clock.UpdateTime(gameTime);
+            Clock.UpdatePosition(player);
 
             // Heathbar
             healtbar.UpdateHealth(player);
@@ -211,7 +208,7 @@ namespace Game_Development_Project
             inventroyHelper.UpdatePosition(player);
 
             // Camera
-            camera.Follow(player);
+            Camera2D.Follow(player);
 
             // Levels
             AllLevels[CurrentLevel].Update(gameTime);

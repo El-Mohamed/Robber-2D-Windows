@@ -11,27 +11,21 @@ namespace Game_Development_Project
 {
     class Clock
     {
-        public int Time { get; set; }
-        public SpriteFont SpriteFont { get; set; }
-        public Vector2 Position { get; set; }
+        static public int Time { get; set; }
+        static public SpriteFont SpriteFont { get; set; }
+        static public Vector2 Position { get; set; }
 
-        public Clock(SpriteFont spriteFont)
-        {
-            SpriteFont = spriteFont;
-            Time = 0;
-        }
-
-        public void UpdateTime(GameTime gameTime)
+        static public void UpdateTime(GameTime gameTime)
         {
             Time += gameTime.ElapsedGameTime.Milliseconds;
         }
 
-        public void UpdatePosition(Player player)
+        static public void UpdatePosition(Player player)
         {
             Position = new Vector2(player.SpriteSheet.Position.X + 10, player.SpriteSheet.Position.Y - (Game1.ScreenHeight / 2) + 100);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        static public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(SpriteFont, "Time: " + Time / 1000, Position, Color.Black);
         }
