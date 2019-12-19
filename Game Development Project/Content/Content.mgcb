@@ -117,6 +117,12 @@
 /processorParam:TextureFormat=Color
 /build:GameOver.png
 
+#begin GameOverSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GameOverSound.wav
+
 #begin Health.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -134,6 +140,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:HitSound.wav
+
+#begin JumpSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:JumpSound.wav
 
 #begin Logo.png
 /importer:TextureImporter

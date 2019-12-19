@@ -64,6 +64,8 @@ namespace Game_Development_Project
             closeGameButton.Click += CloseGame;
             newGameButton.Click += StartNewGame;
 
+            GameSounds.PlayGameOverSound();
+
         }
 
         private void GetScore()

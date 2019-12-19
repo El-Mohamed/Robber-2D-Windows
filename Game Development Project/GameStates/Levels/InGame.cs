@@ -24,7 +24,7 @@ namespace Game_Development_Project
 
         GameSounds gameSounds;
         SpriteFont clockFont;
-        SoundEffect pickSound, hitSound, drinkSound;
+        SoundEffect pickSound, hitSound, drinkSound, jumpSound, gameOverSound;
         Texture2D potionTexture, coinTexture, keyTexture, diamondTexture, healtTexture;
 
         #endregion
@@ -89,7 +89,9 @@ namespace Game_Development_Project
             pickSound = contentManager.Load<SoundEffect>("PickSound");
             hitSound = contentManager.Load<SoundEffect>("HitSound");
             drinkSound = contentManager.Load<SoundEffect>("DrinkSound");
-            gameSounds = new GameSounds(pickSound, hitSound, drinkSound);
+            gameOverSound = contentManager.Load<SoundEffect>("GameOverSound");
+            jumpSound = contentManager.Load<SoundEffect>("JumpSound");
+            gameSounds = new GameSounds(pickSound, hitSound, drinkSound, jumpSound, gameOverSound);
 
 
             // Clock
