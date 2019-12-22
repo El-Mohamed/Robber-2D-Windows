@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,7 +36,7 @@ namespace Game_Development_Project
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            graphicsDevice.Clear(Color.White);
+            graphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(transformMatrix: Camera2D.Transform);
 

@@ -102,7 +102,7 @@ namespace Game_Development_Project
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            graphicsDevice.Clear(Color.White);
+            graphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
 

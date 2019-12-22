@@ -27,7 +27,7 @@ namespace Game_Development_Project
 
         static public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(SpriteFont, "Time: " + Time / 1000, Position, Color.Black);
+            spriteBatch.DrawString(SpriteFont, "Time: " + Time / 1000, Position, Color.White);
         }
 
     }
