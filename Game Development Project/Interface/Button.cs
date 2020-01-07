@@ -59,13 +59,13 @@ namespace Game_Development_Project
         {       
             if (isHovering)
             {
-                FontColor = Color.White;
-                ButtonColor = Color.Red;
+                FontColor = Color.Red;
+                ButtonColor = Color.White;
             }
             else
             {
-                FontColor = Color.Black;
-                ButtonColor = Color.White;
+                FontColor = Color.White;
+                ButtonColor = Color.Red;
             }
             
             spriteBatch.Draw(texture2D, Rectangle, ButtonColor);
