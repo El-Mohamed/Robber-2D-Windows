@@ -1,18 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
     class Sprite
     {
-        public int NumberOfSprites { get; set; }
-        public Texture2D Texture1 { get; set; }
-        public Vector2 Position { get; set; }
+        public int NumberOfSprites;
+        public Texture2D Texture1;
+        public Vector2 Position;
 
         public Sprite(Texture2D texture, int numberOfSprites, Vector2 position)
         {
@@ -25,6 +20,5 @@ namespace Game_Development_Project
         {
             spriteBatch.Draw(Texture1, Position, Color.White);
         }
-
     }
 }

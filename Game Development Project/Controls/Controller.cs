@@ -1,20 +1,10 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
     class Controller
     {
-        public bool Up { get; set; }
-        public bool Right { get; set; }
-        public bool Down { get; set; }
-        public bool Left { get; set; }
-        public bool Space { get; set; }
-        public bool D { get; set; }
+        public bool Up, Down, Left, Right, Space, D;
 
         public void Update()
         {

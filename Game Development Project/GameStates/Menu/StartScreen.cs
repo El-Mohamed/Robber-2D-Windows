@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 
 namespace Game_Development_Project
 {
@@ -13,7 +10,7 @@ namespace Game_Development_Project
     {
         #region Fields
 
-        public List<Button> AllButtons { get; set; }
+        public List<Button> AllButtons;
         private Texture2D buttonBorder;
         private SpriteFont buttonFont;
         private Button startButton, settingsButton, exitButton;
@@ -23,12 +20,12 @@ namespace Game_Development_Project
         #endregion
         public StartScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game) : base(contentManager, graphicsDevice, game)
         {
-        
+
         }
 
         public override void Initialize()
         {
-        
+
         }
 
         public override void LoadContent()

@@ -1,47 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Game_Development_Project
 {
     public class Button
     {
         #region Fields
+        public Rectangle Rectangle => new Rectangle((int)Position.X, (int)Position.Y, texture2D.Width, texture2D.Height);
 
-        private MouseState currentMouse;
-
+        private MouseState currentMouse, previousMouse;
+        public Vector2 Position;
         private SpriteFont spriteFont;
-
-        private bool isHovering;
-
-        private MouseState previousMouse;
-
         private Texture2D texture2D;
-
-        #endregion
-
-        #region Properties
-
         public event EventHandler Click;
-        public bool Clicked { get; private set; }
-        public Color FontColor { get; set; }
-        public Color ButtonColor { get; set; }
-        public Vector2 Position { get; set; }
-
-        public Rectangle Rectangle
-        {
-            get
-            {
-                return new Rectangle((int)Position.X, (int)Position.Y, texture2D.Width, texture2D.Height);
-            }
-        }
-
-        public string Text { get; set; }
+        public bool Clicked, isHovering;
+        public Color FontColor, ButtonColor;
+        public string Text;
 
         #endregion
 
@@ -56,7 +32,7 @@ namespace Game_Development_Project
         }
 
         public void Draw(SpriteBatch spriteBatch)
-        {       
+        {
             if (isHovering)
             {
                 FontColor = Color.Red;
@@ -67,16 +43,16 @@ namespace Game_Development_Project
                 FontColor = Color.White;
                 ButtonColor = Color.Red;
             }
-            
+
             spriteBatch.Draw(texture2D, Rectangle, ButtonColor);
 
             if (!string.IsNullOrEmpty(Text))
             {
-                var x = (Rectangle.X + (Rectangle.Width / 2)) - (spriteFont.MeasureString(Text).X / 2);
-                var y = (Rectangle.Y + (Rectangle.Height / 2)) - (spriteFont.MeasureString(Text).Y / 2);
+                float x = (Rectangle.X + (Rectangle.Width / 2)) - (spriteFont.MeasureString(Text).X / 2);
+                float y = (Rectangle.Y + (Rectangle.Height / 2)) - (spriteFont.MeasureString(Text).Y / 2);
 
                 spriteBatch.DrawString(spriteFont, Text, new Vector2(x, y), FontColor);
-            }          
+            }
         }
 
         public void Update(GameTime gameTime)

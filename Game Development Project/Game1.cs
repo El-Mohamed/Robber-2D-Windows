@@ -1,10 +1,6 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using System;
-using System.Collections.Generic;
 
 namespace Game_Development_Project
 {
@@ -35,7 +31,7 @@ namespace Game_Development_Project
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);    
+            spriteBatch = new SpriteBatch(GraphicsDevice);
             GameStateManager.Instance.SetCurrentState(new StartScreen(Content, GraphicsDevice, this));
         }
 

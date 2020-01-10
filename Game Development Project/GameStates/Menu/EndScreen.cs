@@ -3,9 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
@@ -17,7 +14,7 @@ namespace Game_Development_Project
         Texture2D buttonBorder, GameOverImage;
         private int leftMarginGameOver;
         string EndScore;
-        public List<Button> AllButtons { get; set; }
+        public List<Button> AllButtons;
 
         public EndScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game) : base(contentManager, graphicsDevice, game)
         {
@@ -97,7 +94,7 @@ namespace Game_Development_Project
         {
             var x = ((Game1.ScreenWidth / 2)) - (buttonFont.MeasureString(EndScore).X / 2);
             var y = ((Game1.ScreenHeight / 2)) - (buttonFont.MeasureString(EndScore).Y / 2);
-            spriteBatch.DrawString(buttonFont, EndScore, new Vector2(x, y ), Color.Red);
+            spriteBatch.DrawString(buttonFont, EndScore, new Vector2(x, y), Color.Red);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -127,6 +124,5 @@ namespace Game_Development_Project
         {
             GameStateManager.Instance.SetCurrentState(new InGame(contentManager, graphicsDevice, game));
         }
-
     }
 }

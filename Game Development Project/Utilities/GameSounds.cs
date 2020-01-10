@@ -1,19 +1,14 @@
 ﻿using Microsoft.Xna.Framework.Audio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
     class GameSounds
     {
-        static public SoundEffect PickSound { get; set; }
-        static public SoundEffect HitSound { get; set; }
-        static public SoundEffect DrinkSound { get; set; }
-        static public SoundEffect JumpSound { get; set; }
-        static public SoundEffect GameOverSound { get; set; }
+        static public SoundEffect PickSound;
+        static public SoundEffect HitSound;
+        static public SoundEffect DrinkSound;
+        static public SoundEffect JumpSound;
+        static public SoundEffect GameOverSound;
 
         public GameSounds(SoundEffect pickupSound, SoundEffect hitSound, SoundEffect drinkSound, SoundEffect jumpSound, SoundEffect gameOverSound)
         {
@@ -47,6 +42,5 @@ namespace Game_Development_Project
         {
             JumpSound.Play();
         }
-
     }
 }

@@ -3,19 +3,16 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
     class HardLevel : Level
     {
 
-        public List<Tank> AllTanks { get; set; }
-        protected byte[,] EnemiesArray { get; set; }
-
+        public List<Tank> AllTanks;
+        protected byte[,] EnemiesArray;
         private int LastTimeShooted = 0;
+
         public HardLevel(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, byte[,] enemiesArray, List<Block> allObstacles, List<Block> allPickables, List<Tank> allTanks) : base(obstaclesArray, pickablesArray, moneySafeIdentiefiers, allObstacles, allPickables)
         {
             AllTanks = allTanks;
@@ -51,7 +48,7 @@ namespace Game_Development_Project
                     switch (EnemiesArray[y, x])
                     {
                         case 1:
-                            Tank tempTank = new Tank(tempSprite, tempCollisonRectangle);                          
+                            Tank tempTank = new Tank(tempSprite, tempCollisonRectangle);
                             AllTanks.Add(tempTank);
                             break;
                         default:
@@ -90,7 +87,7 @@ namespace Game_Development_Project
         }
 
         public void CreateBullets(ContentManager contentManager)
-        {            
+        {
             if (LastTimeShooted >= 100)
             {
                 foreach (Tank tank in AllTanks)
@@ -98,7 +95,7 @@ namespace Game_Development_Project
                     tank.Shoot(contentManager, tank.SpriteImage.Position);
 
                 }
-                LastTimeShooted = 0;            
+                LastTimeShooted = 0;
             }
         }
 
@@ -108,11 +105,11 @@ namespace Game_Development_Project
             LastTimeShooted += 100 * gameTime.ElapsedGameTime.Milliseconds / 500;
             base.Update(gameTime);
         }
-        
+
         public void UpdateBullets(GameTime gameTime)
-        {          
+        {
             foreach (Tank tank in AllTanks)
-            {              
+            {
                 foreach (Bullet bullet in tank.ShootedBullets)
                 {
                     bullet.Update(gameTime);

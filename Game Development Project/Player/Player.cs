@@ -1,33 +1,25 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
     class Player : ICollider, IMover
     {
         enum PlayerState { ToLeft, ToRight }
-
-        public Sprite SpriteSheet { get; set; }
-        private Animation Animation { get; set; }
-        private Controller Controller { get; set; }
         public Vector2 Speed { get; set; }
-        public Inventory Inventory { get; set; }
         public Rectangle CollisionRectangle { get; set; }
-        private PlayerState PlayerDirection { get; set; }
-        public int Health { get; set; }
 
-        private bool IsMoving { get; set; }
-        public bool IsJumping { get; set; }
-        public int AirTime { get; set; }
-        public bool CanMoveLeft { get; set; }
-        public bool CanMoveRight { get; set; }
-        public bool CanMoveDown { get; set; }
-        public bool CanMoveUp { get; set; }
+        public Sprite SpriteSheet;
+        private Animation Animation;
+        private Controller Controller;    
+        public Inventory Inventory;
+
+        private PlayerState PlayerDirection;
+        public int Health;
+        public int AirTime;
+        public bool IsMoving, IsJumping;
+        public bool CanMoveUp, CanMoveDown, CanMoveLeft, CanMoveRight;
+
         public bool IsDead
         {
             get
@@ -121,7 +113,6 @@ namespace Game_Development_Project
 
             if (Controller.Space && IsJumping == false && !CanMoveDown)
             {
-
                 IsJumping = true;
             }
         }
@@ -174,10 +165,10 @@ namespace Game_Development_Project
                 {
                     AirTime++;
 
-                    float MULTIPLIER = 8;               
+                    float MULTIPLIER = 8;
                     float newSpeedY = Speed.Y;
                     newSpeedY += 1 * MULTIPLIER;
-                    Speed = new Vector2(Speed.X, newSpeedY);                  
+                    Speed = new Vector2(Speed.X, newSpeedY);
                 }
 
                 SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y + Speed.Y);
@@ -205,7 +196,7 @@ namespace Game_Development_Project
                 {
                     Speed = new Vector2(Speed.X, 0);
                     IsJumping = false;
-                }            
+                }
             }
             else
             {

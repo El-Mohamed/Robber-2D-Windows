@@ -1,26 +1,23 @@
-using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using System;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 
 namespace Game_Development_Project
 {
     class Level
     {
-        public int NextLevel { get; set; }
-        public Vector2 StartPosition { get; set; }
+        public int NextLevel;
+        public Vector2 StartPosition;
 
         protected int SpaceBetweenPlatforms = 250;
-        public List<Block> AllObstacles { get; set; }
-        public List<Block> AllPickables { get; set; }
-        public List<int> MoneySafeIndentifiers { get; set; }
-        protected byte[,] ObstaclesArray { get; set; }
-        protected byte[,] PickablesArray { get; set; }
-        protected long LevelHeight { get; }
-        protected long MapWidth { get; }
+        public List<Block> AllObstacles, AllPickables;
+        public List<int> MoneySafeIndentifiers;
+        protected byte[,] ObstaclesArray, PickablesArray;
+        protected long LevelHeight, MapWidth;
 
-        public Level(byte[,] obstaclesArray, byte[,] pickablesArray,List<int> moneySafeIdentiefiers ,List<Block> allObstacles, List<Block> allPickables)
+        public Level(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, List<Block> allObstacles, List<Block> allPickables)
         {
             ObstaclesArray = obstaclesArray;
             PickablesArray = pickablesArray;
@@ -77,32 +74,33 @@ namespace Game_Development_Project
 
                     switch (PickablesArray[y, x])
                     {
-                        case 1:                        
+                        case 1:
                             MoneySafeKey tempMoneySafeKey = new MoneySafeKey(tempSprite, tempCollisonRectangle)
                             {
                                 MoneySafeID = MoneySafeIndentifiers[totalKeys]
-                            };                           
+                            };
                             AllPickables.Add(tempMoneySafeKey as Block);
                             totalKeys++;
                             break;
-                        case 2:             
+                        case 2:
                             Coin tempCoin = new Coin(tempSprite, tempCollisonRectangle)
                             {
                                 Value = 100 // TODO CREATE RANDOM
                             };
                             AllPickables.Add(tempCoin);
                             break;
-                        case 3:                        
-                            Potion tempPotion= new Potion(tempSprite, tempCollisonRectangle)
+                        case 3:
+                            Potion tempPotion = new Potion(tempSprite, tempCollisonRectangle)
                             {
                                 SpeedAcceleration = 2 // TODO CREATE RANDOM
                             };
                             AllPickables.Add(tempPotion);
                             break;
-                        case 4:                       
+                        case 4:
                             MoneySafe tempMoneySafe = new MoneySafe(tempSprite, tempCollisonRectangle)
                             {
-                                KeyID = MoneySafeIndentifiers[totalMoneySafes], NumberOfDiamonds = 3 // TODO CREATE RANDOM
+                                KeyID = MoneySafeIndentifiers[totalMoneySafes],
+                                NumberOfDiamonds = 3 // TODO CREATE RANDOM
                             };
                             AllPickables.Add(tempMoneySafe);
                             totalMoneySafes++;

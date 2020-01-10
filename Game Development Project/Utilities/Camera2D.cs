@@ -1,16 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
     class Camera2D
     {
-        static public Matrix Transform { get; set; }
+        static public Matrix Transform;
 
         static public void Follow(Player player)
         {

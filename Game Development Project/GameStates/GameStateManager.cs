@@ -1,11 +1,6 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
@@ -13,7 +8,7 @@ namespace Game_Development_Project
     {
         private IGameState currentGameState;
         private static GameStateManager instance;
-  
+
         public static GameStateManager Instance => instance ?? (instance = new GameStateManager());
 
         public void Update(GameTime gameTime)

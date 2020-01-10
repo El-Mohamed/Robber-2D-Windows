@@ -1,19 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
     class HealthBar
     {
-        public Texture2D Heart { get; set; }
-        public Vector2 Position { get; set; }
-        public int HealthLevel { get; set; }
+        public Texture2D Heart;
+        public Vector2 Position;
+        public int HealthLevel;
 
         public HealthBar(Texture2D heart)
         {
@@ -22,7 +16,7 @@ namespace Game_Development_Project
         }
 
         public void UpdatePosition(Player player)
-        {  
+        {
             Position = new Vector2(player.SpriteSheet.Position.X + (Game1.ScreenWidth / 2) - 10, player.SpriteSheet.Position.Y - (Game1.ScreenHeight / 2) + 100);
         }
 

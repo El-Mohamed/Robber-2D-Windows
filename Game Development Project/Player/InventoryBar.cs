@@ -1,23 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
     class InventoryBar
     {
-        public Inventory Inventory { get; set; }
-        private Texture2D CoinTexture { get; set; }
-        private Texture2D PotionTexture { get; set; }
-        private Texture2D KeyTexture { get; set; }
-        private Texture2D DiamondTexture { get; set; }
-        public Vector2 ScreenCornerPosition { get; set; }
-        public Vector2 PlayerPosition { get; set; }
+        public Inventory Inventory;
+        private Texture2D CoinTexture, PotionTexture, KeyTexture, DiamondTexture;
+        public Vector2 ScreenCornerPosition;
+        public Vector2 PlayerPosition;
 
         public InventoryBar(Inventory inventory, Texture2D keyTexture, Texture2D coinTexture, Texture2D potionTexture, Texture2D diamondTexture)
         {
@@ -70,7 +61,6 @@ namespace Game_Development_Project
             {
                 spriteBatch.Draw(KeyTexture, new Vector2(PlayerPosition.X + 40, PlayerPosition.Y - 30), null, Color.Wheat, 0f, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
             }
-
         }
     }
 }

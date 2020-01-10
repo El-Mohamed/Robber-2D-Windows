@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Game_Development_Project
 {
@@ -31,7 +27,7 @@ namespace Game_Development_Project
 
         public InGame(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game) : base(contentManager, graphicsDevice, game)
         {
-        
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -60,7 +56,7 @@ namespace Game_Development_Project
 
         public override void Initialize()
         {
-    
+
         }
 
         public override void LoadContent()
@@ -184,14 +180,14 @@ namespace Game_Development_Project
 
         public override void UnloadContent()
         {
-     
+
         }
 
         public override void Update(GameTime gameTime)
         {
             // Player
 
-            if(player.IsDead)
+            if (player.IsDead)
             {
                 GameStateManager.Instance.SetCurrentState(new EndScreen(contentManager, graphicsDevice, game));
             }

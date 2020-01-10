@@ -1,20 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Game_Development_Project
 {
     class Clock
     {
-        static public int Time { get; set; }
-        static public string TimeText { get; set; } = "";
-        static public SpriteFont SpriteFont { get; set; }
-        static public Vector2 Position { get; set; }
+        static public int Time;
+        static public string TimeText = "";
+        static public SpriteFont SpriteFont;
+        static public Vector2 Position;
 
         static public void UpdateTime(GameTime gameTime)
         {
@@ -45,9 +40,8 @@ namespace Game_Development_Project
         }
 
         static public void Draw(SpriteBatch spriteBatch)
-        {    
+        {
             spriteBatch.DrawString(SpriteFont, TimeText, Position, Color.White);
         }
-
     }
 }

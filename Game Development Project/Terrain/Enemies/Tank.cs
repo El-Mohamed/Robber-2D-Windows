@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Game_Development_Project
 {
     class Tank : Block
     {
-        public List<Bullet> ShootedBullets { get; set; }
+        public List<Bullet> ShootedBullets;
 
         public Tank(Sprite sprite, Rectangle collisionRectangle) : base(sprite, collisionRectangle)
         {
@@ -22,7 +18,7 @@ namespace Game_Development_Project
         {
             const int Offset = 10; // Bullets need to shooted out of the gun
             Texture2D bulletTexture = contentManager.Load<Texture2D>("Bullet");
-            Vector2 bulletPosition = new Vector2(tankPosition.X, tankPosition.Y +Offset);
+            Vector2 bulletPosition = new Vector2(tankPosition.X, tankPosition.Y + Offset);
             Rectangle bulletCollisoionRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
             Sprite sprite = new Sprite(bulletTexture, 1, bulletPosition);
             ShootedBullets.Add(new Bullet(sprite, bulletCollisoionRectangle));

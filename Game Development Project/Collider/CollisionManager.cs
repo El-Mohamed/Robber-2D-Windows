@@ -1,10 +1,3 @@
-using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Game_Development_Project
 {
     class CollisionManager
@@ -106,7 +99,7 @@ namespace Game_Development_Project
 
                     if (canMoveUp)
                     {
-                        canMoveUp = ! (RectangleHelper.CheckBottomCollision(player, block));
+                        canMoveUp = !(RectangleHelper.CheckBottomCollision(player, block));
                     }
 
                 }
@@ -121,12 +114,10 @@ namespace Game_Development_Project
 
         private void CheckMapRange(Player player, Level currentlevel)
         {
-            if(player.CollisionRectangle.Top > 1600)
+            if (player.CollisionRectangle.Top > 1600)
             {
                 player.Respawn();
             }
         }
-
-
     }
 }

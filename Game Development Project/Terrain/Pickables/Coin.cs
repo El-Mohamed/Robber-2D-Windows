@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace Game_Development_Project
 {
     class Coin : Block, ICloneable
     {
+        public int Value;
+
         public Coin(Sprite sprite, Rectangle collisionRectangle) : base(sprite, collisionRectangle)
         {
         }
-
-        public int Value { get; set; }
 
         public object Clone()
         {

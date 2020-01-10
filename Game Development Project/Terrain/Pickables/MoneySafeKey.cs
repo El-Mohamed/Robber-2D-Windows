@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace Game_Development_Project
 {
     class MoneySafeKey : Block, ICloneable
     {
-        public int MoneySafeID { get; set; }
+        public int MoneySafeID;
 
         public MoneySafeKey(Sprite sprite, Rectangle collisionRectangle) : base(sprite, collisionRectangle)
         {
@@ -18,9 +13,10 @@ namespace Game_Development_Project
 
         public object Clone()
         {
-            return new MoneySafeKey(this.SpriteImage, this.CollisionRectangle) {
+            return new MoneySafeKey(this.SpriteImage, this.CollisionRectangle)
+            {
                 MoneySafeID = this.MoneySafeID
-            };         
+            };
         }
     }
 }
