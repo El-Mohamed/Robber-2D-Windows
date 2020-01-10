@@ -11,7 +11,7 @@ namespace Game_Development_Project
 
         static public bool CheckTopCollision(Player player, Block block)
         {
-            return (player.CollisionRectangle.Bottom + player.Speed.Y + 2 > block.CollisionRectangle.Top &&
+            return (player.CollisionRectangle.Bottom + player.Speed.Y + 10 > block.CollisionRectangle.Top &&
                  player.CollisionRectangle.Top < block.CollisionRectangle.Top &&
                  player.CollisionRectangle.Right > block.CollisionRectangle.Left &&
                  player.CollisionRectangle.Left < block.CollisionRectangle.Right);
@@ -19,7 +19,7 @@ namespace Game_Development_Project
 
         static public bool CheckBottomCollision(Player player, Block block)
         {
-            return (player.CollisionRectangle.Top + player.Speed.Y + 2 < block.CollisionRectangle.Bottom &&
+            return (player.CollisionRectangle.Top + player.Speed.Y - 1 < block.CollisionRectangle.Bottom &&
                  player.CollisionRectangle.Bottom > block.CollisionRectangle.Bottom &&
                  player.CollisionRectangle.Right > block.CollisionRectangle.Left &&
                  player.CollisionRectangle.Left < block.CollisionRectangle.Right);

@@ -22,9 +22,12 @@ namespace Game_Development_Project
         public int Health { get; set; }
 
         private bool IsMoving { get; set; }
+        public bool IsJumping { get; set; }
+        public int AirTime { get; set; }
         public bool CanMoveLeft { get; set; }
         public bool CanMoveRight { get; set; }
         public bool CanMoveDown { get; set; }
+        public bool CanMoveUp { get; set; }
         public bool IsDead
         {
             get
@@ -53,6 +56,8 @@ namespace Game_Development_Project
             CanMoveLeft = false;
             CanMoveRight = false;
             CanMoveDown = false;
+            IsJumping = false;
+            AirTime = 0;
         }
 
         private void CreateAnimationFrames()
@@ -93,7 +98,9 @@ namespace Game_Development_Project
 
         private void UpdateMovement(GameTime gameTime)
         {
-            MoveDown();
+
+            HandleJump();
+            HandleGravity();
 
             IsMoving = false;
 
@@ -110,6 +117,12 @@ namespace Game_Development_Project
             if (Controller.D)
             {
                 DrinkPotion();
+            }
+
+            if (Controller.Space && IsJumping == false && !CanMoveDown)
+            {
+
+                IsJumping = true;
             }
         }
 
@@ -153,11 +166,52 @@ namespace Game_Development_Project
             PlayerDirection = PlayerState.ToLeft;
         }
 
-        public void MoveDown()
+        public void HandleGravity()
         {
-            if (CanMoveDown)
+            if (!IsJumping && CanMoveDown)
             {
-                SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y + 4);
+                if (AirTime < 20)
+                {
+                    AirTime++;
+
+                    float MULTIPLIER = 8;               
+                    float newSpeedY = Speed.Y;
+                    newSpeedY += 1 * MULTIPLIER;
+                    Speed = new Vector2(Speed.X, newSpeedY);                  
+                }
+
+                SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y + Speed.Y);
+            }
+
+            if (!CanMoveDown)
+            {
+                Speed = new Vector2(Speed.X, 0);
+                IsJumping = false;
+                AirTime = 0;
+            }
+        }
+
+        public void HandleJump()
+        {
+            if (IsJumping && AirTime < 25)
+            {
+                AirTime++;
+
+                if (CanMoveUp)
+                {
+                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y - 10);
+                }
+                else
+                {
+                    Speed = new Vector2(Speed.X, 0);
+                    IsJumping = false;
+                }            
+            }
+            else
+            {
+                AirTime = 0;
+                IsJumping = false;
+                Speed = new Vector2(Speed.X, 0);
             }
         }
 
@@ -169,7 +223,7 @@ namespace Game_Development_Project
 
         public void Respawn()
         {
-            SpriteSheet.Position = new Vector2(0, 50);
+            SpriteSheet.Position = new Vector2(0, -200);
         }
 
         public void DrinkPotion()

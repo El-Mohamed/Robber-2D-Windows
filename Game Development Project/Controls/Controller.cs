@@ -65,6 +65,14 @@ namespace Game_Development_Project
                 D = false;
             }
 
+            if (stateKey.IsKeyDown(Keys.Space))
+            {
+                Space = true;
+            }
+            if (stateKey.IsKeyUp(Keys.Space))
+            {
+                Space = false;
+            }
         }
     }
 }

@@ -83,6 +83,7 @@ namespace Game_Development_Project
             bool canMoveDown = true;
             bool canMoveLeft = true;
             bool canMoveRight = true;
+            bool canMoveUp = true;
 
             foreach (Block block in level.AllObstacles)
             {
@@ -103,12 +104,18 @@ namespace Game_Development_Project
                         canMoveLeft = !(RectangleHelper.CheckRightCollision(player, block));
                     }
 
+                    if (canMoveUp)
+                    {
+                        canMoveUp = ! (RectangleHelper.CheckBottomCollision(player, block));
+                    }
+
                 }
             }
 
             player.CanMoveDown = canMoveDown;
             player.CanMoveLeft = canMoveLeft;
             player.CanMoveRight = canMoveRight;
+            player.CanMoveUp = canMoveUp;
 
         }
 
