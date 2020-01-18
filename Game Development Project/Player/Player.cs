@@ -182,7 +182,7 @@ namespace Game_Development_Project
                 {
                     AirTime++;
 
-                    float MULTIPLIER = 8;
+                    float MULTIPLIER = 11;
                     float newSpeedY = Speed.Y;
                     newSpeedY += 1 * MULTIPLIER;
                     Speed = new Vector2(Speed.X, newSpeedY);
