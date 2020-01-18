@@ -92,7 +92,7 @@ namespace Game_Development_Project
                         case 3:
                             Potion tempPotion = new Potion(tempSprite, tempCollisonRectangle)
                             {
-                                SpeedAcceleration = 2 // TODO CREATE RANDOM
+                                SpeedAcceleration = 1 // TODO CREATE RANDOM
                             };
                             AllPickables.Add(tempPotion);
                             break;

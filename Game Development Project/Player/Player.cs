@@ -11,13 +11,13 @@ namespace Game_Development_Project
 
         public Sprite SpriteSheet;
         private Animation Animation;
-        private Controller Controller;    
+        private Controller Controller;
         public Inventory Inventory;
 
         private PlayerState PlayerDirection;
         public int Health;
         public int AirTime;
-        public bool IsMoving, IsJumping;
+        public bool IsMoving, IsJumping, IsFallingDown;
         public bool CanMoveUp, CanMoveDown, CanMoveLeft, CanMoveRight;
 
         public bool IsDead
@@ -43,13 +43,13 @@ namespace Game_Development_Project
             CollisionRectangle = collisionRectangle;
             Speed = speed;
             Inventory = inventory;
-            CreateAnimationFrames();
             Health = 100;
             CanMoveLeft = false;
             CanMoveRight = false;
             CanMoveDown = false;
             IsJumping = false;
             AirTime = 0;
+            CreateAnimationFrames();
         }
 
         private void CreateAnimationFrames()
@@ -140,7 +140,15 @@ namespace Game_Development_Project
             if (CanMoveRight)
             {
                 IsMoving = true;
-                SpriteSheet.Position = new Vector2(SpriteSheet.Position.X + Speed.X, SpriteSheet.Position.Y);
+
+                if (IsFallingDown && !IsJumping)
+                {
+                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X + (Speed.X / 2), SpriteSheet.Position.Y);
+                }
+                else
+                {
+                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X + Speed.X, SpriteSheet.Position.Y);
+                }
             }
 
             PlayerDirection = PlayerState.ToRight;
@@ -151,7 +159,15 @@ namespace Game_Development_Project
             if (CanMoveLeft)
             {
                 IsMoving = true;
-                SpriteSheet.Position = new Vector2(SpriteSheet.Position.X - Speed.X, SpriteSheet.Position.Y);
+
+                if (IsFallingDown && !IsJumping)
+                {
+                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X - (Speed.X / 2), SpriteSheet.Position.Y);
+                }
+                else
+                {
+                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X - Speed.X, SpriteSheet.Position.Y);
+                }
             }
 
             PlayerDirection = PlayerState.ToLeft;
@@ -161,6 +177,7 @@ namespace Game_Development_Project
         {
             if (!IsJumping && CanMoveDown)
             {
+                IsFallingDown = true;
                 if (AirTime < 20)
                 {
                     AirTime++;
@@ -178,19 +195,21 @@ namespace Game_Development_Project
             {
                 Speed = new Vector2(Speed.X, 0);
                 IsJumping = false;
+                IsFallingDown = false;
                 AirTime = 0;
             }
         }
 
         public void HandleJump()
         {
+            Speed = new Vector2(Speed.X, 10);
             if (IsJumping && AirTime < 25)
             {
                 AirTime++;
 
                 if (CanMoveUp)
                 {
-                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y - 10);
+                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y - Speed.Y);
                 }
                 else
                 {
@@ -225,6 +244,7 @@ namespace Game_Development_Project
                 Speed = new Vector2(Speed.X + potionToDrink.SpeedAcceleration, Speed.Y);
                 Inventory.MyPotion = null; // Remove Drinked Potion
                 GameSounds.PlayDrinkSound();
+                Animation.IncreaseSpeed();
             }
         }
     }

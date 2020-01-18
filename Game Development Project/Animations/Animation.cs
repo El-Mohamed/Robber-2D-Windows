@@ -9,11 +9,13 @@ namespace Game_Development_Project
         public AnimationFrame currentFrame;
         private double xOffset;
         int counter = 0;
+        private int RefreshRate;
 
         public Animation()
         {
             allFrames = new List<AnimationFrame>();
             xOffset = 0;
+            RefreshRate = 50;
         }
 
         public void AddFrame(Rectangle rectangle)
@@ -29,8 +31,8 @@ namespace Game_Development_Project
 
         public void Update(GameTime gameTime)
         {
-            xOffset += currentFrame.SourceRectangle.Width * gameTime.ElapsedGameTime.Milliseconds / 50;
-            if (xOffset >= currentFrame.SourceRectangle.Width)
+            xOffset += currentFrame.SourceRectangle.Width * gameTime.ElapsedGameTime.Milliseconds;
+            if (xOffset/ RefreshRate >= currentFrame.SourceRectangle.Width)
             {
                 counter++;
                 if (counter >= allFrames.Count)
@@ -42,5 +44,11 @@ namespace Game_Development_Project
                 xOffset = 0;
             }
         }
+
+        public void IncreaseSpeed()
+        {
+            RefreshRate -= 1;
+        }
+
     }
 }
