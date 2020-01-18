@@ -42,17 +42,17 @@ namespace Game_Development_Project
             startButton = new Button(buttonBorder, buttonFont)
             {
                 Text = "START GAME",
-                Position = new Vector2(leftMarginButton, 400)
+                Position = new Vector2(leftMarginButton, 550)
             };
             settingsButton = new Button(buttonBorder, buttonFont)
             {
                 Text = "SETTINGS",
-                Position = new Vector2(leftMarginButton, 500)
+                Position = new Vector2(leftMarginButton, 650)
             };
             exitButton = new Button(buttonBorder, buttonFont)
             {
                 Text = "EXIT",
-                Position = new Vector2(leftMarginButton, 600)
+                Position = new Vector2(leftMarginButton, 750)
             };
 
             AllButtons.Add(startButton);
