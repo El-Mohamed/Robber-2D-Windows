@@ -19,9 +19,10 @@ namespace Game_Development_Project
         HealthBar healtbar;
 
         GameSounds gameSounds;
-        SpriteFont clockFont;
+        SpriteFont defaultFont;
         SoundEffect pickSound, hitSound, drinkSound, jumpSound, gameOverSound;
         Texture2D potionTexture, coinTexture, keyTexture, diamondTexture, healtTexture;
+        List<Texture2D> allTextures;
 
         #endregion
 
@@ -92,8 +93,8 @@ namespace Game_Development_Project
 
             // Clock
 
-            clockFont = contentManager.Load<SpriteFont>("ClockFont");
-            Clock.SpriteFont = clockFont;
+            defaultFont = contentManager.Load<SpriteFont>("DefaultFont");
+            Clock.SpriteFont = defaultFont;
 
             // Inventory Helper 
 
@@ -101,7 +102,8 @@ namespace Game_Development_Project
             coinTexture = contentManager.Load<Texture2D>("Pickable2");
             potionTexture = contentManager.Load<Texture2D>("Pickable3");
             diamondTexture = contentManager.Load<Texture2D>("Diamond");
-            inventroyHelper = new InventoryBar(player.Inventory, keyTexture, coinTexture, potionTexture, diamondTexture);
+            allTextures = new List<Texture2D>() { keyTexture, coinTexture, potionTexture, diamondTexture };
+            inventroyHelper = new InventoryBar(player.Inventory, allTextures, defaultFont);
 
             // Healthbar
 

@@ -68,12 +68,12 @@
 /processorParam:TextureFormat=Compressed
 /build:ButtonFont.spritefont
 
-#begin ClockFont.spritefont
+#begin DefaultFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:ClockFont.spritefont
+/build:DefaultFont.spritefont
 
 #begin Diamond.png
 /importer:TextureImporter
