@@ -88,7 +88,7 @@ namespace Game_Development_Project
 
         public void CreateBullets(ContentManager contentManager)
         {
-            if (LastTimeShooted >= 100)
+            if (LastTimeShooted >= 300)
             {
                 foreach (Tank tank in AllTanks)
                 {

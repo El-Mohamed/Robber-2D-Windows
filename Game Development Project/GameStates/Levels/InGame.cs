@@ -162,6 +162,39 @@ namespace Game_Development_Project
 
             #endregion
 
+            #region Level3
+
+            byte[,] ObstaclesLevel2 = new byte[,]
+            {
+                 {1,0,0,1,0,0,1,0,1,0 },
+                 {1,1,1,1,1,1,0,1,1,1 },
+                 {0,1,2,1,0,1,1,1,1,1 },
+            };
+
+            byte[,] PickablesLevel2 = new byte[,]
+            {
+                 {0,0,0,2,0,0,2,0,4,0 },
+                 {0,0,3,0,0,0,0,0,0,0 },
+                 {0,0,0,0,0,1,0,0,0,0 },
+            };
+
+
+            byte[,] EnemiesArray2 = new byte[,]
+            {
+                 {0,0,0,0,0,0,0,0,0,0 },
+                 {0,0,0,1,0,0,0,0,0,0 },
+                 {0,0,0,0,0,0,0,0,1,0 },
+            };
+
+            List<int> MoneySafeIndetifiers2 = new List<int>() { 10009 };
+
+            Level level2 = new HardLevel(ObstaclesLevel2, PickablesLevel2, MoneySafeIndetifiers2, EnemiesArray2, new List<Block>(), new List<Block>(), new List<Tank>());
+            level2.Create(contentManager);
+            level2.NextLevel = AllLevels.Count + 1;
+            AllLevels.Add(level2);
+
+            #endregion
+
         }
 
         public override void UnloadContent()
