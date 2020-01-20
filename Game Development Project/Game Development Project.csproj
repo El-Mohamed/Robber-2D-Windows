@@ -48,6 +48,7 @@
     <Compile Include="Collider\RectangleHelper.cs" />
     <Compile Include="Controls\Controller.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameStates\Menu\WinScreen.cs" />
     <Compile Include="Interface\Button.cs" />
     <Compile Include="GameStates\Menu\EndScreen.cs" />
     <Compile Include="GameStates\IGameState.cs" />

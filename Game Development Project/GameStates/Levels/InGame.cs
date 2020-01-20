@@ -23,6 +23,8 @@ namespace Game_Development_Project
         SoundEffect pickSound, hitSound, drinkSound, jumpSound, gameOverSound;
         Texture2D potionTexture, coinTexture, keyTexture, diamondTexture, healtTexture;
         List<Texture2D> allTextures;
+        static public bool PlayerWon;
+        static public int GAMEISDONECODE = 999;
 
         #endregion
 
@@ -81,6 +83,7 @@ namespace Game_Development_Project
             AllLevels = new List<Level>();
             CurrentLevel = 0;
             collisionManager = new CollisionManager();
+            PlayerWon = false;
 
             // SoundEffects
             pickSound = contentManager.Load<SoundEffect>("PickSound");
@@ -190,7 +193,7 @@ namespace Game_Development_Project
 
             Level level2 = new HardLevel(ObstaclesLevel2, PickablesLevel2, MoneySafeIndetifiers2, EnemiesArray2, new List<Block>(), new List<Block>(), new List<Tank>());
             level2.Create(contentManager);
-            level2.NextLevel = AllLevels.Count + 1;
+            level2.NextLevel = GAMEISDONECODE;
             AllLevels.Add(level2);
 
             #endregion
@@ -205,6 +208,11 @@ namespace Game_Development_Project
         public override void Update(GameTime gameTime)
         {
             // Player
+
+            if (PlayerWon)
+            {
+                GameStateManager.Instance.SetCurrentState(new WinScreen(contentManager, graphicsDevice, game));
+            }
 
             if (player.IsDead)
             {
