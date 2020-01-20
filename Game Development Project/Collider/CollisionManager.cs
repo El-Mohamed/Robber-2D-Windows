@@ -44,6 +44,7 @@ namespace Game_Development_Project
                             player.Inventory.AddItem(currentLevel.AllPickables[i]);
                             currentLevel.AllPickables.RemoveAt(i);
                             player.Inventory.MyKey = null;
+                            currentLevel.totalMoneySafes--;
                         }
                     }
                     else
@@ -59,7 +60,7 @@ namespace Game_Development_Project
         {
             foreach (Block obstacle in currentLevel.AllObstacles)
             {
-                if (obstacle is Door)
+                if (obstacle is Door && currentLevel.IsCompleted)
                 {
                     Door door = obstacle as Door;
                     if (player.CollisionRectangle.Intersects(door.CollisionRectangle))

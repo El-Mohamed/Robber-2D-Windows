@@ -110,6 +110,30 @@ namespace Game_Development_Project
             healtTexture = contentManager.Load<Texture2D>("Health");
             healtbar = new HealthBar(healtTexture);
 
+            // Level 0
+
+            byte[,] ObstaclesLevel0 = new byte[,]
+            {
+                 {1,1,0,0,0,0,1,1 },
+                 {1,1,1,1,0,1,0,0 },
+                 {2,1,1,1,1,1,0,0 }
+            };
+
+            byte[,] PickablesLevel0 = new byte[,]
+            {
+                 {0,0,0,0,0,0,0,4 },
+                 {0,0,0,1,0,0,0,0 },
+                 {0,0,0,0,0,0,0,0 }
+
+            };
+
+            List<int> MoneySafeIndetifiers0 = new List<int>() { 10006, };
+
+            Level level0 = new Level(ObstaclesLevel0, PickablesLevel0, MoneySafeIndetifiers0, new List<Block>(), new List<Block>());
+            level0.Create(contentManager);
+            level0.NextLevel = 1; 
+            AllLevels.Add(level0);
+
             // Level 1&2 MoneySafe and Keys ID's
 
             List<int> MoneySafeIndetifiers = new List<int>() { 1000, 1001, 1002, 1003 };
