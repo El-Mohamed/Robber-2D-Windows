@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Game_Development_Project
 {
@@ -13,7 +14,7 @@ namespace Game_Development_Project
         public List<Button> AllButtons;
         private Texture2D buttonBorder;
         private SpriteFont buttonFont;
-        private Button startButton, settingsButton, exitButton;
+        private Button startButton, androidVersionButton, exitButton;
         private Texture2D logo;
         private int leftMarginLogo;
 
@@ -44,9 +45,9 @@ namespace Game_Development_Project
                 Text = "START GAME",
                 Position = new Vector2(leftMarginButton, 550)
             };
-            settingsButton = new Button(buttonBorder, buttonFont)
+            androidVersionButton = new Button(buttonBorder, buttonFont)
             {
-                Text = "SETTINGS",
+                Text = "GOOGLE PLAY",
                 Position = new Vector2(leftMarginButton, 650)
             };
             exitButton = new Button(buttonBorder, buttonFont)
@@ -56,10 +57,11 @@ namespace Game_Development_Project
             };
 
             AllButtons.Add(startButton);
-            AllButtons.Add(settingsButton);
+            AllButtons.Add(androidVersionButton);
             AllButtons.Add(exitButton);
 
             exitButton.Click += CloseGame;
+            androidVersionButton.Click += ShowInGooglePlay;
             startButton.Click += StartGame;
         }
 
@@ -71,6 +73,11 @@ namespace Game_Development_Project
         private void StartGame(object sender, EventArgs e)
         {
             GameStateManager.Instance.SetCurrentState(new InGame(contentManager, graphicsDevice, game));
+        }
+
+        private void ShowInGooglePlay(object sender, EventArgs e)
+        {
+            Process.Start("https://play.google.com/store/apps/details?id=com.mohamed.robber2D");
         }
 
         public override void UnloadContent()
