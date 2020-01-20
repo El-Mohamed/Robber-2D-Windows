@@ -110,7 +110,7 @@ namespace Game_Development_Project
             healtTexture = contentManager.Load<Texture2D>("Health");
             healtbar = new HealthBar(healtTexture);
 
-            // Level 0
+            #region Level0
 
             byte[,] ObstaclesLevel0 = new byte[,]
             {
@@ -124,83 +124,43 @@ namespace Game_Development_Project
                  {0,0,0,0,0,0,0,4 },
                  {0,0,0,1,0,0,0,0 },
                  {0,0,0,0,0,0,0,0 }
-
             };
 
             List<int> MoneySafeIndetifiers0 = new List<int>() { 10006, };
 
             Level level0 = new Level(ObstaclesLevel0, PickablesLevel0, MoneySafeIndetifiers0, new List<Block>(), new List<Block>());
             level0.Create(contentManager);
-            level0.NextLevel = 1; 
+            level0.NextLevel = AllLevels.Count + 1;
             AllLevels.Add(level0);
 
-            // Level 1&2 MoneySafe and Keys ID's
+            #endregion
 
-            List<int> MoneySafeIndetifiers = new List<int>() { 1000, 1001, 1002, 1003 };
-
-            // Level 1
+            #region Level1
 
             byte[,] ObstaclesLevel1 = new byte[,]
             {
-                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                 {1,0,1,0,1,1,0,1,1,1,1,0,1,1,0,1,1,0,0,1,1,1,0,1},
-                 {1,1,0,1,0,1,1,0,1,1,0,1,0,1,1,1,0,1,1,1,0,1,1,0},
-                 {1,0,1,0,1,1,0,1,1,1,1,0,1,1,0,1,1,0,0,1,1,1,0,1},
-                 {1,1,0,1,0,1,1,0,1,1,0,1,0,1,1,1,0,1,1,1,0,1,1,0},
-                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1},
+                 {1,0,1,0,0,0,0,1,0,0 },
+                 {1,0,0,0,1,1,1,1,0,1},
+                 {1,1,2,1,1,1,1,0,1,1},
+                 {1,1,0,1,0,1,1,1,0,1}
             };
 
             byte[,] PickablesLevel1 = new byte[,]
             {
-                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0},
-                 {0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                 {0,0,0,0,0,0,0,4,0,0 },
+                 {0,0,0,0,0,1,0,0,0,0 },
+                 {0,0,0,0,0,0,0,0,0,4 },
+                 {0,1,0,0,0,0,0,0,0,0 }
             };
 
-            Level level1 = new Level(ObstaclesLevel1, PickablesLevel1, MoneySafeIndetifiers, new List<Block>(), new List<Block>());
+            List<int> MoneySafeIndetifiers1 = new List<int>() { 10006, 10007 };
+
+            Level level1 = new Level(ObstaclesLevel1, PickablesLevel1, MoneySafeIndetifiers1, new List<Block>(), new List<Block>());
             level1.Create(contentManager);
-            level1.NextLevel = 1; // Go to second level
+            level1.NextLevel = AllLevels.Count + 1;
             AllLevels.Add(level1);
 
-            // Level 2
-
-            byte[,] ObstaclesLevel2 = new byte[,]
-            {
-                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                 {1,1,0,0,1,0,0,1,1,0,0,1,1,0,0,0,1,0,1,1,0,1,0,1},
-                 {0,1,1,1,0,0,1,1,0,1,1,0,0,1,1,1,0,1,1,0,1,1,1,1},
-                 {1,1,0,0,1,0,0,1,1,0,0,1,1,0,0,0,1,0,1,1,0,1,0,1},
-                 {0,1,1,1,0,0,1,1,0,1,1,0,0,1,1,1,0,1,1,0,1,1,1,1},
-                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1},
-            };
-
-            byte[,] PickablesLevel2 = new byte[,]
-            {
-                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                 {0,2,0,0,3,0,0,2,0,0,0,0,2,0,0,0,3,0,0,0,0,0,0,0},
-                 {0,0,0,0,0,4,0,0,0,2,0,0,0,0,0,4,0,2,0,0,0,0,0,0},
-                 {0,3,2,0,0,0,3,0,4,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2},
-                 {2,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,4,0,0,0},
-                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-            };
-
-            byte[,] EnemiesLevel2 = new byte[,]
-             {
-                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0},
-                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0},
-                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0},
-            };
-
-            HardLevel level2 = new HardLevel(ObstaclesLevel2, PickablesLevel2, MoneySafeIndetifiers, EnemiesLevel2, new List<Block>(), new List<Block>(), new List<Tank>());
-            level2.Create(contentManager);
-            level2.NextLevel = 0; // Go back to first level
-            AllLevels.Add(level2);
+            #endregion
 
         }
 
