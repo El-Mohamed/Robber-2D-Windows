@@ -123,7 +123,7 @@ namespace Game_Development_Project
             {
                  {0,0,0,0,0,0,0,4 },
                  {0,0,0,1,0,0,0,0 },
-                 {0,0,0,0,0,0,0,0 }
+                 {0,0,2,0,0,0,0,0 }
             };
 
             List<int> MoneySafeIndetifiers0 = new List<int>() { 10006, };
@@ -139,7 +139,7 @@ namespace Game_Development_Project
 
             byte[,] ObstaclesLevel1 = new byte[,]
             {
-                 {1,0,1,0,0,0,0,1,0,0 },
+                 {1,0,0,0,1,0,0,1,0,0 },
                  {1,0,0,0,1,1,1,1,0,1},
                  {1,1,2,1,1,1,1,0,1,1},
                  {1,1,0,1,0,1,1,1,0,1}
@@ -147,10 +147,10 @@ namespace Game_Development_Project
 
             byte[,] PickablesLevel1 = new byte[,]
             {
-                 {0,0,0,0,0,0,0,4,0,0 },
-                 {0,0,0,0,0,1,0,0,0,0 },
-                 {0,0,0,0,0,0,0,0,0,4 },
-                 {0,1,0,0,0,0,0,0,0,0 }
+                 {0,0,0,0,2,0,0,4,0,0 },
+                 {2,0,0,0,0,1,0,0,0,0 },
+                 {0,0,0,0,0,3,0,0,0,4 },
+                 {0,1,0,0,0,0,0,0,0,2 }
             };
 
             List<int> MoneySafeIndetifiers1 = new List<int>() { 10006, 10007 };
@@ -162,7 +162,7 @@ namespace Game_Development_Project
 
             #endregion
 
-            #region Level3
+            #region Level2
 
             byte[,] ObstaclesLevel2 = new byte[,]
             {
@@ -173,9 +173,9 @@ namespace Game_Development_Project
 
             byte[,] PickablesLevel2 = new byte[,]
             {
-                 {0,0,0,2,0,0,2,0,4,0 },
-                 {0,0,3,0,0,0,0,0,0,0 },
-                 {0,0,0,0,0,1,0,0,0,0 },
+                 {0,0,0,0,0,0,2,0,4,0 },
+                 {2,0,0,0,0,0,0,0,0,0 },
+                 {0,0,0,0,0,1,0,0,0,2 },
             };
 
 
