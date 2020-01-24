@@ -6,7 +6,7 @@ namespace Game_Development_Project
     class Player : ICollider, IMover
     {
         enum PlayerState { ToLeft, ToRight }
-        public Vector2 Speed { get; set; }
+        public Vector2 Speed;
         public Rectangle CollisionRectangle { get; set; }
 
         public Sprite SpriteSheet;
@@ -143,11 +143,11 @@ namespace Game_Development_Project
 
                 if (IsFallingDown && !IsJumping)
                 {
-                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X + (Speed.X / 2), SpriteSheet.Position.Y);
+                    SpriteSheet.Position.X += (Speed.X / 2);
                 }
                 else
                 {
-                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X + Speed.X, SpriteSheet.Position.Y);
+                    SpriteSheet.Position.X += Speed.X;
                 }
             }
 
@@ -162,11 +162,11 @@ namespace Game_Development_Project
 
                 if (IsFallingDown && !IsJumping)
                 {
-                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X - (Speed.X / 2), SpriteSheet.Position.Y);
+                    SpriteSheet.Position.X -= (Speed.X / 2);
                 }
                 else
                 {
-                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X - Speed.X, SpriteSheet.Position.Y);
+                    SpriteSheet.Position.X -= Speed.X;
                 }
             }
 
@@ -185,15 +185,15 @@ namespace Game_Development_Project
                     float MULTIPLIER = 8;
                     float newSpeedY = Speed.Y;
                     newSpeedY += 1 * MULTIPLIER;
-                    Speed = new Vector2(Speed.X, newSpeedY);
+                    Speed.Y = newSpeedY;
                 }
 
-                SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y + Speed.Y);
+                SpriteSheet.Position.Y += Speed.Y;
             }
 
             if (!CanMoveDown)
             {
-                Speed = new Vector2(Speed.X, 0);
+                Speed.Y = 0;
                 IsJumping = false;
                 IsFallingDown = false;
                 AirTime = 0;
@@ -202,23 +202,23 @@ namespace Game_Development_Project
 
         public void HandleJump()
         {
-            Speed = new Vector2(Speed.X, 10);
+            Speed.Y = 10;
             if (IsJumping && AirTime < 25)
             {
                 AirTime++;
 
-                if(AirTime == 5)
+                if (AirTime == 5)
                 {
                     GameSounds.PlayJumpSound();
                 }
 
                 if (CanMoveUp)
                 {
-                    SpriteSheet.Position = new Vector2(SpriteSheet.Position.X, SpriteSheet.Position.Y - Speed.Y);
+                    SpriteSheet.Position.Y -= Speed.Y;
                 }
                 else
                 {
-                    Speed = new Vector2(Speed.X, 0);
+                    Speed.Y = 0;
                     IsJumping = false;
                 }
             }
@@ -226,7 +226,7 @@ namespace Game_Development_Project
             {
                 AirTime = 0;
                 IsJumping = false;
-                Speed = new Vector2(Speed.X, 0);
+                Speed.Y = 0;
             }
         }
 
@@ -238,7 +238,8 @@ namespace Game_Development_Project
 
         public void Respawn()
         {
-            SpriteSheet.Position = new Vector2(0, -200);
+            SpriteSheet.Position.X = 0;
+            SpriteSheet.Position.Y = -200;
         }
 
         public void DrinkPotion()
@@ -246,7 +247,7 @@ namespace Game_Development_Project
             if (Inventory.MyPotion != null)
             {
                 Potion potionToDrink = Inventory.MyPotion;
-                Speed = new Vector2(Speed.X + potionToDrink.SpeedAcceleration, Speed.Y);
+                Speed.X += potionToDrink.SpeedAcceleration;
                 Inventory.MyPotion = null; // Remove Drinked Potion
                 GameSounds.PlayDrinkSound();
                 Animation.IncreaseSpeed();

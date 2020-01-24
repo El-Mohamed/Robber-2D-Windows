@@ -4,7 +4,7 @@ namespace Game_Development_Project
 {
     class Bullet : Block, IMover
     {
-        public Vector2 Speed { get; set; }
+        Vector2 Speed;
         public int Damage;
 
         public Bullet(Sprite sprite, Rectangle collisionRectangle) : base(sprite, collisionRectangle)
@@ -15,12 +15,12 @@ namespace Game_Development_Project
 
         public void MoveRight()
         {
-            SpriteImage.Position = new Vector2(SpriteImage.Position.X + Speed.X, SpriteImage.Position.Y);
+            SpriteImage.Position.X += Speed.X;
         }
 
         public void MoveLeft()
         {
-            SpriteImage.Position = new Vector2(SpriteImage.Position.X - Speed.X, SpriteImage.Position.Y);
+            SpriteImage.Position.X -= Speed.X;          
         }
 
         public void Update(GameTime gameTime)
