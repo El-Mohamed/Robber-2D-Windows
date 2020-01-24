@@ -47,7 +47,7 @@
     <Compile Include="Collider\ICollider.cs" />
     <Compile Include="Collider\RectangleHelper.cs" />
     <Compile Include="Controls\Controller.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="Robber2D.cs" />
     <Compile Include="GameStates\Menu\WinScreen.cs" />
     <Compile Include="Interface\Button.cs" />
     <Compile Include="GameStates\Menu\EndScreen.cs" />

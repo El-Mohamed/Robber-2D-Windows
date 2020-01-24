@@ -19,7 +19,7 @@ namespace Game_Development_Project
         private int leftMarginLogo;
 
         #endregion
-        public StartScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game) : base(contentManager, graphicsDevice, game)
+        public StartScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game) : base(contentManager, graphicsDevice, game)
         {
 
         }
@@ -37,8 +37,8 @@ namespace Game_Development_Project
             buttonFont = contentManager.Load<SpriteFont>("ButtonFont");
             logo = contentManager.Load<Texture2D>("Logo");
 
-            int leftMarginButton = (Game1.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
-            leftMarginLogo = (Game1.ScreenWidth - logo.Width) / 2;
+            int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
+            leftMarginLogo = (Robber2D.ScreenWidth - logo.Width) / 2;
 
             startButton = new Button(buttonBorder, buttonFont)
             {

@@ -14,7 +14,7 @@ namespace Game_Development_Project
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new Robber2D())
                 game.Run();
         }
     }

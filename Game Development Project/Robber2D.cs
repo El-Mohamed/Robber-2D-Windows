@@ -4,14 +4,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Game_Development_Project
 {
-
-    public class Game1 : Game
+    public class Robber2D : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         public static int ScreenHeight, ScreenWidth;
 
-        public Game1()
+        public Robber2D()
         {
             graphics = new GraphicsDeviceManager(this)
             {

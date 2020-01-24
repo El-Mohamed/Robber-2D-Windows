@@ -16,7 +16,7 @@ namespace Game_Development_Project
         string EndScore;
         public List<Button> AllButtons;
 
-        public EndScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game) : base(contentManager, graphicsDevice, game)
+        public EndScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game) : base(contentManager, graphicsDevice, game)
         {
 
         }
@@ -32,14 +32,14 @@ namespace Game_Development_Project
 
             // Game Over Image
             GameOverImage = contentManager.Load<Texture2D>("GameOver");
-            leftMarginGameOver = (Game1.ScreenWidth - GameOverImage.Width) / 2;
+            leftMarginGameOver = (Robber2D.ScreenWidth - GameOverImage.Width) / 2;
 
             // Buttons
             AllButtons = new List<Button>();
             buttonBorder = contentManager.Load<Texture2D>("ButtonBorder");
             buttonFont = contentManager.Load<SpriteFont>("ButtonFont");
 
-            int leftMarginButton = (Game1.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
+            int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
 
             newGameButton = new Button(buttonBorder, buttonFont)
             {
@@ -92,8 +92,8 @@ namespace Game_Development_Project
 
         private void DrawScore(SpriteBatch spriteBatch)
         {
-            var x = ((Game1.ScreenWidth / 2)) - (buttonFont.MeasureString(EndScore).X / 2);
-            var y = ((Game1.ScreenHeight / 2)) - (buttonFont.MeasureString(EndScore).Y / 2);
+            var x = ((Robber2D.ScreenWidth / 2)) - (buttonFont.MeasureString(EndScore).X / 2);
+            var y = ((Robber2D.ScreenHeight / 2)) - (buttonFont.MeasureString(EndScore).Y / 2);
             spriteBatch.DrawString(buttonFont, EndScore, new Vector2(x, y), Color.Red);
         }
 

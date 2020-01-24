@@ -29,7 +29,7 @@ namespace Game_Development_Project
 
         #endregion
 
-        public InGame(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game) : base(contentManager, graphicsDevice, game)
+        public InGame(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game) : base(contentManager, graphicsDevice, game)
         {
 
         }

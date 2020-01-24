@@ -8,9 +8,9 @@ namespace Game_Development_Project
     {
         public ContentManager contentManager;
         public GraphicsDevice graphicsDevice;
-        public Game1 game;
+        public Robber2D game;
 
-        public GameState(ContentManager contentManager, GraphicsDevice graphicsDevice, Game1 game)
+        public GameState(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game)
         {
             this.graphicsDevice = graphicsDevice;
             this.contentManager = contentManager;
