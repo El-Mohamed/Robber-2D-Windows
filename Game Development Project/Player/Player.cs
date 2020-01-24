@@ -76,7 +76,7 @@ namespace Game_Development_Project
         {
             if (!IsMoving && !CanMoveDown)
             {
-                Animation.currentFrame = Animation.allFrames[0];
+                Animation.Freeze(0);
             }
             else if (IsMoving && !CanMoveDown)
             {
@@ -84,16 +84,19 @@ namespace Game_Development_Project
             }
             else
             {
-                Animation.currentFrame = Animation.allFrames[4];
+                Animation.Freeze(4);
             }
         }
 
         private void UpdateMovement(GameTime gameTime)
         {
-
             HandleJump();
             HandleGravity();
+            UpdateController();
+        }
 
+        private void UpdateController()
+        {
             IsMoving = false;
 
             if (Controller.Left)

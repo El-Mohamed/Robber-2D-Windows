@@ -50,5 +50,10 @@ namespace Game_Development_Project
             RefreshRate -= 1;
         }
 
+        public void Freeze(int frameToFreeze)
+        {
+            currentFrame = allFrames[frameToFreeze];
+        }
+
     }
 }
