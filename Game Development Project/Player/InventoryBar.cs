@@ -7,63 +7,89 @@ namespace Game_Development_Project
 {
     class InventoryBar
     {
-        public Inventory Inventory;
-        private List<Texture2D> AllTextures;
-        public Vector2 ScreenCornerPosition, PlayerPosition;
-        private SpriteFont TextFont;
-        private Vector2 CoinPosition, KeyPosition, DiamondPosition, PotionPosition;
+        Inventory Inventory;
+        List<Texture2D> AllTextures;
+        public Vector2 ScreenCornerPosition, PlayerHeadPosition;
+        SpriteFont Font;
+        Vector2 CoinPosition, KeyPosition, DiamondPosition, PotionPosition;
 
-        public InventoryBar(Inventory inventory, List<Texture2D> allTextures, SpriteFont spriteFont)
+        public InventoryBar(Inventory inventory, List<Texture2D> allTextures, SpriteFont font)
         {
             AllTextures = allTextures;
             Inventory = inventory;
-            TextFont = spriteFont;
+            Font = font;
         }
 
-        public void UpdatePosition(Player player)
+        public void UpdatePosition(Vector2 screenCornerPosition, Vector2 playerHeadPosition)
         {
-            ScreenCornerPosition.X = player.SpriteSheet.Position.X - (Game1.ScreenWidth / 2) + 100;
-            ScreenCornerPosition.Y = player.SpriteSheet.Position.Y - (Game1.ScreenHeight / 2) + 100;
-            PlayerPosition.X = player.CollisionRectangle.X;
-            PlayerPosition.Y = player.CollisionRectangle.Y;
+            ScreenCornerPosition = screenCornerPosition;
+            PlayerHeadPosition = playerHeadPosition;
+            UpdateTexturePositions();
+        }
+
+        private void UpdateTexturePositions()
+        {
+            UpdateDiamondPosition();
+            UpdateCoinPosition();
+            UpdatePotionPosition();
+            UpdateKeyPosition();
+        }
+
+        private void UpdateDiamondPosition()
+        {
+            DiamondPosition = ScreenCornerPosition;
+        }
+
+        private void UpdateCoinPosition()
+        {
+            CoinPosition.X = ScreenCornerPosition.X;
+            CoinPosition.Y = ScreenCornerPosition.Y + 70;
+        }
+
+        private void UpdateKeyPosition()
+        {
+            KeyPosition.X = PlayerHeadPosition.X + 40;
+            KeyPosition.Y = PlayerHeadPosition.Y - 30;
+        }
+
+        private void UpdatePotionPosition()
+        {
+            PotionPosition.X = PlayerHeadPosition.X + 70;
+            PotionPosition.Y = PlayerHeadPosition.Y - 40;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            DrawKey(spriteBatch);
+            DrawDiamond(spriteBatch);
+            DrawCoin(spriteBatch);
             DrawPotion(spriteBatch);
-            DrawCoins(spriteBatch);
-            DrawDiamonds(spriteBatch);  
+            DrawKey(spriteBatch);
         }
 
-        private void DrawDiamonds(SpriteBatch spriteBatch)
+        private void DrawDiamond(SpriteBatch spriteBatch)
         {
-            string numberOfDiamonds = Convert.ToString(Inventory.MyDiamonds);
-            DiamondPosition = new Vector2(ScreenCornerPosition.X, ScreenCornerPosition.Y);
+            // Draw Texture   
             spriteBatch.Draw(AllTextures[3], DiamondPosition, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
             // Draw Amount 
+            string numberOfDiamonds = Convert.ToString(Inventory.MyDiamonds);
             DiamondPosition.X += 60;
             DiamondPosition.Y -= 10;
-            spriteBatch.DrawString(TextFont, numberOfDiamonds, DiamondPosition, Color.White);
+            spriteBatch.DrawString(Font, numberOfDiamonds, DiamondPosition, Color.White);
         }
 
-        private void DrawCoins(SpriteBatch spriteBatch)
+        private void DrawCoin(SpriteBatch spriteBatch)
         {
-            string numberOfCoins = Convert.ToString(Inventory.MyCoins.Count);
-            CoinPosition.X = ScreenCornerPosition.X;
-            CoinPosition.Y = ScreenCornerPosition.Y + 70;
+            // Draw Texture       
             spriteBatch.Draw(AllTextures[1], CoinPosition, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
-            // Draw Amount       
+            // Draw Amount     
+            string numberOfCoins = Convert.ToString(Inventory.MyCoins.Count);
             CoinPosition.X += 60;
             CoinPosition.Y -= 5;
-            spriteBatch.DrawString(TextFont, numberOfCoins, CoinPosition, Color.White);
+            spriteBatch.DrawString(Font, numberOfCoins, CoinPosition, Color.White);
         }
 
         private void DrawPotion(SpriteBatch spriteBatch)
         {
-            PotionPosition.X = PlayerPosition.X + 70;
-            PotionPosition.Y = PlayerPosition.Y - 40;
-
             if (Inventory.MyPotion != null)
             {
                 spriteBatch.Draw(AllTextures[2], PotionPosition, null, Color.White, 0f, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
@@ -72,9 +98,6 @@ namespace Game_Development_Project
 
         private void DrawKey(SpriteBatch spriteBatch)
         {
-            KeyPosition.X = PlayerPosition.X + 40;
-            KeyPosition.Y = PlayerPosition.Y - 30;
-
             if (Inventory.MyKey != null)
             {
                 spriteBatch.Draw(AllTextures[0], KeyPosition, null, Color.White, 0f, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);

@@ -231,7 +231,7 @@ namespace Game_Development_Project
             healtbar.UpdatePosition(ScreenPositionHelper.GetRightTopCorner(player));
 
             // Inventory
-            inventroyHelper.UpdatePosition(player);
+            inventroyHelper.UpdatePosition(ScreenPositionHelper.GetLeftScreenCorner(player), player.SpriteSheet.Position); 
 
             // Camera
             Camera2D.Follow(player);
