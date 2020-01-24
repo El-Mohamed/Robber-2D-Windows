@@ -9,8 +9,8 @@
     <ProjectGuid>{99C43126-BEA6-4F1F-BFDE-36581F349F92}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game_Development_Project</RootNamespace>
-    <AssemblyName>Game Development Project</AssemblyName>
+    <RootNamespace>Robber_2D_Windows</RootNamespace>
+    <AssemblyName>Robber 2D Windows</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>

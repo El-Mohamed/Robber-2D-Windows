@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29306.81
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robber-2D-Windows", "Game Development Project\Robber-2D-Windows.csproj", "{99C43126-BEA6-4F1F-BFDE-36581F349F92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robber-2D-Windows", "Robber 2D Windows\Robber-2D-Windows.csproj", "{99C43126-BEA6-4F1F-BFDE-36581F349F92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6B49640E-FAB0-4CEE-9A49-1E937AC43800}
+		SolutionGuid = {4ED072C8-A2B8-49D7-A221-2BF657442135}
 	EndGlobalSection
 EndGlobal
