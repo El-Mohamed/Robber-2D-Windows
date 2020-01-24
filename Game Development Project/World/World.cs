@@ -9,15 +9,13 @@ namespace Game_Development_Project
     class World
     {
         public int NextWorld;
-        public Vector2 StartPosition;
-
-        protected int SpaceBetweenPlatforms = 250;
+        Vector2 StartPosition;
+        public int SpaceBetweenPlatforms = 250;
         public List<Block> AllObstacles, AllPickables;
-        public List<int> MoneySafeIndentifiers;
-        protected byte[,] ObstaclesArray, PickablesArray;
+        List<int> MoneySafeIndentifiers;
+        byte[,] ObstaclesArray, PickablesArray;
         protected long LevelHeight, MapWidth;
-        int totalKeys;
-        public int totalMoneySafes;
+        public int totalMoneySafes, totalKeys;
 
         public bool IsCompleted
         {
@@ -51,12 +49,12 @@ namespace Game_Development_Project
             AllPickables = new List<Block>();
             MapWidth = ObstaclesArray.GetLength(1);
             LevelHeight = ObstaclesArray.GetLength(0);
-            StartPosition = new Vector2();
+            StartPosition = WorldFactory.CreateVector(0, 0);
         }
 
         public virtual void Create(ContentManager contentManager)
         {
-            CreateWorld(contentManager);
+            CreateObstacles(contentManager);
             CreatePickables(contentManager);
         }
 
@@ -73,11 +71,8 @@ namespace Game_Development_Project
 
         private void CreatePickables(ContentManager contentManager)
         {
-
             Texture2D tempTexture = contentManager.Load<Texture2D>("Pickable1");
-            Vector2 tempVector = new Vector2();
-            Rectangle tempCollisonRectangle = new Rectangle();
-            Sprite tempSprite = new Sprite(tempTexture, 1, tempVector);
+
             for (int x = 0; x < MapWidth; x++)
             {
                 for (int y = 0; y < LevelHeight; y++)
@@ -92,40 +87,29 @@ namespace Game_Development_Project
 
                     const int marginBottom = 10; // Margin between pickable and platform                                     
                     int maginLeft = (150 - tempTexture.Width) / 2; // Calculate margin to center Pickable on the platform
-                    tempVector = new Vector2((x * 150) + maginLeft, (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom);
-                    tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
-                    tempSprite = new Sprite(tempTexture, 1, tempVector);
+                    float xPos = (x * 150) + maginLeft;
+                    float yPos = (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom;
+                    Vector2 tempVector = WorldFactory.CreateVector(xPos, yPos);
+                    Rectangle tempCollisonRectangle = WorldFactory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
+                    Sprite tempSprite = WorldFactory.CreateSprite(tempTexture, 1, tempVector);
 
                     switch (PickablesArray[y, x])
                     {
                         case 1:
-                            MoneySafeKey tempMoneySafeKey = new MoneySafeKey(tempSprite, tempCollisonRectangle)
-                            {
-                                MoneySafeID = MoneySafeIndentifiers[totalKeys]
-                            };
+                            MoneySafeKey tempMoneySafeKey = WorldFactory.CreateKey(tempSprite, tempCollisonRectangle, MoneySafeIndentifiers[totalKeys]);
                             AllPickables.Add(tempMoneySafeKey as Block);
                             totalKeys++;
                             break;
                         case 2:
-                            Coin tempCoin = new Coin(tempSprite, tempCollisonRectangle)
-                            {
-                                Value = 100 // TODO CREATE RANDOM
-                            };
+                            Coin tempCoin = WorldFactory.CreateCoin(tempSprite, tempCollisonRectangle);
                             AllPickables.Add(tempCoin);
                             break;
                         case 3:
-                            Potion tempPotion = new Potion(tempSprite, tempCollisonRectangle)
-                            {
-                                SpeedAcceleration = 1 // TODO CREATE RANDOM
-                            };
+                            Potion tempPotion = WorldFactory.CreatePotion(tempSprite, tempCollisonRectangle);
                             AllPickables.Add(tempPotion);
                             break;
                         case 4:
-                            MoneySafe tempMoneySafe = new MoneySafe(tempSprite, tempCollisonRectangle)
-                            {
-                                KeyID = MoneySafeIndentifiers[totalMoneySafes],
-                                NumberOfDiamonds = 3 // TODO CREATE RANDOM
-                            };
+                            MoneySafe tempMoneySafe = WorldFactory.CreateSafe(tempSprite, tempCollisonRectangle, MoneySafeIndentifiers[totalMoneySafes]);
                             AllPickables.Add(tempMoneySafe);
                             totalMoneySafes++;
                             break;
@@ -144,33 +128,18 @@ namespace Game_Development_Project
             }
         }
 
-        protected void CreateWorld(ContentManager contentManager)
+        protected void CreateObstacles(ContentManager contentManager)
         {
-            Texture2D tempTexture = contentManager.Load<Texture2D>("Block1");
-            Vector2 tempVector = new Vector2();
-            Rectangle tempCollisonRectangle = new Rectangle();
-            Sprite tempSprite = new Sprite(tempTexture, 1, tempVector);
-            Block platform = new Platform(tempSprite, tempCollisonRectangle);
-
             for (int x = 0; x < MapWidth; x++)
             {
                 for (int y = 0; y < LevelHeight; y++)
                 {
-                    int BLOCK_ID = ObstaclesArray[y, x];
-                    string ID_STRING = Convert.ToString(BLOCK_ID);
-
-                    if (ID_STRING != "0")
-                    {
-                        tempTexture = contentManager.Load<Texture2D>("Block" + ID_STRING);
-                    }
-
-                    // Creat Platform
+                    // Create Platform
                     Texture2D platformTexture = contentManager.Load<Texture2D>("Block1");
-                    tempVector = new Vector2(x * platformTexture.Width, y * SpaceBetweenPlatforms);
-                    tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, platformTexture.Width, platformTexture.Height);
-                    tempSprite = new Sprite(platformTexture, 1, tempVector);
-                    platform = new Platform(tempSprite, tempCollisonRectangle);
-
+                    Vector2 tempVector = WorldFactory.CreateVector(x * platformTexture.Width, y * SpaceBetweenPlatforms);
+                    Rectangle tempCollisonRectangle = WorldFactory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, platformTexture.Width, platformTexture.Height);
+                    Sprite tempSprite = WorldFactory.CreateSprite(platformTexture, 1, tempVector);
+                    Block platform = WorldFactory.CreatePlatform(tempSprite, tempCollisonRectangle);
 
                     switch (ObstaclesArray[y, x])
                     {
@@ -185,15 +154,20 @@ namespace Game_Development_Project
 
                             // Create Door on the platform
                             Texture2D doorTexture = contentManager.Load<Texture2D>("Block2");
+                            // Calculate margin to center the door on the platform
+                            int maginLeft = (150 - doorTexture.Width) / 2;
 
-                            int maginLeft = (150 - doorTexture.Width) / 2; // Calculate margin to center the door on the platform
-                            Vector2 doorVector = new Vector2((x * platformTexture.Width) + maginLeft, (y * SpaceBetweenPlatforms) - doorTexture.Height);
-                            Rectangle doorCollisonRectangle = new Rectangle((int)doorVector.X, (int)doorVector.Y, doorTexture.Width, doorTexture.Height);
-                            Sprite doorSprite = new Sprite(doorTexture, 1, doorVector);
-                            Block door = new Door(doorSprite, doorCollisonRectangle);
+                            float xPos = (x * platformTexture.Width) + maginLeft;
+                            float yPos = (y * SpaceBetweenPlatforms) - doorTexture.Height;
+                            Vector2 doorVector = WorldFactory.CreateVector(xPos, yPos);
+
+                            Rectangle doorCollisonRectangle = WorldFactory.CreateRectangle((int)doorVector.X, (int)doorVector.Y, doorTexture.Width, doorTexture.Height);
+                            Sprite doorSprite = WorldFactory.CreateSprite(doorTexture, 1, doorVector);
+                            Block door = WorldFactory.CreateDoor(doorSprite, doorCollisonRectangle);
 
                             // Add Door
                             AllObstacles.Add(door);
+
                             break;
                         default:
                             break;

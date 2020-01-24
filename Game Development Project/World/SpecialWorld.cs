@@ -8,10 +8,9 @@ namespace Game_Development_Project
 {
     class SpecialWorld : World
     {
-
         public List<Tank> AllTanks;
-        protected byte[,] EnemiesArray;
-        private int LastTimeShooted = 0;
+        byte[,] EnemiesArray;
+        int LastTimeShooted = 0;
 
         public SpecialWorld(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, byte[,] enemiesArray) : base(obstaclesArray, pickablesArray, moneySafeIdentiefiers)
         {
@@ -22,15 +21,11 @@ namespace Game_Development_Project
         private void CreateTanks(ContentManager contentManager)
         {
             Texture2D tempTexture = contentManager.Load<Texture2D>("Enemy1");
-            Vector2 tempVector = new Vector2();
-            Rectangle tempCollisonRectangle = new Rectangle();
-            Sprite tempSprite = new Sprite(tempTexture, 1, tempVector);
-
+  
             for (int x = 0; x < MapWidth; x++)
             {
                 for (int y = 0; y < LevelHeight; y++)
                 {
-
                     int BLOCK_ID = EnemiesArray[y, x];
                     string ID_STRING = Convert.ToString(BLOCK_ID);
 
@@ -39,16 +34,20 @@ namespace Game_Development_Project
                         tempTexture = contentManager.Load<Texture2D>("Enemy" + ID_STRING);
                     }
 
-                    const int marginBottom = 1; // Margin between pickable and platform                                     
-                    int maginLeft = (150 - tempTexture.Width) / 2; // Calculate margin to center Tank on the platform
-                    tempVector = new Vector2((x * 150) + maginLeft, (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom);
-                    tempCollisonRectangle = new Rectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
-                    tempSprite = new Sprite(tempTexture, 1, tempVector);
+                    // Margin between pickable and platform 
+                    const int marginBottom = 1;                                     
+                    // Calculate margin to center Tank on the platform
+                    int maginLeft = (150 - tempTexture.Width) / 2; 
+                    float xPos = (x * 150) + maginLeft;
+                    float yPos = (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom;
+                    Vector2 tempVector = WorldFactory.CreateVector(xPos, yPos);
+                    Rectangle tempCollisonRectangle = WorldFactory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
+                    Sprite tempSprite = WorldFactory.CreateSprite(tempTexture, 1, tempVector);
 
                     switch (EnemiesArray[y, x])
                     {
                         case 1:
-                            Tank tempTank = new Tank(tempSprite, tempCollisonRectangle);
+                            Tank tempTank = WorldFactory.CreateTank(tempSprite, tempCollisonRectangle);
                             AllTanks.Add(tempTank);
                             break;
                         default:
@@ -75,7 +74,6 @@ namespace Game_Development_Project
         public override void Draw(SpriteBatch spriteBatch)
         {
             DrawTanks(spriteBatch);
-
             base.Draw(spriteBatch);
         }
 
@@ -83,7 +81,6 @@ namespace Game_Development_Project
         {
             CreateTanks(contentManager);
             base.Create(contentManager);
-
         }
 
         public void CreateBullets(ContentManager contentManager)
@@ -93,8 +90,8 @@ namespace Game_Development_Project
                 foreach (Tank tank in AllTanks)
                 {
                     tank.Shoot(contentManager, tank.SpriteImage.Position);
-
                 }
+
                 LastTimeShooted = 0;
             }
         }
