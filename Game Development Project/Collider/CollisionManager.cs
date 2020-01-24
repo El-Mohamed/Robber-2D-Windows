@@ -122,7 +122,7 @@ namespace Game_Development_Project
 
         private void CheckMapRange(Player player, Level currentlevel)
         {
-            if (player.CollisionRectangle.Top > 1600)
+            if (player.CollisionRectangle.Top > currentlevel.MapRange)
             {
                 player.Respawn();
             }

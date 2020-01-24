@@ -34,6 +34,13 @@ namespace Game_Development_Project
             }
         }
 
+        public long MapRange
+        {
+            get
+            {
+                return LevelHeight * 230;
+            }
+        }
 
         public Level(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, List<Block> allObstacles, List<Block> allPickables)
         {
