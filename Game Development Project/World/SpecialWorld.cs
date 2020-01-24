@@ -13,9 +13,9 @@ namespace Game_Development_Project
         protected byte[,] EnemiesArray;
         private int LastTimeShooted = 0;
 
-        public SpecialWorld(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, byte[,] enemiesArray, List<Block> allObstacles, List<Block> allPickables, List<Tank> allTanks) : base(obstaclesArray, pickablesArray, moneySafeIdentiefiers, allObstacles, allPickables)
+        public SpecialWorld(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, byte[,] enemiesArray) : base(obstaclesArray, pickablesArray, moneySafeIdentiefiers)
         {
-            AllTanks = allTanks;
+            AllTanks = new List<Tank>();
             EnemiesArray = enemiesArray;
         }
 

@@ -42,13 +42,13 @@ namespace Game_Development_Project
             }
         }
 
-        public World(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, List<Block> allObstacles, List<Block> allPickables)
+        public World(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers)
         {
             ObstaclesArray = obstaclesArray;
             PickablesArray = pickablesArray;
             MoneySafeIndentifiers = moneySafeIdentiefiers;
-            AllObstacles = allObstacles;
-            AllPickables = allPickables;
+            AllObstacles = new List<Block>();
+            AllPickables = new List<Block>();
             MapWidth = ObstaclesArray.GetLength(1);
             LevelHeight = ObstaclesArray.GetLength(0);
             StartPosition = new Vector2();

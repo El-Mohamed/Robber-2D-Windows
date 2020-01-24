@@ -130,9 +130,9 @@ namespace Game_Development_Project
                  {0,0,2,0,0,0,0,0 }
             };
 
-            List<int> Identiefiers1 = new List<int>() { 10006, };
+            List<int> MoneySafeIdentiefiers1 = new List<int>() { 10006, };
 
-            World world1 = new World(ObstaclesWorld1, PickablesWorld1, Identiefiers1, new List<Block>(), new List<Block>());
+            World world1 = new World(ObstaclesWorld1, PickablesWorld1, MoneySafeIdentiefiers1);
             world1.Create(contentManager);
             world1.NextWorld = AllWorlds.Count + 1;
             AllWorlds.Add(world1);
@@ -157,9 +157,9 @@ namespace Game_Development_Project
                  {0,1,0,0,0,0,0,0,0,2 }
             };
 
-            List<int> Indentifiers2 = new List<int>() { 10006, 10007 };
+            List<int> MoneySafeIdentiefiers2 = new List<int>() { 10006, 10007 };
 
-            World world2 = new World(ObstaclesWorld2, PickablesWorld2, Indentifiers2, new List<Block>(), new List<Block>());
+            World world2 = new World(ObstaclesWorld2, PickablesWorld2, MoneySafeIdentiefiers2);
             world2.Create(contentManager);
             world2.NextWorld = AllWorlds.Count + 1;
             AllWorlds.Add(world2);
@@ -190,9 +190,9 @@ namespace Game_Development_Project
                  {0,0,0,0,0,0,0,0,1,0 },
             };
 
-            List<int> Indentifiers3 = new List<int>() { 10009 };
+            List<int> MoneySafeIdentiefiers3 = new List<int>() { 10009 };
 
-            World world3 = new SpecialWorld(ObstaclesWorld3, PickablesWorld3, Indentifiers3, EnemiesWorld3, new List<Block>(), new List<Block>(), new List<Tank>());
+            World world3 = new SpecialWorld(ObstaclesWorld3, PickablesWorld3, MoneySafeIdentiefiers3, EnemiesWorld3);
             world3.Create(contentManager);
             world3.NextWorld = GAMEISDONECODE;
             AllWorlds.Add(world3);
