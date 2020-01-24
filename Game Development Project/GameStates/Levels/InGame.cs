@@ -11,8 +11,8 @@ namespace Game_Development_Project
         #region Fields
         public static Player player;
 
-        public static int CurrentLevel;
-        List<Level> AllLevels;
+        public static int CurrentWorld;
+        List<World> AllWorlds;
         CollisionManager collisionManager;
 
         InventoryBar inventroyHelper;
@@ -41,7 +41,7 @@ namespace Game_Development_Project
             spriteBatch.Begin(transformMatrix: Camera2D.Transform);
 
             // Levels
-            AllLevels[CurrentLevel].Draw(spriteBatch);
+            AllWorlds[CurrentWorld].Draw(spriteBatch);
 
             // Player
             player.Draw(spriteBatch);
@@ -81,8 +81,8 @@ namespace Game_Development_Project
 
             // Other
 
-            AllLevels = new List<Level>();
-            CurrentLevel = 0;
+            AllWorlds = new List<World>();
+            CurrentWorld = 0;
             collisionManager = new CollisionManager();
             PlayerWon = false;
 
@@ -114,34 +114,34 @@ namespace Game_Development_Project
             healtTexture = contentManager.Load<Texture2D>("Health");
             healtbar = new HealthBar(healtTexture);
 
-            #region Level0
+            #region World1
 
-            byte[,] ObstaclesLevel0 = new byte[,]
+            byte[,] ObstaclesWorld1 = new byte[,]
             {
                  {1,1,0,0,0,0,1,1 },
                  {1,1,1,1,0,1,0,0 },
                  {2,1,1,1,1,1,0,0 }
             };
 
-            byte[,] PickablesLevel0 = new byte[,]
+            byte[,] PickablesWorld1 = new byte[,]
             {
                  {0,0,0,0,0,0,0,4 },
                  {0,0,0,1,0,0,0,0 },
                  {0,0,2,0,0,0,0,0 }
             };
 
-            List<int> MoneySafeIndetifiers0 = new List<int>() { 10006, };
+            List<int> Identiefiers1 = new List<int>() { 10006, };
 
-            Level level0 = new Level(ObstaclesLevel0, PickablesLevel0, MoneySafeIndetifiers0, new List<Block>(), new List<Block>());
-            level0.Create(contentManager);
-            level0.NextLevel = AllLevels.Count + 1;
-            AllLevels.Add(level0);
+            World world1 = new World(ObstaclesWorld1, PickablesWorld1, Identiefiers1, new List<Block>(), new List<Block>());
+            world1.Create(contentManager);
+            world1.NextWorld = AllWorlds.Count + 1;
+            AllWorlds.Add(world1);
 
             #endregion
 
-            #region Level1
+            #region World2
 
-            byte[,] ObstaclesLevel1 = new byte[,]
+            byte[,] ObstaclesWorld2 = new byte[,]
             {
                  {1,0,0,0,1,0,0,1,0,0 },
                  {1,0,0,0,1,1,1,1,0,1},
@@ -149,7 +149,7 @@ namespace Game_Development_Project
                  {1,1,0,1,0,1,1,1,0,1}
             };
 
-            byte[,] PickablesLevel1 = new byte[,]
+            byte[,] PickablesWorld2 = new byte[,]
             {
                  {0,0,0,0,2,0,0,4,0,0 },
                  {2,0,0,0,0,1,0,0,0,0 },
@@ -157,25 +157,25 @@ namespace Game_Development_Project
                  {0,1,0,0,0,0,0,0,0,2 }
             };
 
-            List<int> MoneySafeIndetifiers1 = new List<int>() { 10006, 10007 };
+            List<int> Indentifiers2 = new List<int>() { 10006, 10007 };
 
-            Level level1 = new Level(ObstaclesLevel1, PickablesLevel1, MoneySafeIndetifiers1, new List<Block>(), new List<Block>());
-            level1.Create(contentManager);
-            level1.NextLevel = AllLevels.Count + 1;
-            AllLevels.Add(level1);
+            World world2 = new World(ObstaclesWorld2, PickablesWorld2, Indentifiers2, new List<Block>(), new List<Block>());
+            world2.Create(contentManager);
+            world2.NextWorld = AllWorlds.Count + 1;
+            AllWorlds.Add(world2);
 
             #endregion
 
-            #region Level2
+            #region World3
 
-            byte[,] ObstaclesLevel2 = new byte[,]
+            byte[,] ObstaclesWorld3 = new byte[,]
             {
                  {1,0,0,1,0,0,1,0,1,0 },
                  {1,1,1,1,1,1,0,1,1,1 },
                  {0,1,2,1,0,1,1,1,1,1 },
             };
 
-            byte[,] PickablesLevel2 = new byte[,]
+            byte[,] PickablesWorld3 = new byte[,]
             {
                  {0,0,0,0,0,0,2,0,4,0 },
                  {2,0,0,0,0,0,0,0,0,0 },
@@ -183,19 +183,19 @@ namespace Game_Development_Project
             };
 
 
-            byte[,] EnemiesArray2 = new byte[,]
+            byte[,] EnemiesWorld3 = new byte[,]
             {
                  {0,0,0,0,0,0,0,0,0,0 },
                  {0,0,0,1,0,0,0,0,0,0 },
                  {0,0,0,0,0,0,0,0,1,0 },
             };
 
-            List<int> MoneySafeIndetifiers2 = new List<int>() { 10009 };
+            List<int> Indentifiers3 = new List<int>() { 10009 };
 
-            Level level2 = new HardLevel(ObstaclesLevel2, PickablesLevel2, MoneySafeIndetifiers2, EnemiesArray2, new List<Block>(), new List<Block>(), new List<Tank>());
-            level2.Create(contentManager);
-            level2.NextLevel = GAMEISDONECODE;
-            AllLevels.Add(level2);
+            World world3 = new SpecialWorld(ObstaclesWorld3, PickablesWorld3, Indentifiers3, EnemiesWorld3, new List<Block>(), new List<Block>(), new List<Tank>());
+            world3.Create(contentManager);
+            world3.NextWorld = GAMEISDONECODE;
+            AllWorlds.Add(world3);
 
             #endregion
 
@@ -237,11 +237,11 @@ namespace Game_Development_Project
             Camera2D.Follow(player);
 
             // Levels
-            AllLevels[CurrentLevel].Update(gameTime);
-            collisionManager.CheckCollision(player, AllLevels[CurrentLevel]);
-            if (AllLevels[CurrentLevel] is HardLevel)
+            AllWorlds[CurrentWorld].Update(gameTime);
+            collisionManager.CheckCollision(player, AllWorlds[CurrentWorld]);
+            if (AllWorlds[CurrentWorld] is SpecialWorld)
             {
-                HardLevel hardLevel = AllLevels[CurrentLevel] as HardLevel;
+                SpecialWorld hardLevel = AllWorlds[CurrentWorld] as SpecialWorld;
                 hardLevel.CreateBullets(contentManager);
             }
 

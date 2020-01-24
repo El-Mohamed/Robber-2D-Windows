@@ -63,8 +63,8 @@
     <Compile Include="Terrain\Enemies\Bullet.cs" />
     <Compile Include="Other\IMover.cs" />
     <Compile Include="Other\Sprite.cs" />
-    <Compile Include="Level\Level.cs" />
-    <Compile Include="Level\HardLevel.cs" />
+    <Compile Include="World\World.cs" />
+    <Compile Include="World\SpecialWorld.cs" />
     <Compile Include="Utilities\Camera2D.cs" />
     <Compile Include="Player\Inventory.cs" />
     <Compile Include="Terrain\Enemies\Tank.cs" />

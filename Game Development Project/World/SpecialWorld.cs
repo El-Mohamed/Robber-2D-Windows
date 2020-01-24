@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 namespace Game_Development_Project
 {
-    class HardLevel : Level
+    class SpecialWorld : World
     {
 
         public List<Tank> AllTanks;
         protected byte[,] EnemiesArray;
         private int LastTimeShooted = 0;
 
-        public HardLevel(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, byte[,] enemiesArray, List<Block> allObstacles, List<Block> allPickables, List<Tank> allTanks) : base(obstaclesArray, pickablesArray, moneySafeIdentiefiers, allObstacles, allPickables)
+        public SpecialWorld(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, byte[,] enemiesArray, List<Block> allObstacles, List<Block> allPickables, List<Tank> allTanks) : base(obstaclesArray, pickablesArray, moneySafeIdentiefiers, allObstacles, allPickables)
         {
             AllTanks = allTanks;
             EnemiesArray = enemiesArray;

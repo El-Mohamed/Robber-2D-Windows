@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace Game_Development_Project
 {
-    class Level
+    class World
     {
-        public int NextLevel;
+        public int NextWorld;
         public Vector2 StartPosition;
 
         protected int SpaceBetweenPlatforms = 250;
@@ -42,7 +42,7 @@ namespace Game_Development_Project
             }
         }
 
-        public Level(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, List<Block> allObstacles, List<Block> allPickables)
+        public World(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers, List<Block> allObstacles, List<Block> allPickables)
         {
             ObstaclesArray = obstaclesArray;
             PickablesArray = pickablesArray;

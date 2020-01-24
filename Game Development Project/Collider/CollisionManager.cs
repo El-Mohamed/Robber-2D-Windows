@@ -2,20 +2,20 @@ namespace Game_Development_Project
 {
     class CollisionManager
     {
-        public void CheckCollision(Player player, Level currentLevel)
+        public void CheckCollision(Player player, World currentLevel)
         {
             CheckPickablesCollision(player, currentLevel);
             CheckDoorCollision(player, currentLevel);
             CheckPlatformCollision(player, currentLevel);
             CheckMapRange(player, currentLevel);
-            if (currentLevel is HardLevel)
+            if (currentLevel is SpecialWorld)
             {
-                HardLevel hardLevel = currentLevel as HardLevel;
+                SpecialWorld hardLevel = currentLevel as SpecialWorld;
                 CheckBulletsCollison(player, hardLevel);
             }
         }
 
-        private void CheckBulletsCollison(Player player, HardLevel hardLevel)
+        private void CheckBulletsCollison(Player player, SpecialWorld hardLevel)
         {
             foreach (Tank tank in hardLevel.AllTanks)
             {
@@ -30,7 +30,7 @@ namespace Game_Development_Project
             }
         }
 
-        private void CheckPickablesCollision(Player player, Level currentLevel)
+        private void CheckPickablesCollision(Player player, World currentLevel)
         {
             for (int i = 0; i < currentLevel.AllPickables.Count; i++)
             {
@@ -56,7 +56,7 @@ namespace Game_Development_Project
             }
         }
 
-        private void CheckDoorCollision(Player player, Level currentLevel)
+        private void CheckDoorCollision(Player player, World currentLevel)
         {
             foreach (Block obstacle in currentLevel.AllObstacles)
             {
@@ -65,13 +65,13 @@ namespace Game_Development_Project
                     Door door = obstacle as Door;
                     if (player.CollisionRectangle.Intersects(door.CollisionRectangle))
                     {                       
-                        if(currentLevel.NextLevel == InGame.GAMEISDONECODE)
+                        if(currentLevel.NextWorld == InGame.GAMEISDONECODE)
                         {
                             InGame.PlayerWon = true;                        
                         }   
                         else
                         {
-                            InGame.CurrentLevel = currentLevel.NextLevel;
+                            InGame.CurrentWorld = currentLevel.NextWorld;
                             player.Respawn();
                         }
                     }
@@ -79,7 +79,7 @@ namespace Game_Development_Project
             }
         }
 
-        private void CheckPlatformCollision(Player player, Level level)
+        private void CheckPlatformCollision(Player player, World level)
         {
             bool canMoveDown = true;
             bool canMoveLeft = true;
@@ -120,7 +120,7 @@ namespace Game_Development_Project
 
         }
 
-        private void CheckMapRange(Player player, Level currentlevel)
+        private void CheckMapRange(Player player, World currentlevel)
         {
             if (player.CollisionRectangle.Top > currentlevel.MapRange)
             {
