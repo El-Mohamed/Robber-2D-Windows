@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-namespace Game_Development_Project
+namespace Robber_2D_Windows
 {
     public class Button
     {

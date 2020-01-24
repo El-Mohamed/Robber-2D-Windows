@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 
-namespace Game_Development_Project
+namespace Robber_2D_Windows
 {
     class Coin : Block, ICloneable
     {

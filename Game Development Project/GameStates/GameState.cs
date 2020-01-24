@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Game_Development_Project
+namespace Robber_2D_Windows
 {
     public abstract class GameState : IGameState
     {

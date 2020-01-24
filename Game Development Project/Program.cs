@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game_Development_Project
+namespace Robber_2D_Windows
 {
 #if WINDOWS || LINUX
     /// <summary>

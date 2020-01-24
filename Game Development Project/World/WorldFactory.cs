@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game_Development_Project
+namespace Robber_2D_Windows
 {
     static class WorldFactory
     {

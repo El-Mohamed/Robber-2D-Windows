@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Game_Development_Project
+namespace Robber_2D_Windows
 {
     class WinScreen : GameState
     {

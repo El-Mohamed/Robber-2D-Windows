@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Game_Development_Project
+namespace Robber_2D_Windows
 {
     class StartScreen : GameState
     {

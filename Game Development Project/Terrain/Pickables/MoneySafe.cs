@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Game_Development_Project
+namespace Robber_2D_Windows
 {
     class MoneySafe : Block
     {

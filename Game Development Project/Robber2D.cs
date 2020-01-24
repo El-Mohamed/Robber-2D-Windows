@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Game_Development_Project
+namespace Robber_2D_Windows
 {
     public class Robber2D : Game
     {

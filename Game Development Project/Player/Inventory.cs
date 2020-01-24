@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Game_Development_Project
+namespace Robber_2D_Windows
 {
     class Inventory
     {
