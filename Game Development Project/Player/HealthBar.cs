@@ -5,22 +5,22 @@ namespace Game_Development_Project
 {
     class HealthBar
     {
-        public Texture2D Heart;
-        public Vector2 Position;
+        public Texture2D HeartTexture;
+        public Vector2 RightTopCorner;
         public int HealthLevel;
 
-        public HealthBar(Texture2D heart)
+        public HealthBar(Texture2D heartTexture)
         {
-            Heart = heart;
+            HeartTexture = heartTexture;
             HealthLevel = 0;
         }
 
-        public void UpdatePosition(Player player)
+        public void UpdatePosition(Vector2 rightTopCorner)
         {
-            Position = new Vector2(player.SpriteSheet.Position.X + (Game1.ScreenWidth / 2) - 10, player.SpriteSheet.Position.Y - (Game1.ScreenHeight / 2) + 100);
+            RightTopCorner = rightTopCorner;
         }
 
-        public void UpdateHealth(Player player)
+        public void SetHealth(Player player)
         {
             HealthLevel = player.Health;
         }
@@ -31,8 +31,8 @@ namespace Game_Development_Project
             {
                 for (int i = 0; i < HealthLevel / 10; i++)
                 {
-                    Vector2 tempVector = new Vector2(Position.X - (i * (Heart.Width + 10)), Position.Y);
-                    Sprite tempSprite = new Sprite(Heart, 1, tempVector);
+                    Vector2 tempVector = new Vector2(RightTopCorner.X - (i * (HeartTexture.Width + 10)), RightTopCorner.Y);
+                    Sprite tempSprite = new Sprite(HeartTexture, 1, tempVector);
                     tempSprite.Draw(spriteBatch);
                 }
             }

@@ -227,8 +227,8 @@ namespace Game_Development_Project
             clock.UpdatePosition(ScreenPositionHelper.GetScreenTop(player));
 
             // Heathbar
-            healtbar.UpdateHealth(player);
-            healtbar.UpdatePosition(player);
+            healtbar.SetHealth(player);
+            healtbar.UpdatePosition(ScreenPositionHelper.GetRightTopCorner(player));
 
             // Inventory
             inventroyHelper.UpdatePosition(player);
