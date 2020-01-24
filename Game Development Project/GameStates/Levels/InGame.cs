@@ -17,6 +17,7 @@ namespace Game_Development_Project
 
         InventoryBar inventroyHelper;
         HealthBar healtbar;
+        Clock clock;
 
         GameSounds gameSounds;
         SpriteFont defaultFont;
@@ -46,8 +47,8 @@ namespace Game_Development_Project
             player.Draw(spriteBatch);
 
             // Clock
-            Clock.Draw(spriteBatch);
-
+            clock.Draw(spriteBatch);
+            
             // Healtbar
             healtbar.Draw(spriteBatch);
 
@@ -97,7 +98,7 @@ namespace Game_Development_Project
             // Clock
 
             defaultFont = contentManager.Load<SpriteFont>("DefaultFont");
-            Clock.SpriteFont = defaultFont;
+            clock = new Clock(defaultFont);
 
             // Inventory Helper 
 
@@ -222,8 +223,8 @@ namespace Game_Development_Project
             player.Update(gameTime);
 
             // Clock
-            Clock.UpdateTime(gameTime);
-            Clock.UpdatePosition(player);
+            clock.Update(gameTime);
+            clock.UpdatePosition(ScreenPositionHelper.GetScreenTop(player));
 
             // Heathbar
             healtbar.UpdateHealth(player);

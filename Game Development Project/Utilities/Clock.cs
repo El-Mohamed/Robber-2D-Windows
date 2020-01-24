@@ -6,42 +6,56 @@ namespace Game_Development_Project
 {
     class Clock
     {
-        static public int Time;
-        static public string TimeText = "";
-        static public SpriteFont SpriteFont;
-        static public Vector2 Position;
+        int CountedTime, Minutes, Seconds;
+        string TimeOutput;
+        public SpriteFont Font;
+        Vector2 ScreenTop;
 
-        static public void UpdateTime(GameTime gameTime)
+        public Clock(SpriteFont font)
         {
-            Time += gameTime.ElapsedGameTime.Milliseconds;
+            Font = font;
+            TimeOutput = "00:00";
+        }
 
-            int minutes = Time / 60000;
-            int seconds = (Time % 60000) / 1000;
-            string strMinutes = Convert.ToString(minutes);
-            string strSeconds = Convert.ToString(seconds);
+        public void Update(GameTime gameTime)
+        {
+            UpdateTime(gameTime);
+            UpdateTimeOuput();
+        }
 
-            if (minutes < 10)
+        private void UpdateTimeOuput()
+        {
+            string strMinutes = Convert.ToString(Minutes);
+            string strSeconds = Convert.ToString(Seconds);
+
+            if (Minutes < 10)
             {
                 strMinutes = "0" + strMinutes;
             }
 
-            if (seconds < 10)
+            if (Seconds < 10)
             {
                 strSeconds = "0" + strSeconds;
             }
 
-            TimeText = strMinutes + ":" + strSeconds;
+            TimeOutput = strMinutes + ":" + strSeconds;
         }
 
-        static public void UpdatePosition(Player player)
+        private void UpdateTime(GameTime gameTime)
         {
-            int OffSet = 15;
-            Position = new Vector2(player.SpriteSheet.Position.X + OffSet, player.SpriteSheet.Position.Y - (Game1.ScreenHeight / 2) + 100);
+            CountedTime += gameTime.ElapsedGameTime.Milliseconds;
+            Minutes = CountedTime / 60000;
+            Seconds = (CountedTime % 60000) / 1000;
         }
 
-        static public void Draw(SpriteBatch spriteBatch)
+        public void UpdatePosition(Vector2 screenTop)
         {
-            spriteBatch.DrawString(SpriteFont, TimeText, Position, Color.White);
+            ScreenTop = screenTop;
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(Font, TimeOutput, ScreenTop, Color.White);
         }
     }
 }
