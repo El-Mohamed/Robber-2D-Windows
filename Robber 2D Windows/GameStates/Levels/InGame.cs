@@ -228,14 +228,14 @@ namespace Robber_2D_Windows
 
             // Clock
             clock.Update(gameTime);
-            clock.UpdatePosition(ScreenPositionHelper.GetScreenTop(player));
+            clock.UpdatePosition(ScreenPosition.Top(player));
 
             // Heathbar
             healtbar.SetHealth(player);
-            healtbar.UpdatePosition(ScreenPositionHelper.GetRightTopCorner(player));
+            healtbar.UpdatePosition(ScreenPosition.RightTopCorner(player));
 
             // Inventory
-            inventroyHelper.UpdatePosition(ScreenPositionHelper.GetLeftScreenCorner(player), player.Spirte.Position); 
+            inventroyHelper.UpdatePosition(ScreenPosition.LeftLopCorner(player), player.Spirte.Position); 
 
             // Camera
             camera.Follow(player);

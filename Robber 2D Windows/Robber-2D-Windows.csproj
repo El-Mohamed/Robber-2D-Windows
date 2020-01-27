@@ -80,7 +80,7 @@
     <Compile Include="Terrain\Obstacles\Platform.cs" />
     <Compile Include="Terrain\Pickables\MoneySafe.cs" />
     <Compile Include="Terrain\Pickables\Potion.cs" />
-    <Compile Include="Utilities\ScreenPositionHelper.cs" />
+    <Compile Include="Utilities\ScreenPosition.cs" />
     <Compile Include="Factory\WorldFactory.cs" />
   </ItemGroup>
   <ItemGroup>
