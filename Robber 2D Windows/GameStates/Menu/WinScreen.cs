@@ -9,13 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Robber_2D_Windows
 {
-    class WinScreen : GameState
+    class WinScreen : GameState, IMenu
     {
+        public List<Button> AllButtons;
         SpriteFont buttonFont;
         Button newGameButton, returnButton;
-        Texture2D buttonBorder, GameOverImage;
-        private int leftMarginGameOver;
-        public List<Button> AllButtons;
+        Texture2D buttonBorder, winImage;
+        int leftMarginGameOver;
 
         public WinScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game) : base(contentManager, graphicsDevice, game)
         {
@@ -26,11 +26,12 @@ namespace Robber_2D_Windows
         {
 
         }
+
         public override void LoadContent()
         {
             // Game Over Image
-            GameOverImage = ContentManager.Load<Texture2D>("YouWin");
-            leftMarginGameOver = (Robber2D.ScreenWidth - GameOverImage.Width) / 2;
+            winImage = ContentManager.Load<Texture2D>("YouWin");
+            leftMarginGameOver = (Robber2D.ScreenWidth - winImage.Width) / 2;
 
             // Buttons
             AllButtons = new List<Button>();
@@ -67,32 +68,25 @@ namespace Robber_2D_Windows
 
         public override void Update(GameTime gameTime)
         {
-            foreach (Button button in AllButtons)
-            {
-                button.Update(gameTime);
-            }
+            UpdateButtons(gameTime);
         }
-
-        private void DrawGameOverText(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(GameOverImage, new Vector2(leftMarginGameOver, 200), null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
-        }
-
-
+      
         public override void Draw(SpriteBatch spriteBatch)
         {
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
 
-            DrawGameOverText(spriteBatch);
-
-            foreach (Button button in AllButtons)
-            {
-                button.Draw(spriteBatch);
-            }
+            DrawButtons(spriteBatch);
+            DrawImages(spriteBatch);
+            DrawText(spriteBatch);
 
             spriteBatch.End();
+        }
+
+        private void DrawWinImage(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(winImage, new Vector2(leftMarginGameOver, 200), null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
         }
 
         private void StartNewGame(object sender, EventArgs e)
@@ -103,6 +97,32 @@ namespace Robber_2D_Windows
         private void ReturnToMenu(object sender, EventArgs e)
         {
             GameStateManager.Instance.SetCurrentState(new StartScreen(ContentManager, GraphicsDevice, Game));
+        }
+
+        public void DrawButtons(SpriteBatch spriteBatch)
+        {
+            foreach (Button button in AllButtons)
+            {
+                button.Draw(spriteBatch);
+            }
+        }
+
+        public void UpdateButtons(GameTime gameTime)
+        {
+            foreach (Button button in AllButtons)
+            {
+                button.Update(gameTime);
+            }
+        }
+
+        public void DrawImages(SpriteBatch spriteBatch)
+        {
+            DrawWinImage(spriteBatch);
+        }
+
+        public void DrawText(SpriteBatch spriteBatch)
+        {
+
         }
     }
 }

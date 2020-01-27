@@ -6,16 +6,15 @@ using System.Collections.Generic;
 
 namespace Robber_2D_Windows
 {
-    class EndScreen : GameState
+    class EndScreen : GameState, IMenu
     {
-
+        public List<Button> AllButtons;
         SpriteFont buttonFont;
         Button newGameButton, closeGameButton;
         Texture2D buttonBorder, GameOverImage;
-        private int leftMarginGameOver;
-        string EndScore;
-        public List<Button> AllButtons;
-
+        int leftMarginGameOver;
+        string endScore;
+        
         public EndScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game) : base(contentManager, graphicsDevice, game)
         {
 
@@ -25,6 +24,7 @@ namespace Robber_2D_Windows
         {
 
         }
+
         public override void LoadContent()
         {
 
@@ -65,13 +65,6 @@ namespace Robber_2D_Windows
 
         }
 
-        private void GetScore()
-        {
-            int DiamondsScore = InGame.player.Inventory.MyDiamonds * 200;
-            int CoinsScore = InGame.player.Inventory.AllCoins.Count * 100;
-            EndScore = "TOTAL SCORE: " + Convert.ToString(DiamondsScore + CoinsScore);
-        }
-
         public override void UnloadContent()
         {
 
@@ -79,22 +72,7 @@ namespace Robber_2D_Windows
 
         public override void Update(GameTime gameTime)
         {
-            foreach (Button button in AllButtons)
-            {
-                button.Update(gameTime);
-            }
-        }
-
-        private void DrawGameOverText(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(GameOverImage, new Vector2(leftMarginGameOver, 200), null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
-        }
-
-        private void DrawScore(SpriteBatch spriteBatch)
-        {
-            var x = ((Robber2D.ScreenWidth / 2)) - (buttonFont.MeasureString(EndScore).X / 2);
-            var y = ((Robber2D.ScreenHeight / 2)) - (buttonFont.MeasureString(EndScore).Y / 2);
-            spriteBatch.DrawString(buttonFont, EndScore, new Vector2(x, y), Color.Red);
+            UpdateButtons(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -103,16 +81,35 @@ namespace Robber_2D_Windows
 
             spriteBatch.Begin();
 
-            DrawGameOverText(spriteBatch);
-
-            foreach (Button button in AllButtons)
-            {
-                button.Draw(spriteBatch);
-            }
-
-            DrawScore(spriteBatch);
+            DrawButtons(spriteBatch);
+            DrawImages(spriteBatch);
+            DrawText(spriteBatch);
 
             spriteBatch.End();
+        }
+
+        private void GetScore()
+        {
+            int DiamondsScore = InGame.player.Inventory.MyDiamonds * 200;
+            int CoinsScore = InGame.player.Inventory.AllCoins.Count * 100;
+            endScore = "TOTAL SCORE: " + Convert.ToString(DiamondsScore + CoinsScore);
+        }
+
+        private void DrawGameOverImage(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(GameOverImage, new Vector2(leftMarginGameOver, 200), null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+        }
+
+        private void DrawScore(SpriteBatch spriteBatch)
+        {
+            var x = ((Robber2D.ScreenWidth / 2)) - (buttonFont.MeasureString(endScore).X / 2);
+            var y = ((Robber2D.ScreenHeight / 2)) - (buttonFont.MeasureString(endScore).Y / 2);
+            spriteBatch.DrawString(buttonFont, endScore, new Vector2(x, y), Color.Red);
+        }
+
+        private void StartNewGame(object sender, EventArgs e)
+        {
+            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game));
         }
 
         private void CloseGame(object sender, EventArgs e)
@@ -120,9 +117,30 @@ namespace Robber_2D_Windows
             Game.Exit();
         }
 
-        private void StartNewGame(object sender, EventArgs e)
+        public void DrawButtons(SpriteBatch spriteBatch)
         {
-            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game));
+            foreach (Button button in AllButtons)
+            {
+                button.Draw(spriteBatch);
+            }
+        }
+
+        public void UpdateButtons(GameTime gameTime)
+        {
+            foreach (Button button in AllButtons)
+            {
+                button.Update(gameTime);
+            }
+        }
+
+        public void DrawImages(SpriteBatch spriteBatch)
+        {
+            DrawGameOverImage(spriteBatch);
+        }
+
+        public void DrawText(SpriteBatch spriteBatch)
+        {
+            DrawScore(spriteBatch);
         }
     }
 }
