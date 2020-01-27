@@ -235,7 +235,7 @@ namespace Robber_2D_Windows
             healtbar.UpdatePosition(ScreenPositionHelper.GetRightTopCorner(player));
 
             // Inventory
-            inventroyHelper.UpdatePosition(ScreenPositionHelper.GetLeftScreenCorner(player), player.SpriteSheet.Position); 
+            inventroyHelper.UpdatePosition(ScreenPositionHelper.GetLeftScreenCorner(player), player.Spirte.Position); 
 
             // Camera
             camera.Follow(player);

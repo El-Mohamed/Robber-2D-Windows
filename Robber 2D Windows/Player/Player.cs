@@ -5,18 +5,17 @@ namespace Robber_2D_Windows
 {
     class Player : ICollider, IMover
     {
-        enum PlayerState { ToLeft, ToRight }
-        public Vector2 Speed;
         public Rectangle CollisionRectangle { get; set; }
+        public Vector2 Speed;
+        Direction direction;
 
-        public Sprite SpriteSheet;
-        private Animation Animation;
-        private Controller Controller;
+        public Sprite Spirte;
+        Animation Animation;
+        Controller Controller;
         public Inventory Inventory;
 
-        private PlayerState PlayerDirection;
-        public int Health;
-        public int AirTime;
+        public int Health = 100;
+        int AirTime = 0;
         public bool IsMoving, IsJumping, IsFallingDown;
         public bool CanMoveUp, CanMoveDown, CanMoveLeft, CanMoveRight;
 
@@ -35,32 +34,26 @@ namespace Robber_2D_Windows
             }
         }
 
-        public Player(Sprite spriteSheet, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed, Inventory inventory)
+        public Player(Sprite sprite, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed, Inventory inventory)
         {
-            SpriteSheet = spriteSheet;
+            Spirte = sprite;
             Controller = controller;
             Animation = animation;
             CollisionRectangle = collisionRectangle;
             Speed = speed;
             Inventory = inventory;
-            Health = 100;
-            CanMoveLeft = false;
-            CanMoveRight = false;
-            CanMoveDown = false;
-            IsJumping = false;
-            AirTime = 0;
             CreateAnimationFrames();
         }
 
         private void CreateAnimationFrames()
         {
             double OffSet = 0;
-            int IndividualSpirteLength = SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites;
+            int IndividualSpirteLength = Spirte.Texture1.Width / Spirte.NumberOfSprites;
 
-            for (int i = 0; i < SpriteSheet.NumberOfSprites - 1; i++)
+            for (int i = 0; i < Spirte.NumberOfSprites - 1; i++)
             {
-                OffSet = ((SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites) * i);
-                Animation.AddFrame(new Rectangle((int)OffSet, 0, IndividualSpirteLength, SpriteSheet.Texture1.Height));
+                OffSet = ((Spirte.Texture1.Width / Spirte.NumberOfSprites) * i);
+                Animation.AddFrame(new Rectangle((int)OffSet, 0, IndividualSpirteLength, Spirte.Texture1.Height));
             }
         }
 
@@ -122,19 +115,25 @@ namespace Robber_2D_Windows
 
         private void UpdateCollisionRectangle()
         {
-            CollisionRectangle = new Rectangle((int)SpriteSheet.Position.X, (int)SpriteSheet.Position.Y, SpriteSheet.Texture1.Width / SpriteSheet.NumberOfSprites, SpriteSheet.Texture1.Height);
+            CollisionRectangle = new Rectangle((int)Spirte.Position.X, (int)Spirte.Position.Y, Spirte.Texture1.Width / Spirte.NumberOfSprites, Spirte.Texture1.Height);
+        }
+
+        public void UpdateHealth(Bullet bullet)
+        {
+            GameSounds.PlayHitSound();
+            Health -= bullet.Damage;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (PlayerDirection == PlayerState.ToLeft)
+            if (direction == Direction.ToLeft)
             {
-                spriteBatch.Draw(SpriteSheet.Texture1, SpriteSheet.Position, Animation.CurrentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
+                spriteBatch.Draw(Spirte.Texture1, Spirte.Position, Animation.CurrentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
             }
 
-            if (PlayerDirection == PlayerState.ToRight)
+            if (direction == Direction.ToRight)
             {
-                spriteBatch.Draw(SpriteSheet.Texture1, SpriteSheet.Position, Animation.CurrentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(Spirte.Texture1, Spirte.Position, Animation.CurrentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
             }
         }
 
@@ -146,15 +145,15 @@ namespace Robber_2D_Windows
 
                 if (IsFallingDown && !IsJumping)
                 {
-                    SpriteSheet.Position.X += (Speed.X / 2);
+                    Spirte.Position.X += (Speed.X / 2);
                 }
                 else
                 {
-                    SpriteSheet.Position.X += Speed.X;
+                    Spirte.Position.X += Speed.X;
                 }
             }
 
-            PlayerDirection = PlayerState.ToRight;
+            direction = Direction.ToRight;
         }
 
         public void MoveLeft()
@@ -165,15 +164,15 @@ namespace Robber_2D_Windows
 
                 if (IsFallingDown && !IsJumping)
                 {
-                    SpriteSheet.Position.X -= (Speed.X / 2);
+                    Spirte.Position.X -= (Speed.X / 2);
                 }
                 else
                 {
-                    SpriteSheet.Position.X -= Speed.X;
+                    Spirte.Position.X -= Speed.X;
                 }
             }
 
-            PlayerDirection = PlayerState.ToLeft;
+            direction = Direction.ToLeft;
         }
 
         public void HandleGravity()
@@ -181,23 +180,22 @@ namespace Robber_2D_Windows
             if (!IsJumping && CanMoveDown)
             {
                 IsFallingDown = true;
+
                 if (AirTime < 20)
                 {
                     AirTime++;
 
-                    float MULTIPLIER = 8;
-                    float newSpeedY = Speed.Y;
-                    newSpeedY += 1 * MULTIPLIER;
+                    const float SPEED = 8;
+                    float newSpeedY = Speed.Y + SPEED;
                     Speed.Y = newSpeedY;
                 }
 
-                SpriteSheet.Position.Y += Speed.Y;
+                Spirte.Position.Y += Speed.Y;
             }
 
             if (!CanMoveDown)
             {
                 Speed.Y = 0;
-                IsJumping = false;
                 IsFallingDown = false;
                 AirTime = 0;
             }
@@ -206,6 +204,7 @@ namespace Robber_2D_Windows
         public void HandleJump()
         {
             Speed.Y = 10;
+
             if (IsJumping && AirTime < 25)
             {
                 AirTime++;
@@ -217,43 +216,40 @@ namespace Robber_2D_Windows
 
                 if (CanMoveUp)
                 {
-                    SpriteSheet.Position.Y -= Speed.Y;
+                    Spirte.Position.Y -= Speed.Y;
                 }
                 else
                 {
-                    Speed.Y = 0;
-                    IsJumping = false;
+                    StopJump();
                 }
             }
             else
             {
-                AirTime = 0;
-                IsJumping = false;
-                Speed.Y = 0;
+                StopJump();
             }
         }
 
-        public void UpdateHealth(Bullet bullet)
+        private void StopJump()
         {
-            GameSounds.PlayHitSound();
-            Health -= bullet.Damage;
+            AirTime = 0;
+            IsJumping = false;
+            Speed.Y = 0;
         }
 
         public void Respawn()
         {
-            SpriteSheet.Position.X = 0;
-            SpriteSheet.Position.Y = -200;
+            Spirte.Position.X = 0;
+            Spirte.Position.Y = -200;
         }
 
         public void DrinkPotion()
         {
             if (Inventory.Potion != null)
             {
-                Potion potionToDrink = Inventory.Potion;
-                Speed.X += potionToDrink.SpeedAcceleration;
-                Inventory.Potion = null; // Remove Drinked Potion
-                GameSounds.PlayDrinkSound();
+                Speed.X += Inventory.Potion.SpeedAcceleration;
                 Animation.IncreaseSpeed();
+                Inventory.Potion = null; // Remove Drinked Potion
+                GameSounds.PlayDrinkSound();            
             }
         }
     }

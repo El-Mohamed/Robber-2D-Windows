@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Robber_2D_Windows
 {
+    enum Direction { ToLeft, ToRight }
+
     public class Robber2D : Game
     {
         GraphicsDeviceManager graphics;
