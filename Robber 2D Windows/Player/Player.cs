@@ -129,12 +129,12 @@ namespace Robber_2D_Windows
         {
             if (PlayerDirection == PlayerState.ToLeft)
             {
-                spriteBatch.Draw(SpriteSheet.Texture1, SpriteSheet.Position, Animation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
+                spriteBatch.Draw(SpriteSheet.Texture1, SpriteSheet.Position, Animation.CurrentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
             }
 
             if (PlayerDirection == PlayerState.ToRight)
             {
-                spriteBatch.Draw(SpriteSheet.Texture1, SpriteSheet.Position, Animation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(SpriteSheet.Texture1, SpriteSheet.Position, Animation.CurrentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
             }
         }
 
