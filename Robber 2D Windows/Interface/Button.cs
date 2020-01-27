@@ -7,55 +7,68 @@ namespace Robber_2D_Windows
 {
     public class Button
     {
-        #region Fields
-        public Rectangle Rectangle => Factory.CreateRectangle((int)Position.X, (int)Position.Y, texture2D.Width, texture2D.Height);
+        public Rectangle Rectangle => Factory.CreateRectangle((int)Position.X, (int)Position.Y, border.Width, border.Height);
 
-        private MouseState currentMouse, previousMouse;
+        MouseState currentMouse, previousMouse;
         public Vector2 Position;
-        private SpriteFont spriteFont;
-        private Texture2D texture2D;
+        SpriteFont font;
+        Texture2D border;
         public event EventHandler Click;
         public bool Clicked, isHovering;
-        public Color FontColor, ButtonColor;
+        Color fontColor, buttonColor;
         public string Text;
-
-        #endregion
-
-        #region Methods
 
         public Button(Texture2D texture, SpriteFont font)
         {
-            texture2D = texture;
-            spriteFont = font;
-            FontColor = Color.Black;
-            ButtonColor = Color.White;
+            border = texture;
+            this.font = font;
+            fontColor = Color.Black;
+            buttonColor = Color.White;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (isHovering)
-            {
-                FontColor = Color.Red;
-                ButtonColor = Color.White;
-            }
-            else
-            {
-                FontColor = Color.White;
-                ButtonColor = Color.Red;
-            }
+            DrawBorder(spriteBatch);
+            DrawText(spriteBatch);
+        }
 
-            spriteBatch.Draw(texture2D, Rectangle, ButtonColor);
+        private void DrawBorder(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(border, Rectangle, buttonColor);
+        }
 
+        private void DrawText(SpriteBatch spriteBatch)
+        {
             if (!string.IsNullOrEmpty(Text))
             {
-                float x = (Rectangle.X + (Rectangle.Width / 2)) - (spriteFont.MeasureString(Text).X / 2);
-                float y = (Rectangle.Y + (Rectangle.Height / 2)) - (spriteFont.MeasureString(Text).Y / 2);
+                float x = (Rectangle.X + (Rectangle.Width / 2)) - (font.MeasureString(Text).X / 2);
+                float y = (Rectangle.Y + (Rectangle.Height / 2)) - (font.MeasureString(Text).Y / 2);
 
-                spriteBatch.DrawString(spriteFont, Text, new Vector2(x, y), FontColor);
+                spriteBatch.DrawString(font, Text, new Vector2(x, y), fontColor);
             }
         }
 
         public void Update(GameTime gameTime)
+        {
+            UpdateColors();
+            UpdateMouse();
+        }
+
+        private void UpdateColors()
+        {
+            if (isHovering)
+            {
+                fontColor = Color.Red;
+                buttonColor = Color.White;
+            }
+            else
+            {
+                fontColor = Color.White;
+                buttonColor = Color.Red;
+            }
+        }
+
+        private void UpdateMouse()
         {
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();
@@ -74,7 +87,5 @@ namespace Robber_2D_Windows
                 }
             }
         }
-
-        #endregion
     }
 }
