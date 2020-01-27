@@ -82,7 +82,7 @@ namespace Robber_2D_Windows
             // Draw Texture       
             spriteBatch.Draw(AllTextures[1], CoinPosition, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
             // Draw Amount     
-            string numberOfCoins = Convert.ToString(Inventory.MyCoins.Count);
+            string numberOfCoins = Convert.ToString(Inventory.AllCoins.Count);
             CoinPosition.X += 60;
             CoinPosition.Y -= 5;
             spriteBatch.DrawString(Font, numberOfCoins, CoinPosition, Color.White);
@@ -90,7 +90,7 @@ namespace Robber_2D_Windows
 
         private void DrawPotion(SpriteBatch spriteBatch)
         {
-            if (Inventory.MyPotion != null)
+            if (Inventory.Potion != null)
             {
                 spriteBatch.Draw(AllTextures[2], PotionPosition, null, Color.White, 0f, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
             }
@@ -98,7 +98,7 @@ namespace Robber_2D_Windows
 
         private void DrawKey(SpriteBatch spriteBatch)
         {
-            if (Inventory.MyKey != null)
+            if (Inventory.Key != null)
             {
                 spriteBatch.Draw(AllTextures[0], KeyPosition, null, Color.White, 0f, new Vector2(0, 0), 0.5f, SpriteEffects.None, 1);
             }

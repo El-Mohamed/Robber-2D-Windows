@@ -247,11 +247,11 @@ namespace Robber_2D_Windows
 
         public void DrinkPotion()
         {
-            if (Inventory.MyPotion != null)
+            if (Inventory.Potion != null)
             {
-                Potion potionToDrink = Inventory.MyPotion;
+                Potion potionToDrink = Inventory.Potion;
                 Speed.X += potionToDrink.SpeedAcceleration;
-                Inventory.MyPotion = null; // Remove Drinked Potion
+                Inventory.Potion = null; // Remove Drinked Potion
                 GameSounds.PlayDrinkSound();
                 Animation.IncreaseSpeed();
             }

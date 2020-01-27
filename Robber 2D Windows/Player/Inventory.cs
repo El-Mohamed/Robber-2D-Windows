@@ -4,36 +4,35 @@ namespace Robber_2D_Windows
 {
     class Inventory
     {
-        public MoneySafeKey MyKey;
-        public List<Coin> MyCoins;
-        public Potion MyPotion;
-        public int MyDiamonds;
+        public MoneySafeKey Key;
+        public List<Coin> AllCoins;
+        public Potion Potion;
+        public int MyDiamonds = 0;
 
         public Inventory()
         {
-            MyCoins = new List<Coin>();
-            MyDiamonds = 0;
+            AllCoins = new List<Coin>();
         }
 
         public bool HasWorkingKey(MoneySafe moneySafe)
         {
-            if (MyKey != null && MyKey.MoneySafeID.Equals(moneySafe.KeyID))
+            if (Key != null && Key.MoneySafeID.Equals(moneySafe.KeyID))
             {
                 return true;
             }
-            return false;
 
+            return false;
         }
 
         public bool HasPlace(Block pickable)
         {
             if (pickable is MoneySafeKey)
             {
-                return (MyKey == null);
+                return (Key == null);
             }
             if (pickable is Potion)
             {
-                return (MyPotion == null);
+                return (Potion == null);
             }
             else
             {
@@ -49,20 +48,23 @@ namespace Robber_2D_Windows
             {
                 MoneySafeKey doorKey = Item as MoneySafeKey;
                 MoneySafeKey clone = (doorKey.Clone()) as MoneySafeKey;
-                MyKey = clone;
+                Key = clone;
             }
+
             if (Item is Coin)
             {
                 Coin coin = Item as Coin;
                 Coin clone = (coin.Clone()) as Coin;
-                MyCoins.Add(clone);
+                AllCoins.Add(clone);
             }
+
             if (Item is Potion)
             {
                 Potion potion = Item as Potion;
                 Potion clone = (potion.Clone()) as Potion;
-                MyPotion = clone;
+                Potion = clone;
             }
+
             if (Item is MoneySafe)
             {
                 MoneySafe moneySafe = Item as MoneySafe;

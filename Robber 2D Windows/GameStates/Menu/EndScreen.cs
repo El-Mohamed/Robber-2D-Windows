@@ -68,7 +68,7 @@ namespace Robber_2D_Windows
         private void GetScore()
         {
             int DiamondsScore = InGame.player.Inventory.MyDiamonds * 200;
-            int CoinsScore = InGame.player.Inventory.MyCoins.Count * 100;
+            int CoinsScore = InGame.player.Inventory.AllCoins.Count * 100;
             EndScore = "TOTAL SCORE: " + Convert.ToString(DiamondsScore + CoinsScore);
         }
 

@@ -43,7 +43,7 @@ namespace Robber_2D_Windows
                         {
                             player.Inventory.AddItem(currentLevel.AllPickables[i]);
                             currentLevel.AllPickables.RemoveAt(i);
-                            player.Inventory.MyKey = null;
+                            player.Inventory.Key = null;
                             currentLevel.totalMoneySafes--;
                         }
                     }
