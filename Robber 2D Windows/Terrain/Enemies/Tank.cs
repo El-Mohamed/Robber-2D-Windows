@@ -18,11 +18,10 @@ namespace Robber_2D_Windows
         {
             const int Offset = 10; // Bullets need to shooted out of the gun
             Texture2D bulletTexture = contentManager.Load<Texture2D>("Bullet");
-            Vector2 bulletPosition = new Vector2(tankPosition.X, tankPosition.Y + Offset);
-            Rectangle bulletCollisoionRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
-            Sprite sprite = new Sprite(bulletTexture, bulletPosition);
+            Vector2 bulletPosition = Factory.CreateVector(tankPosition.X, tankPosition.Y + Offset);
+            Rectangle bulletCollisoionRectangle = Factory.CreateRectangle((int)bulletPosition.X, (int)bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
+            Sprite sprite = Factory.CreateSprite(bulletTexture, 1, bulletPosition);
             ShootedBullets.Add(new Bullet(sprite, bulletCollisoionRectangle));
         }
-
     }
 }

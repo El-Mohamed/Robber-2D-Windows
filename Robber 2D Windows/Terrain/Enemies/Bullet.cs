@@ -9,7 +9,7 @@ namespace Robber_2D_Windows
 
         public Bullet(Sprite sprite, Rectangle collisionRectangle) : base(sprite, collisionRectangle)
         {
-            Speed = new Vector2(15, 0);
+            Speed = Factory.CreateVector(15, 0);
             Damage = 10;
         }
 
@@ -26,7 +26,7 @@ namespace Robber_2D_Windows
         public void Update(GameTime gameTime)
         {
             MoveLeft();
-            CollisionRectangle = new Rectangle((int)SpriteImage.Position.X, (int)SpriteImage.Position.Y, SpriteImage.Texture1.Width, SpriteImage.Texture1.Height);
+            CollisionRectangle = Factory.CreateRectangle((int)SpriteImage.Position.X, (int)SpriteImage.Position.Y, SpriteImage.Texture1.Width, SpriteImage.Texture1.Height);
         }
     }
 }

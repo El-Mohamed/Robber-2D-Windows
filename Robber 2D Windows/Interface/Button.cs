@@ -8,7 +8,7 @@ namespace Robber_2D_Windows
     public class Button
     {
         #region Fields
-        public Rectangle Rectangle => new Rectangle((int)Position.X, (int)Position.Y, texture2D.Width, texture2D.Height);
+        public Rectangle Rectangle => Factory.CreateRectangle((int)Position.X, (int)Position.Y, texture2D.Width, texture2D.Height);
 
         private MouseState currentMouse, previousMouse;
         public Vector2 Position;
@@ -60,7 +60,7 @@ namespace Robber_2D_Windows
             previousMouse = currentMouse;
             currentMouse = Mouse.GetState();
 
-            Rectangle mouseRectangle = new Rectangle(currentMouse.X, currentMouse.Y, 1, 1);
+            Rectangle mouseRectangle = Factory.CreateRectangle(currentMouse.X, currentMouse.Y, 1, 1);
 
             isHovering = false;
 

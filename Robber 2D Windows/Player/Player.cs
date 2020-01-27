@@ -53,7 +53,7 @@ namespace Robber_2D_Windows
             for (int i = 0; i < Spirte.NumberOfSprites - 1; i++)
             {
                 OffSet = ((Spirte.Texture1.Width / Spirte.NumberOfSprites) * i);
-                Animation.AddFrame(new Rectangle((int)OffSet, 0, IndividualSpirteLength, Spirte.Texture1.Height));
+                Animation.AddFrame(Factory.CreateRectangle((int)OffSet, 0, IndividualSpirteLength, Spirte.Texture1.Height));
             }
         }
 
@@ -115,7 +115,7 @@ namespace Robber_2D_Windows
 
         private void UpdateCollisionRectangle()
         {
-            CollisionRectangle = new Rectangle((int)Spirte.Position.X, (int)Spirte.Position.Y, Spirte.Texture1.Width / Spirte.NumberOfSprites, Spirte.Texture1.Height);
+            CollisionRectangle = Factory.CreateRectangle((int)Spirte.Position.X, (int)Spirte.Position.Y, Spirte.Texture1.Width / Spirte.NumberOfSprites, Spirte.Texture1.Height);
         }
 
         public void UpdateHealth(Bullet bullet)

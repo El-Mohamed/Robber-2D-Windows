@@ -49,7 +49,7 @@ namespace Robber_2D_Windows
             AllPickables = new List<Block>();
             MapWidth = ObstaclesArray.GetLength(1);
             LevelHeight = ObstaclesArray.GetLength(0);
-            StartPosition = WorldFactory.CreateVector(0, 0);
+            StartPosition = Factory.CreateVector(0, 0);
         }
 
         public virtual void Create(ContentManager contentManager)
@@ -89,9 +89,9 @@ namespace Robber_2D_Windows
                     int maginLeft = (150 - tempTexture.Width) / 2; // Calculate margin to center Pickable on the platform
                     float xPos = (x * 150) + maginLeft;
                     float yPos = (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom;
-                    Vector2 tempVector = WorldFactory.CreateVector(xPos, yPos);
-                    Rectangle tempCollisonRectangle = WorldFactory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
-                    Sprite tempSprite = WorldFactory.CreateSprite(tempTexture, 1, tempVector);
+                    Vector2 tempVector = Factory.CreateVector(xPos, yPos);
+                    Rectangle tempCollisonRectangle = Factory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
+                    Sprite tempSprite = Factory.CreateSprite(tempTexture, 1, tempVector);
 
                     switch (PickablesArray[y, x])
                     {
@@ -136,9 +136,9 @@ namespace Robber_2D_Windows
                 {
                     // Create Platform
                     Texture2D platformTexture = contentManager.Load<Texture2D>("Block1");
-                    Vector2 tempVector = WorldFactory.CreateVector(x * platformTexture.Width, y * SpaceBetweenPlatforms);
-                    Rectangle tempCollisonRectangle = WorldFactory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, platformTexture.Width, platformTexture.Height);
-                    Sprite tempSprite = WorldFactory.CreateSprite(platformTexture, 1, tempVector);
+                    Vector2 tempVector = Factory.CreateVector(x * platformTexture.Width, y * SpaceBetweenPlatforms);
+                    Rectangle tempCollisonRectangle = Factory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, platformTexture.Width, platformTexture.Height);
+                    Sprite tempSprite = Factory.CreateSprite(platformTexture, 1, tempVector);
                     Block platform = WorldFactory.CreatePlatform(tempSprite, tempCollisonRectangle);
 
                     switch (ObstaclesArray[y, x])
@@ -159,10 +159,10 @@ namespace Robber_2D_Windows
 
                             float xPos = (x * platformTexture.Width) + maginLeft;
                             float yPos = (y * SpaceBetweenPlatforms) - doorTexture.Height;
-                            Vector2 doorVector = WorldFactory.CreateVector(xPos, yPos);
+                            Vector2 doorVector = Factory.CreateVector(xPos, yPos);
 
-                            Rectangle doorCollisonRectangle = WorldFactory.CreateRectangle((int)doorVector.X, (int)doorVector.Y, doorTexture.Width, doorTexture.Height);
-                            Sprite doorSprite = WorldFactory.CreateSprite(doorTexture, 1, doorVector);
+                            Rectangle doorCollisonRectangle = Factory.CreateRectangle((int)doorVector.X, (int)doorVector.Y, doorTexture.Width, doorTexture.Height);
+                            Sprite doorSprite = Factory.CreateSprite(doorTexture, 1, doorVector);
                             Block door = WorldFactory.CreateDoor(doorSprite, doorCollisonRectangle);
 
                             // Add Door

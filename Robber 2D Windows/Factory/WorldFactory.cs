@@ -10,18 +10,7 @@ namespace Robber_2D_Windows
 {
     static class WorldFactory
     {
-        // Types
-        static public Rectangle CreateRectangle(int x, int y, int width, int height)
-        {
-            return new Rectangle(x, y, width, height);
-        }
 
-        static public Vector2 CreateVector(float x, float y)
-        {
-            return new Vector2(x, y);
-        }
-
-        // Obstacles
         static public Platform CreatePlatform(Sprite sprite, Rectangle collisonRectangle)
         {
             return new Platform(sprite, collisonRectangle);
@@ -32,13 +21,6 @@ namespace Robber_2D_Windows
             return new Door(sprite, collisonRectangle);
         }
 
-        // Other
-        static public Sprite CreateSprite(Texture2D texture, int number, Vector2 vector)
-        {
-            return new Sprite(texture, number, vector);
-        }
-
-        // Pickables
         static public Coin CreateCoin(Sprite sprite, Rectangle collisonRectangle)
         {
             return new Coin(sprite, collisonRectangle)
@@ -66,10 +48,10 @@ namespace Robber_2D_Windows
 
         static public MoneySafeKey CreateKey(Sprite sprite, Rectangle collisonRectangle, int moneySafeID)
         {
-           return new MoneySafeKey(sprite, collisonRectangle)
-           {
-               MoneySafeID = moneySafeID
-           };
+            return new MoneySafeKey(sprite, collisonRectangle)
+            {
+                MoneySafeID = moneySafeID
+            };
         }
 
         // Enemies

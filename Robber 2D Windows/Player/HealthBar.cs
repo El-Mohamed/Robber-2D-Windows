@@ -31,8 +31,8 @@ namespace Robber_2D_Windows
             {
                 for (int i = 0; i < HealthLevel / 10; i++)
                 {
-                    Vector2 tempVector = new Vector2(RightTopCorner.X - (i * (HeartTexture.Width + 10)), RightTopCorner.Y);
-                    Sprite tempSprite = new Sprite(HeartTexture, tempVector);
+                    Vector2 tempVector = Factory.CreateVector(RightTopCorner.X - (i * (HeartTexture.Width + 10)), RightTopCorner.Y);
+                    Sprite tempSprite = Factory.CreateSprite(HeartTexture, 1, tempVector);
                     tempSprite.Draw(spriteBatch);
                 }
             }

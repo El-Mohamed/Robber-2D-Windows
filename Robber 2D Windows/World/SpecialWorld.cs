@@ -40,9 +40,9 @@ namespace Robber_2D_Windows
                     int maginLeft = (150 - tempTexture.Width) / 2; 
                     float xPos = (x * 150) + maginLeft;
                     float yPos = (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom;
-                    Vector2 tempVector = WorldFactory.CreateVector(xPos, yPos);
-                    Rectangle tempCollisonRectangle = WorldFactory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
-                    Sprite tempSprite = WorldFactory.CreateSprite(tempTexture, 1, tempVector);
+                    Vector2 tempVector = Factory.CreateVector(xPos, yPos);
+                    Rectangle tempCollisonRectangle = Factory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
+                    Sprite tempSprite = Factory.CreateSprite(tempTexture, 1, tempVector);
 
                     switch (EnemiesArray[y, x])
                     {
