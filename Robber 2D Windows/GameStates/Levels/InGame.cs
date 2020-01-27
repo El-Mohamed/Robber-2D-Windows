@@ -37,7 +37,7 @@ namespace Robber_2D_Windows
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            graphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(transformMatrix: camera.Transform);
 
@@ -69,7 +69,7 @@ namespace Robber_2D_Windows
             // Player 1
 
             int spriteSheetLength = 6;
-            Texture2D playerTexture = contentManager.Load<Texture2D>("PlayerSpriteSheet");
+            Texture2D playerTexture = ContentManager.Load<Texture2D>("PlayerSpriteSheet");
             Controller playerController = new Controller();
             Vector2 playerPosition = new Vector2();
             Vector2 playerSpeed = new Vector2(7, 0);
@@ -88,17 +88,17 @@ namespace Robber_2D_Windows
             PlayerWon = false;
 
             // SoundEffects
-            pickSound = contentManager.Load<SoundEffect>("PickSound");
-            hitSound = contentManager.Load<SoundEffect>("HitSound");
-            drinkSound = contentManager.Load<SoundEffect>("DrinkSound");
-            gameOverSound = contentManager.Load<SoundEffect>("GameOverSound");
-            jumpSound = contentManager.Load<SoundEffect>("JumpSound");
+            pickSound = ContentManager.Load<SoundEffect>("PickSound");
+            hitSound = ContentManager.Load<SoundEffect>("HitSound");
+            drinkSound = ContentManager.Load<SoundEffect>("DrinkSound");
+            gameOverSound = ContentManager.Load<SoundEffect>("GameOverSound");
+            jumpSound = ContentManager.Load<SoundEffect>("JumpSound");
             gameSounds = new GameSounds(pickSound, hitSound, drinkSound, jumpSound, gameOverSound);
 
 
             // Clock
 
-            defaultFont = contentManager.Load<SpriteFont>("DefaultFont");
+            defaultFont = ContentManager.Load<SpriteFont>("DefaultFont");
             clock = new Clock(defaultFont);
 
             // Camera
@@ -106,16 +106,16 @@ namespace Robber_2D_Windows
 
             // Inventory Helper 
 
-            keyTexture = contentManager.Load<Texture2D>("Pickable1");
-            coinTexture = contentManager.Load<Texture2D>("Pickable2");
-            potionTexture = contentManager.Load<Texture2D>("Pickable3");
-            diamondTexture = contentManager.Load<Texture2D>("Diamond");
+            keyTexture = ContentManager.Load<Texture2D>("Pickable1");
+            coinTexture = ContentManager.Load<Texture2D>("Pickable2");
+            potionTexture = ContentManager.Load<Texture2D>("Pickable3");
+            diamondTexture = ContentManager.Load<Texture2D>("Diamond");
             allTextures = new List<Texture2D>() { keyTexture, coinTexture, potionTexture, diamondTexture };
             inventroyHelper = new InventoryBar(player.Inventory, allTextures, defaultFont);
 
             // Healthbar
 
-            healtTexture = contentManager.Load<Texture2D>("Health");
+            healtTexture = ContentManager.Load<Texture2D>("Health");
             healtbar = new HealthBar(healtTexture);
 
             #region World1
@@ -137,7 +137,7 @@ namespace Robber_2D_Windows
             List<int> MoneySafeIdentiefiers1 = new List<int>() { 10006, };
 
             World world1 = new World(ObstaclesWorld1, PickablesWorld1, MoneySafeIdentiefiers1);
-            world1.Create(contentManager);
+            world1.Create(ContentManager);
             world1.NextWorld = AllWorlds.Count + 1;
             AllWorlds.Add(world1);
 
@@ -164,7 +164,7 @@ namespace Robber_2D_Windows
             List<int> MoneySafeIdentiefiers2 = new List<int>() { 10006, 10007 };
 
             World world2 = new World(ObstaclesWorld2, PickablesWorld2, MoneySafeIdentiefiers2);
-            world2.Create(contentManager);
+            world2.Create(ContentManager);
             world2.NextWorld = AllWorlds.Count + 1;
             AllWorlds.Add(world2);
 
@@ -197,7 +197,7 @@ namespace Robber_2D_Windows
             List<int> MoneySafeIdentiefiers3 = new List<int>() { 10009 };
 
             World world3 = new SpecialWorld(ObstaclesWorld3, PickablesWorld3, MoneySafeIdentiefiers3, EnemiesWorld3);
-            world3.Create(contentManager);
+            world3.Create(ContentManager);
             world3.NextWorld = GAMEISDONECODE;
             AllWorlds.Add(world3);
 
@@ -216,12 +216,12 @@ namespace Robber_2D_Windows
 
             if (PlayerWon)
             {
-                GameStateManager.Instance.SetCurrentState(new WinScreen(contentManager, graphicsDevice, game));
+                GameStateManager.Instance.SetCurrentState(new WinScreen(ContentManager, GraphicsDevice, Game));
             }
 
             if (player.IsDead)
             {
-                GameStateManager.Instance.SetCurrentState(new EndScreen(contentManager, graphicsDevice, game));
+                GameStateManager.Instance.SetCurrentState(new EndScreen(ContentManager, GraphicsDevice, Game));
             }
 
             player.Update(gameTime);
@@ -246,7 +246,7 @@ namespace Robber_2D_Windows
             if (AllWorlds[CurrentWorld] is SpecialWorld)
             {
                 SpecialWorld hardLevel = AllWorlds[CurrentWorld] as SpecialWorld;
-                hardLevel.CreateBullets(contentManager);
+                hardLevel.CreateBullets(ContentManager);
             }
 
         }

@@ -6,15 +6,15 @@ namespace Robber_2D_Windows
 {
     public abstract class GameState : IGameState
     {
-        public ContentManager contentManager;
-        public GraphicsDevice graphicsDevice;
-        public Robber2D game;
+        public ContentManager ContentManager;
+        public GraphicsDevice GraphicsDevice;
+        public Robber2D Game;
 
         public GameState(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game)
         {
-            this.graphicsDevice = graphicsDevice;
-            this.contentManager = contentManager;
-            this.game = game;
+            this.GraphicsDevice = graphicsDevice;
+            this.ContentManager = contentManager;
+            this.Game = game;
         }
 
         public abstract void Initialize();
@@ -22,6 +22,5 @@ namespace Robber_2D_Windows
         public abstract void UnloadContent();
         public abstract void Update(GameTime gameTime);
         public abstract void Draw(SpriteBatch spriteBatch);
-
     }
 }

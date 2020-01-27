@@ -29,13 +29,13 @@ namespace Robber_2D_Windows
         public override void LoadContent()
         {
             // Game Over Image
-            GameOverImage = contentManager.Load<Texture2D>("YouWin");
+            GameOverImage = ContentManager.Load<Texture2D>("YouWin");
             leftMarginGameOver = (Robber2D.ScreenWidth - GameOverImage.Width) / 2;
 
             // Buttons
             AllButtons = new List<Button>();
-            buttonBorder = contentManager.Load<Texture2D>("ButtonBorder");
-            buttonFont = contentManager.Load<SpriteFont>("ButtonFont");
+            buttonBorder = ContentManager.Load<Texture2D>("ButtonBorder");
+            buttonFont = ContentManager.Load<SpriteFont>("ButtonFont");
 
             int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
 
@@ -81,7 +81,7 @@ namespace Robber_2D_Windows
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            graphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
 
@@ -97,12 +97,12 @@ namespace Robber_2D_Windows
 
         private void StartNewGame(object sender, EventArgs e)
         {
-            GameStateManager.Instance.SetCurrentState(new InGame(contentManager, graphicsDevice, game));
+            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game));
         }
 
         private void ReturnToMenu(object sender, EventArgs e)
         {
-            GameStateManager.Instance.SetCurrentState(new StartScreen(contentManager, graphicsDevice, game));
+            GameStateManager.Instance.SetCurrentState(new StartScreen(ContentManager, GraphicsDevice, Game));
         }
     }
 }
