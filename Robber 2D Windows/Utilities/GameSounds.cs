@@ -4,11 +4,7 @@ namespace Robber_2D_Windows
 {
     class GameSounds
     {
-        static public SoundEffect PickSound;
-        static public SoundEffect HitSound;
-        static public SoundEffect DrinkSound;
-        static public SoundEffect JumpSound;
-        static public SoundEffect GameOverSound;
+        static public SoundEffect PickSound, HitSound, DrinkSound, JumpSound, GameOverSound;
 
         public GameSounds(SoundEffect pickupSound, SoundEffect hitSound, SoundEffect drinkSound, SoundEffect jumpSound, SoundEffect gameOverSound)
         {
