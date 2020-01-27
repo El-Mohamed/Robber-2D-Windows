@@ -4,9 +4,9 @@ namespace Robber_2D_Windows
 {
     class Camera2D
     {
-        static public Matrix Transform;
+        public Matrix Transform;
 
-        static public void Follow(Player player)
+        public void Follow(Player player)
         {
             var position = Matrix.CreateTranslation(
                -player.SpriteSheet.Position.X - (player.CollisionRectangle.Height / 2),

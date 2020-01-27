@@ -18,6 +18,7 @@ namespace Robber_2D_Windows
         InventoryBar inventroyHelper;
         HealthBar healtbar;
         Clock clock;
+        Camera2D camera;
 
         GameSounds gameSounds;
         SpriteFont defaultFont;
@@ -38,7 +39,7 @@ namespace Robber_2D_Windows
         {
             graphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin(transformMatrix: Camera2D.Transform);
+            spriteBatch.Begin(transformMatrix: camera.Transform);
 
             // Levels
             AllWorlds[CurrentWorld].Draw(spriteBatch);
@@ -99,6 +100,9 @@ namespace Robber_2D_Windows
 
             defaultFont = contentManager.Load<SpriteFont>("DefaultFont");
             clock = new Clock(defaultFont);
+
+            // Camera
+            camera = new Camera2D();
 
             // Inventory Helper 
 
@@ -234,7 +238,7 @@ namespace Robber_2D_Windows
             inventroyHelper.UpdatePosition(ScreenPositionHelper.GetLeftScreenCorner(player), player.SpriteSheet.Position); 
 
             // Camera
-            Camera2D.Follow(player);
+            camera.Follow(player);
 
             // Levels
             AllWorlds[CurrentWorld].Update(gameTime);
