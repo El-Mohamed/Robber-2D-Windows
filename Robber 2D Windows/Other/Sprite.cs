@@ -16,6 +16,13 @@ namespace Robber_2D_Windows
             Position = position;
         }
 
+        public Sprite(Texture2D texture, Vector2 position)
+        {
+            NumberOfSprites = 1;
+            Texture1 = texture;
+            Position = position;
+        }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture1, Position, Color.White);

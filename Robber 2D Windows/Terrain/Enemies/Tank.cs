@@ -20,7 +20,7 @@ namespace Robber_2D_Windows
             Texture2D bulletTexture = contentManager.Load<Texture2D>("Bullet");
             Vector2 bulletPosition = new Vector2(tankPosition.X, tankPosition.Y + Offset);
             Rectangle bulletCollisoionRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
-            Sprite sprite = new Sprite(bulletTexture, 1, bulletPosition);
+            Sprite sprite = new Sprite(bulletTexture, bulletPosition);
             ShootedBullets.Add(new Bullet(sprite, bulletCollisoionRectangle));
         }
 
