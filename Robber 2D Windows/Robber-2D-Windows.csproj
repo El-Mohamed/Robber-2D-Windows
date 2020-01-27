@@ -54,20 +54,20 @@
     <Compile Include="Interface\Button.cs" />
     <Compile Include="GameStates\Menu\EndScreen.cs" />
     <Compile Include="GameStates\IGameState.cs" />
-    <Compile Include="GameStates\Levels\InGame.cs" />
+    <Compile Include="GameStates\Levels\StartLevels.cs" />
     <Compile Include="GameStates\GameState.cs" />
     <Compile Include="GameStates\Menu\StartScreen.cs" />
     <Compile Include="GameStates\GameStateManager.cs" />
-    <Compile Include="Utilities\Clock.cs" />
-    <Compile Include="Utilities\GameSounds.cs" />
+    <Compile Include="Other\Clock.cs" />
+    <Compile Include="Other\GameSounds.cs" />
     <Compile Include="Player\HealthBar.cs" />
     <Compile Include="Player\InventoryBar.cs" />
     <Compile Include="Terrain\Enemies\Bullet.cs" />
-    <Compile Include="Other\IMover.cs" />
-    <Compile Include="Other\Sprite.cs" />
+    <Compile Include="Helpers\IMover.cs" />
+    <Compile Include="Helpers\Sprite.cs" />
     <Compile Include="World\World.cs" />
     <Compile Include="World\SpecialWorld.cs" />
-    <Compile Include="Utilities\Camera2D.cs" />
+    <Compile Include="Other\Camera2D.cs" />
     <Compile Include="Player\Inventory.cs" />
     <Compile Include="Terrain\Enemies\Tank.cs" />
     <Compile Include="Terrain\Pickables\Coin.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="Terrain\Obstacles\Platform.cs" />
     <Compile Include="Terrain\Pickables\MoneySafe.cs" />
     <Compile Include="Terrain\Pickables\Potion.cs" />
-    <Compile Include="Utilities\ScreenPosition.cs" />
+    <Compile Include="Helpers\ScreenPosition.cs" />
     <Compile Include="Factory\WorldFactory.cs" />
   </ItemGroup>
   <ItemGroup>
