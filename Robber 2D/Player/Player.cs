@@ -50,11 +50,20 @@ namespace Robber_2D
             double OffSet = 0;
             int IndividualSpirteLength = Spirte.Texture1.Width / Spirte.NumberOfSprites;
 
-            for (int i = 0; i < Spirte.NumberOfSprites - 1; i++)
+            if (Spirte.NumberOfSprites > 1)
             {
-                OffSet = ((Spirte.Texture1.Width / Spirte.NumberOfSprites) * i);
+                for (int i = 0; i < Spirte.NumberOfSprites - 1; i++)
+                {
+                    OffSet = ((Spirte.Texture1.Width / Spirte.NumberOfSprites) * i);
+                    Animation.AddFrame(Factory.CreateRectangle((int)OffSet, 0, IndividualSpirteLength, Spirte.Texture1.Height));
+                }
+            }
+            else
+            {
+                OffSet = ((Spirte.Texture1.Width / Spirte.NumberOfSprites) * 0);
                 Animation.AddFrame(Factory.CreateRectangle((int)OffSet, 0, IndividualSpirteLength, Spirte.Texture1.Height));
             }
+
         }
 
         public void Update(GameTime gameTime)
@@ -67,17 +76,20 @@ namespace Robber_2D
 
         private void UpdateAnimation(GameTime gameTime)
         {
-            if (!IsMoving && !CanMoveDown)
+            if (Spirte.NumberOfSprites > 1)
             {
-                Animation.Freeze(0);
-            }
-            else if (IsMoving && !CanMoveDown)
-            {
-                Animation.Update(gameTime);
-            }
-            else
-            {
-                Animation.Freeze(4);
+                if (!IsMoving && !CanMoveDown)
+                {
+                    Animation.Freeze(0);
+                }
+                else if (IsMoving && !CanMoveDown)
+                {
+                    Animation.Update(gameTime);
+                }
+                else
+                {
+                    Animation.Freeze(4);
+                }
             }
         }
 

@@ -10,6 +10,7 @@ namespace Robber_2D
     {
         #region Fields
         public static Player player;
+        bool playerIsTank;
 
         public static int CurrentWorld;
         List<World> AllWorlds;
@@ -30,9 +31,9 @@ namespace Robber_2D
 
         #endregion
 
-        public InGame(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game) : base(contentManager, graphicsDevice, game)
+        public InGame(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game, bool playerIsTank) : base(contentManager, graphicsDevice, game)
         {
-
+            this.playerIsTank = playerIsTank;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -67,14 +68,26 @@ namespace Robber_2D
         public override void LoadContent()
         {
             // Player 1
+            Texture2D playerTexture;
+            int spriteSheetLength;
 
-            int spriteSheetLength = 6;
-            Texture2D playerTexture = ContentManager.Load<Texture2D>("PlayerSpriteSheet");
+            if (playerIsTank)
+            {
+                spriteSheetLength = 6;
+                playerTexture = ContentManager.Load<Texture2D>("PlayerSpriteSheet");
+            }
+            else
+            {
+                spriteSheetLength = 1;
+                playerTexture = ContentManager.Load<Texture2D>("PlayerTank");
+            }
+
+
             Controller playerController = new Controller();
             Vector2 playerPosition = new Vector2();
             Vector2 playerSpeed = new Vector2(7, 0);
             Animation playerAnimation = new Animation();
-            Sprite playerSprite = new Sprite(playerTexture, 6, playerPosition);
+            Sprite playerSprite = new Sprite(playerTexture, spriteSheetLength, playerPosition);
             Rectangle playerCollisonRectangle = new Rectangle((int)playerPosition.X, (int)playerPosition.Y, playerTexture.Width / spriteSheetLength, playerTexture.Height);
             Inventory playerInventory = new Inventory();
             player = new Player(playerSprite, playerController, playerAnimation, playerCollisonRectangle, playerSpeed, playerInventory);
@@ -86,7 +99,7 @@ namespace Robber_2D
             CurrentWorld = 0;
             collisionManager = new CollisionManager();
             PlayerWon = false;
-
+            Factory.contentManager = ContentManager;
             // SoundEffects
             pickSound = ContentManager.Load<SoundEffect>("PickSound");
             hitSound = ContentManager.Load<SoundEffect>("HitSound");
@@ -246,7 +259,7 @@ namespace Robber_2D
             if (AllWorlds[CurrentWorld] is SpecialWorld)
             {
                 SpecialWorld hardLevel = AllWorlds[CurrentWorld] as SpecialWorld;
-                hardLevel.CreateBullets(ContentManager);
+                hardLevel.CreateBullets();
             }
 
         }

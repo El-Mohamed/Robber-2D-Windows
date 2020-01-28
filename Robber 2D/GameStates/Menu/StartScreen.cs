@@ -11,7 +11,7 @@ namespace Robber_2D
     {
         public List<Button> AllButtons;
         SpriteFont buttonFont;
-        Button startButton, androidVersionButton, exitButton;
+        Button startHeroMode, startTankMode, androidVersionButton, exitButton;
         Texture2D buttonBorder, logo;
         int leftMarginLogo;
 
@@ -36,29 +36,38 @@ namespace Robber_2D
             int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
             leftMarginLogo = (Robber2D.ScreenWidth - logo.Width) / 2;
 
-            startButton = new Button(buttonBorder, buttonFont)
+            startHeroMode = new Button(buttonBorder, buttonFont)
             {
-                Text = "START GAME",
+                Text = "HERO MODE",
                 Position = new Vector2(leftMarginButton, 550)
             };
+
+            startTankMode = new Button(buttonBorder, buttonFont)
+            {
+                Text = "TANK MODE",
+                Position = new Vector2(leftMarginButton, 650)
+            };
+
             androidVersionButton = new Button(buttonBorder, buttonFont)
             {
                 Text = "GOOGLE PLAY",
-                Position = new Vector2(leftMarginButton, 650)
+                Position = new Vector2(leftMarginButton, 750)
             };
             exitButton = new Button(buttonBorder, buttonFont)
             {
                 Text = "EXIT",
-                Position = new Vector2(leftMarginButton, 750)
+                Position = new Vector2(leftMarginButton, 850)
             };
 
-            AllButtons.Add(startButton);
+            AllButtons.Add(startHeroMode);
+            AllButtons.Add(startTankMode);
             AllButtons.Add(androidVersionButton);
             AllButtons.Add(exitButton);
 
             exitButton.Click += CloseGame;
             androidVersionButton.Click += OpenGooglePlay;
-            startButton.Click += StartGame;
+            startHeroMode.Click += StartGameAsTank;
+            startTankMode.Click += StartGameAsHero;
         }
 
         public override void UnloadContent()
@@ -87,9 +96,14 @@ namespace Robber_2D
             Game.Exit();
         }
 
-        private void StartGame(object sender, EventArgs e)
+        private void StartGameAsTank(object sender, EventArgs e)
         {
-            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game));
+            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game, true));
+        }
+
+        private void StartGameAsHero(object sender, EventArgs e)
+        {
+            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game, false));
         }
 
         private void OpenGooglePlay(object sender, EventArgs e)

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
@@ -14,11 +13,11 @@ namespace Robber_2D
             ShootedBullets = new List<Bullet>();
         }
 
-        public void Shoot(ContentManager contentManager, Vector2 tankPosition)
+        public void Shoot()
         {
             const int Offset = 10; // Bullets need to shooted out of the gun
-            Texture2D bulletTexture = contentManager.Load<Texture2D>("Bullet");
-            Vector2 bulletPosition = Factory.CreateVector(tankPosition.X, tankPosition.Y + Offset);
+            Texture2D bulletTexture = Factory.CreateTexture("Bullet");
+            Vector2 bulletPosition = Factory.CreateVector(SpriteImage.Position.X, SpriteImage.Position.Y + Offset);
             Rectangle bulletCollisoionRectangle = Factory.CreateRectangle((int)bulletPosition.X, (int)bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
             Sprite sprite = Factory.CreateSprite(bulletTexture, 1, bulletPosition);
             ShootedBullets.Add(new Bullet(sprite, bulletCollisoionRectangle));

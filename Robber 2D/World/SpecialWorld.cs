@@ -83,13 +83,13 @@ namespace Robber_2D
             base.Create(contentManager);
         }
 
-        public void CreateBullets(ContentManager contentManager)
+        public void CreateBullets()
         {
             if (LastTimeShooted >= 300)
             {
                 foreach (Tank tank in AllTanks)
                 {
-                    tank.Shoot(contentManager, tank.SpriteImage.Position);
+                    tank.Shoot();
                 }
 
                 LastTimeShooted = 0;

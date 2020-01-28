@@ -10,7 +10,7 @@ namespace Robber_2D
     {
         public List<Button> AllButtons;
         SpriteFont buttonFont;
-        Button newGameButton, returnButton;
+        Button returnButton;
         Texture2D buttonBorder, winImage;
         int leftMarginGameOver;
 
@@ -37,13 +37,6 @@ namespace Robber_2D
 
             int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
 
-            newGameButton = new Button(buttonBorder, buttonFont)
-            {
-                Text = "NEW GAME",
-                Position = new Vector2(leftMarginButton, 650)
-
-            };
-
             returnButton = new Button(buttonBorder, buttonFont)
             {
                 Text = "RETURN",
@@ -51,9 +44,7 @@ namespace Robber_2D
             };
 
 
-            AllButtons.Add(newGameButton);
             AllButtons.Add(returnButton);
-            newGameButton.Click += StartNewGame;
             returnButton.Click += ReturnToMenu;
 
         }
@@ -84,11 +75,6 @@ namespace Robber_2D
         private void DrawWinImage(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(winImage, new Vector2(leftMarginGameOver, 200), null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
-        }
-
-        private void StartNewGame(object sender, EventArgs e)
-        {
-            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game));
         }
 
         private void ReturnToMenu(object sender, EventArgs e)

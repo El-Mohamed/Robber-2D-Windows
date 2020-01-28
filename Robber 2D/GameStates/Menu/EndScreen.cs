@@ -43,7 +43,7 @@ namespace Robber_2D
 
             newGameButton = new Button(buttonBorder, buttonFont)
             {
-                Text = "NEW GAME",
+                Text = "RETURN",
                 Position = new Vector2(leftMarginButton, 650)
 
             };
@@ -59,7 +59,7 @@ namespace Robber_2D
             AllButtons.Add(newGameButton);
 
             closeGameButton.Click += CloseGame;
-            newGameButton.Click += StartNewGame;
+            newGameButton.Click += ReturnToMenu;
 
             GameSounds.PlayGameOverSound();
 
@@ -107,9 +107,9 @@ namespace Robber_2D
             spriteBatch.DrawString(buttonFont, endScore, new Vector2(x, y), Color.Red);
         }
 
-        private void StartNewGame(object sender, EventArgs e)
+        private void ReturnToMenu(object sender, EventArgs e)
         {
-            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game));
+            GameStateManager.Instance.SetCurrentState(new StartScreen(ContentManager, GraphicsDevice, Game));
         }
 
         private void CloseGame(object sender, EventArgs e)
