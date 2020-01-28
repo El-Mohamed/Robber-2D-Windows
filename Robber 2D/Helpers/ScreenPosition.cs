@@ -4,11 +4,11 @@ namespace Robber_2D
 {
     static class ScreenPosition
     {
-        static int marginTop = 100, marginLeft = 100, marginRight = 10;
+        static int marginTop = 30, marginLeft = 30, marginRight = 70;
 
         public static Vector2 Top(Player player)
         {
-            const int OffSet = 15;
+            const int OffSet =- 40;
             float xPos = player.Sprite.Position.X + OffSet;
             float yPos = player.Sprite.Position.Y - (Robber2D.ScreenHeight / 2) + marginTop;
             return Factory.CreateVector(xPos, yPos);

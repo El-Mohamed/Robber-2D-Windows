@@ -9,8 +9,8 @@ namespace Robber_2D
         public void Follow(Player player)
         {
             var position = Matrix.CreateTranslation(
-               -player.Sprite.Position.X - (player.CollisionRectangle.Height / 2),
-               -player.Sprite.Position.Y - (player.CollisionRectangle.Height / 2),
+               -player.Sprite.Position.X ,
+               -player.Sprite.Position.Y ,
                0);
 
             var offset = Matrix.CreateTranslation(
