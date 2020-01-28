@@ -1,5 +1,6 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Robber_2D
 {
@@ -9,7 +10,7 @@ namespace Robber_2D
         public Vector2 Speed;
         Direction direction;
 
-        public Sprite Spirte;
+        public Sprite Sprite;
         Animation Animation;
         Controller Controller;
         public Inventory Inventory;
@@ -18,6 +19,7 @@ namespace Robber_2D
         int AirTime = 0;
         public bool IsMoving, IsJumping, IsFallingDown;
         public bool CanMoveUp, CanMoveDown, CanMoveLeft, CanMoveRight;
+        List<Bullet> allShootedBullets;
 
         public bool IsDead
         {
@@ -36,32 +38,33 @@ namespace Robber_2D
 
         public Player(Sprite sprite, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed, Inventory inventory)
         {
-            Spirte = sprite;
+            Sprite = sprite;
             Controller = controller;
             Animation = animation;
             CollisionRectangle = collisionRectangle;
             Speed = speed;
             Inventory = inventory;
             CreateAnimationFrames();
+            allShootedBullets = new List<Bullet>();
         }
 
         private void CreateAnimationFrames()
         {
             double OffSet = 0;
-            int IndividualSpirteLength = Spirte.Texture1.Width / Spirte.NumberOfSprites;
+            int IndividualSpirteLength = Sprite.Texture1.Width / Sprite.NumberOfSprites;
 
-            if (Spirte.NumberOfSprites > 1)
+            if (Sprite.NumberOfSprites > 1)
             {
-                for (int i = 0; i < Spirte.NumberOfSprites - 1; i++)
+                for (int i = 0; i < Sprite.NumberOfSprites - 1; i++)
                 {
-                    OffSet = ((Spirte.Texture1.Width / Spirte.NumberOfSprites) * i);
-                    Animation.AddFrame(Factory.CreateRectangle((int)OffSet, 0, IndividualSpirteLength, Spirte.Texture1.Height));
+                    OffSet = ((Sprite.Texture1.Width / Sprite.NumberOfSprites) * i);
+                    Animation.AddFrame(Factory.CreateRectangle((int)OffSet, 0, IndividualSpirteLength, Sprite.Texture1.Height));
                 }
             }
             else
             {
-                OffSet = ((Spirte.Texture1.Width / Spirte.NumberOfSprites) * 0);
-                Animation.AddFrame(Factory.CreateRectangle((int)OffSet, 0, IndividualSpirteLength, Spirte.Texture1.Height));
+                OffSet = ((Sprite.Texture1.Width / Sprite.NumberOfSprites) * 0);
+                Animation.AddFrame(Factory.CreateRectangle((int)OffSet, 0, IndividualSpirteLength, Sprite.Texture1.Height));
             }
 
         }
@@ -72,11 +75,12 @@ namespace Robber_2D
             UpdateAnimation(gameTime);
             UpdateMovement(gameTime);
             UpdateCollisionRectangle();
+            UpdateBullets();
         }
 
         private void UpdateAnimation(GameTime gameTime)
         {
-            if (Spirte.NumberOfSprites > 1)
+            if (Sprite.NumberOfSprites > 1)
             {
                 if (!IsMoving && !CanMoveDown)
                 {
@@ -123,11 +127,16 @@ namespace Robber_2D
             {
                 IsJumping = true;
             }
+
+            if(Controller.S)
+            {
+                Shoot();
+            }
         }
 
         private void UpdateCollisionRectangle()
         {
-            CollisionRectangle = Factory.CreateRectangle((int)Spirte.Position.X, (int)Spirte.Position.Y, Spirte.Texture1.Width / Spirte.NumberOfSprites, Spirte.Texture1.Height);
+            CollisionRectangle = Factory.CreateRectangle((int)Sprite.Position.X, (int)Sprite.Position.Y, Sprite.Texture1.Width / Sprite.NumberOfSprites, Sprite.Texture1.Height);
         }
 
         public void UpdateHealth(Bullet bullet)
@@ -140,12 +149,29 @@ namespace Robber_2D
         {
             if (direction == Direction.ToLeft)
             {
-                spriteBatch.Draw(Spirte.Texture1, Spirte.Position, Animation.CurrentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
+                spriteBatch.Draw(Sprite.Texture1, Sprite.Position, Animation.CurrentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
             }
 
             if (direction == Direction.ToRight)
             {
-                spriteBatch.Draw(Spirte.Texture1, Spirte.Position, Animation.CurrentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(Sprite.Texture1, Sprite.Position, Animation.CurrentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+            }
+            DrawBullets(spriteBatch);
+        }
+
+        private void DrawBullets(SpriteBatch spriteBatch)
+        {
+            foreach (Bullet bullet in allShootedBullets)
+            {
+                bullet.SpriteImage.Draw(spriteBatch);
+            }
+        }
+
+        private void UpdateBullets()
+        {
+            foreach (Bullet bullet in allShootedBullets)
+            {
+                bullet.Move();
             }
         }
 
@@ -157,11 +183,11 @@ namespace Robber_2D
 
                 if (IsFallingDown && !IsJumping)
                 {
-                    Spirte.Position.X += (Speed.X / 2);
+                    Sprite.Position.X += (Speed.X / 2);
                 }
                 else
                 {
-                    Spirte.Position.X += Speed.X;
+                    Sprite.Position.X += Speed.X;
                 }
             }
 
@@ -176,11 +202,11 @@ namespace Robber_2D
 
                 if (IsFallingDown && !IsJumping)
                 {
-                    Spirte.Position.X -= (Speed.X / 2);
+                    Sprite.Position.X -= (Speed.X / 2);
                 }
                 else
                 {
-                    Spirte.Position.X -= Speed.X;
+                    Sprite.Position.X -= Speed.X;
                 }
             }
 
@@ -202,7 +228,7 @@ namespace Robber_2D
                     Speed.Y = newSpeedY;
                 }
 
-                Spirte.Position.Y += Speed.Y;
+                Sprite.Position.Y += Speed.Y;
             }
 
             if (!CanMoveDown)
@@ -228,7 +254,7 @@ namespace Robber_2D
 
                 if (CanMoveUp)
                 {
-                    Spirte.Position.Y -= Speed.Y;
+                    Sprite.Position.Y -= Speed.Y;
                 }
                 else
                 {
@@ -250,8 +276,8 @@ namespace Robber_2D
 
         public void Respawn()
         {
-            Spirte.Position.X = 0;
-            Spirte.Position.Y = -200;
+            Sprite.Position.X = 0;
+            Sprite.Position.Y = -200;
         }
 
         public void DrinkPotion()
@@ -262,6 +288,32 @@ namespace Robber_2D
                 Animation.IncreaseSpeed();
                 Inventory.Potion = null; // Remove Drinked Potion
                 GameSounds.PlayDrinkSound();
+            }
+        }
+
+        private void Shoot()
+        {
+            if(Sprite.NumberOfSprites == 1)
+            {
+                Texture2D bulletTexture = Factory.CreateTexture("Bullet");
+                const int yOffset = 10; // Bullets need to shooted out of the gun
+                int xOffset;
+
+                if (direction == Direction.ToLeft)
+                {
+                    xOffset = -bulletTexture.Width;
+                }
+                else
+                {
+                    xOffset = Sprite.Texture1.Width;
+                }
+
+                Vector2 bulletPosition = Factory.CreateVector(Sprite.Position.X + xOffset, Sprite.Position.Y + yOffset);
+                Rectangle bulletCollisoionRectangle = Factory.CreateRectangle((int)bulletPosition.X, (int)bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
+                Sprite sprite = Factory.CreateSprite(bulletTexture, 1, bulletPosition);
+                Bullet bullet = WorldFactory.CreateBullet(sprite, bulletCollisoionRectangle);
+                bullet.direction = direction;
+                allShootedBullets.Add(bullet);
             }
         }
     }

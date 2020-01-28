@@ -53,5 +53,10 @@ namespace Robber_2D
         {
             return new Tank(sprite, collisonRectangle);
         }
+
+        static public Bullet CreateBullet(Sprite sprite, Rectangle collisionRectangle)
+        {
+            return new Bullet(sprite, collisionRectangle);
+        }
     }
 }

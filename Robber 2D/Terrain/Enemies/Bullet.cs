@@ -6,6 +6,7 @@ namespace Robber_2D
     {
         Vector2 Speed;
         public int Damage;
+        public Direction direction;
 
         public Bullet(Sprite sprite, Rectangle collisionRectangle) : base(sprite, collisionRectangle)
         {
@@ -21,6 +22,19 @@ namespace Robber_2D
         public void MoveLeft()
         {
             SpriteImage.Position.X -= Speed.X;
+        }
+
+        public void Move()
+        {
+            if (direction == Direction.ToLeft)
+            {
+                MoveLeft();
+            }
+
+            if (direction == Direction.ToRight)
+            {
+                MoveRight();
+            }
         }
 
         public void Update(GameTime gameTime)

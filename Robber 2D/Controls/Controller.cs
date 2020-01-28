@@ -4,7 +4,7 @@ namespace Robber_2D
 {
     class Controller
     {
-        public bool Up, Down, Left, Right, Space, D;
+        public bool Up, Down, Left, Right, Space, D, S;
 
         public void Update()
         {
@@ -62,6 +62,15 @@ namespace Robber_2D
             if (stateKey.IsKeyUp(Keys.Space))
             {
                 Space = false;
+            }
+
+            if (stateKey.IsKeyDown(Keys.S))
+            {
+                S = true;
+            }
+            if (stateKey.IsKeyUp(Keys.S))
+            {
+                S = false;
             }
         }
     }

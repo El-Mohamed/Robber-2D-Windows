@@ -20,7 +20,8 @@ namespace Robber_2D
             Vector2 bulletPosition = Factory.CreateVector(SpriteImage.Position.X, SpriteImage.Position.Y + Offset);
             Rectangle bulletCollisoionRectangle = Factory.CreateRectangle((int)bulletPosition.X, (int)bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
             Sprite sprite = Factory.CreateSprite(bulletTexture, 1, bulletPosition);
-            ShootedBullets.Add(new Bullet(sprite, bulletCollisoionRectangle));
+            Bullet bullet = WorldFactory.CreateBullet(sprite, CollisionRectangle);
+            ShootedBullets.Add(bullet);
         }
     }
 }
