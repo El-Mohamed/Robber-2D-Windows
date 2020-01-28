@@ -302,6 +302,8 @@ namespace Robber_2D
         {
             if(Sprite.NumberOfSprites == 1 && LastTimeShooted >= 250)
             {
+                GameSounds.PlayShootSound();
+
                 Texture2D bulletTexture = Factory.CreateTexture("Bullet");
                 const int yOffset = 10; // Bullets need to shooted out of the gun
                 int xOffset;

@@ -105,6 +105,12 @@
 /processorParam:TextureFormat=Color
 /build:Enemy1.png
 
+#begin ExplosionSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ExplosionSound.wav
+
 #begin GameOver.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -236,6 +242,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PlayerTank.png
+
+#begin ShootSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:ShootSound.wav
 
 #begin YouWin.png
 /importer:TextureImporter

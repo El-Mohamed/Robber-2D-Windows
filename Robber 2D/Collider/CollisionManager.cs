@@ -36,7 +36,7 @@ namespace Robber_2D
             for (int i = 0; i < player.ShootedBullets.Count; i++)
             {
                 Bullet bullet = player.ShootedBullets[i];
-           
+
                 for (int j = 0; j < specialWorld.AllTanks.Count; j++)
                 {
                     Tank tank = specialWorld.AllTanks[j];
@@ -48,6 +48,7 @@ namespace Robber_2D
 
                         if (tank.IsDestroyed)
                         {
+                            GameSounds.PlayExplosionSound();
                             specialWorld.AllTanks.RemoveAt(j);
                         }
                     }
