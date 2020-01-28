@@ -32,13 +32,7 @@ namespace Robber_2D
             }
         }
 
-        public long MapRange
-        {
-            get
-            {
-                return LevelHeight * 230;
-            }
-        }
+        public long MapRange => LevelHeight * 230;
 
         public World(byte[,] obstaclesArray, byte[,] pickablesArray, List<int> moneySafeIdentiefiers)
         {

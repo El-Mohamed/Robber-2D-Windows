@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 
 namespace Robber_2D
 {
@@ -70,7 +67,7 @@ namespace Robber_2D
         {
             UpdateButtons(gameTime);
         }
-      
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             GraphicsDevice.Clear(Color.Black);

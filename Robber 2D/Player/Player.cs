@@ -249,7 +249,7 @@ namespace Robber_2D
                 Speed.X += Inventory.Potion.SpeedAcceleration;
                 Animation.IncreaseSpeed();
                 Inventory.Potion = null; // Remove Drinked Potion
-                GameSounds.PlayDrinkSound();            
+                GameSounds.PlayDrinkSound();
             }
         }
     }

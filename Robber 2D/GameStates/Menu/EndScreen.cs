@@ -14,7 +14,7 @@ namespace Robber_2D
         Texture2D buttonBorder, GameOverImage;
         int leftMarginGameOver;
         string endScore;
-        
+
         public EndScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game) : base(contentManager, graphicsDevice, game)
         {
 

@@ -21,7 +21,7 @@ namespace Robber_2D
         private void CreateTanks(ContentManager contentManager)
         {
             Texture2D tempTexture = contentManager.Load<Texture2D>("Enemy1");
-  
+
             for (int x = 0; x < MapWidth; x++)
             {
                 for (int y = 0; y < LevelHeight; y++)
@@ -35,9 +35,9 @@ namespace Robber_2D
                     }
 
                     // Margin between pickable and platform 
-                    const int marginBottom = 1;                                     
+                    const int marginBottom = 1;
                     // Calculate margin to center Tank on the platform
-                    int maginLeft = (150 - tempTexture.Width) / 2; 
+                    int maginLeft = (150 - tempTexture.Width) / 2;
                     float xPos = (x * 150) + maginLeft;
                     float yPos = (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom;
                     Vector2 tempVector = Factory.CreateVector(xPos, yPos);

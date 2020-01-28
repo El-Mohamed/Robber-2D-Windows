@@ -20,7 +20,7 @@ namespace Robber_2D
 
         public void MoveLeft()
         {
-            SpriteImage.Position.X -= Speed.X;          
+            SpriteImage.Position.X -= Speed.X;
         }
 
         public void Update(GameTime gameTime)

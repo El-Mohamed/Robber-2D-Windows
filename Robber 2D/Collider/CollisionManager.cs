@@ -64,11 +64,11 @@ namespace Robber_2D
                 {
                     Door door = obstacle as Door;
                     if (player.CollisionRectangle.Intersects(door.CollisionRectangle))
-                    {                       
-                        if(currentLevel.NextWorld == InGame.GAMEISDONECODE)
+                    {
+                        if (currentLevel.NextWorld == InGame.GAMEISDONECODE)
                         {
-                            InGame.PlayerWon = true;                        
-                        }   
+                            InGame.PlayerWon = true;
+                        }
                         else
                         {
                             InGame.CurrentWorld = currentLevel.NextWorld;
