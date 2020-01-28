@@ -10,14 +10,15 @@ namespace Robber_2D
             CheckMapRange(player, currentLevel);
             if (currentLevel is SpecialWorld)
             {
-                SpecialWorld hardLevel = currentLevel as SpecialWorld;
-                CheckBulletsCollison(player, hardLevel);
+                SpecialWorld specialWorld = currentLevel as SpecialWorld;
+                CheckEnemiesBulletsCollision(player, specialWorld);
+                CheckPlayerBulletsCollison(player, specialWorld);
             }
         }
 
-        private void CheckBulletsCollison(Player player, SpecialWorld hardLevel)
+        private void CheckEnemiesBulletsCollision(Player player, SpecialWorld specialWorld)
         {
-            foreach (Tank tank in hardLevel.AllTanks)
+            foreach (Tank tank in specialWorld.AllTanks)
             {
                 for (int i = 0; i < tank.ShootedBullets.Count; i++)
                 {
@@ -25,6 +26,30 @@ namespace Robber_2D
                     {
                         player.UpdateHealth(tank.ShootedBullets[i]);
                         tank.ShootedBullets.RemoveAt(i);
+                    }
+                }
+            }
+        }
+
+        private void CheckPlayerBulletsCollison(Player player, SpecialWorld specialWorld)
+        {
+            for (int i = 0; i < player.ShootedBullets.Count; i++)
+            {
+                Bullet bullet = player.ShootedBullets[i];
+           
+                for (int j = 0; j < specialWorld.AllTanks.Count; j++)
+                {
+                    Tank tank = specialWorld.AllTanks[j];
+
+                    if (bullet.CollisionRectangle.Intersects(tank.CollisionRectangle))
+                    {
+                        tank.UpdateHealth(bullet);
+                        player.ShootedBullets.RemoveAt(i);
+
+                        if (tank.IsDestroyed)
+                        {
+                            specialWorld.AllTanks.RemoveAt(j);
+                        }
                     }
                 }
             }

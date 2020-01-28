@@ -27,7 +27,7 @@ namespace Robber_2D
 
         public override void LoadContent()
         {
-            if(gameResult == GameResult.Won)
+            if(gameResult == GameResult.Lost)
             {
                 GameSounds.PlayGameOverSound();
             }

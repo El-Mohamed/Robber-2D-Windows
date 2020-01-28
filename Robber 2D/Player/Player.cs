@@ -19,7 +19,7 @@ namespace Robber_2D
         int AirTime = 0;
         public bool IsMoving, IsJumping, IsFallingDown;
         public bool CanMoveUp, CanMoveDown, CanMoveLeft, CanMoveRight;
-        List<Bullet> allShootedBullets;
+        public List<Bullet> ShootedBullets;
         int LastTimeShooted;
 
         public bool IsDead
@@ -46,7 +46,7 @@ namespace Robber_2D
             Speed = speed;
             Inventory = inventory;
             CreateAnimationFrames();
-            allShootedBullets = new List<Bullet>();
+            ShootedBullets = new List<Bullet>();
         }
 
         private void CreateAnimationFrames()
@@ -168,7 +168,7 @@ namespace Robber_2D
 
         private void DrawBullets(SpriteBatch spriteBatch)
         {
-            foreach (Bullet bullet in allShootedBullets)
+            foreach (Bullet bullet in ShootedBullets)
             {
                 bullet.SpriteImage.Draw(spriteBatch);
             }
@@ -176,7 +176,7 @@ namespace Robber_2D
 
         private void UpdateBullets(GameTime gameTime)
         {
-            foreach (Bullet bullet in allShootedBullets)
+            foreach (Bullet bullet in ShootedBullets)
             {
                 bullet.Update(gameTime);
             }
@@ -320,7 +320,7 @@ namespace Robber_2D
                 Sprite sprite = Factory.CreateSprite(bulletTexture, 1, bulletPosition);
                 Bullet bullet = WorldFactory.CreateBullet(sprite, bulletCollisoionRectangle);
                 bullet.direction = direction;
-                allShootedBullets.Add(bullet);
+                ShootedBullets.Add(bullet);
                 LastTimeShooted = 0;
             }
         }
