@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Robber_2D
 {
@@ -27,11 +28,11 @@ namespace Robber_2D
 
         public override void LoadContent()
         {
-            if(gameResult == GameResult.Lost)
+            if (gameResult == GameResult.Lost)
             {
                 GameSounds.PlayGameOverSound();
             }
-            
+
             GetScore();
 
             // Game Over Image
@@ -55,7 +56,7 @@ namespace Robber_2D
 
             // Create Buttons
 
-            List<String> buttonTitles = new List<string>() { "RETURN", "CLOSE GAME" };
+            List<String> buttonTitles = new List<string>() { "SAVE SCORE", "BACK", "EXIT" };
             int yPos = 650;
 
             for (int i = 0; i < buttonTitles.Count; i++)
@@ -70,8 +71,9 @@ namespace Robber_2D
                 yPos += 100;
             }
 
-            AllButtons[0].Click += ReturnToMenu;
-            AllButtons[1].Click += CloseGame;
+            AllButtons[0].Click += SaveScore;
+            AllButtons[1].Click += ReturnToMenu;
+            AllButtons[2].Click += CloseGame;      
         }
 
         public override void UnloadContent()
@@ -124,6 +126,22 @@ namespace Robber_2D
         private void CloseGame(object sender, EventArgs e)
         {
             Game.Exit();
+        }
+
+        private void SaveScore(object sender, EventArgs e)
+        {
+            DateTime currentTime = DateTime.Now;
+            string fileName = "Score " + currentTime.ToString("MM-dd-yyyy_HH-mm-ss");
+
+            string path = $@"c:\temp\{fileName}.txt";
+            if (!File.Exists(path))
+            {
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine("Robber 2D Score:");
+                    sw.WriteLine(endScore);
+                }
+            }
         }
 
         public void DrawButtons(SpriteBatch spriteBatch)
