@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Robber_2D
 {
@@ -12,6 +13,7 @@ namespace Robber_2D
         {
             Speed = Factory.CreateVector(15, 0);
             Damage = 10;
+            direction = Direction.ToLeft;
         }
 
         public void MoveRight()
@@ -24,7 +26,7 @@ namespace Robber_2D
             SpriteImage.Position.X -= Speed.X;
         }
 
-        public void Move()
+        private void UpdateMovement()
         {
             if (direction == Direction.ToLeft)
             {
@@ -39,8 +41,14 @@ namespace Robber_2D
 
         public void Update(GameTime gameTime)
         {
-            MoveLeft();
+            UpdateCollisionRectangle();
+            UpdateMovement();
+        }
+
+        private void UpdateCollisionRectangle()
+        {
             CollisionRectangle = Factory.CreateRectangle((int)SpriteImage.Position.X, (int)SpriteImage.Position.Y, SpriteImage.Texture1.Width, SpriteImage.Texture1.Height);
         }
+
     }
 }

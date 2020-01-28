@@ -75,7 +75,7 @@ namespace Robber_2D
             UpdateAnimation(gameTime);
             UpdateMovement(gameTime);
             UpdateCollisionRectangle();
-            UpdateBullets();
+            UpdateBullets(gameTime);
         }
 
         private void UpdateAnimation(GameTime gameTime)
@@ -167,11 +167,11 @@ namespace Robber_2D
             }
         }
 
-        private void UpdateBullets()
+        private void UpdateBullets(GameTime gameTime)
         {
             foreach (Bullet bullet in allShootedBullets)
             {
-                bullet.Move();
+                bullet.Update(gameTime);
             }
         }
 

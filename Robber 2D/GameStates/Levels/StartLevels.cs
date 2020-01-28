@@ -10,7 +10,7 @@ namespace Robber_2D
     {
         #region Fields
         public static Player player;
-        bool playerIsTank;
+        GameMode gameMode;
 
         public static int CurrentWorld;
         List<World> AllWorlds;
@@ -31,9 +31,9 @@ namespace Robber_2D
 
         #endregion
 
-        public InGame(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game, bool playerIsTank) : base(contentManager, graphicsDevice, game)
+        public InGame(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game, GameMode gameMode) : base(contentManager, graphicsDevice, game)
         {
-            this.playerIsTank = playerIsTank;
+            this.gameMode = gameMode;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -71,7 +71,7 @@ namespace Robber_2D
             Texture2D playerTexture;
             int spriteSheetLength;
 
-            if (playerIsTank)
+            if (gameMode == GameMode.Hero)
             {
                 spriteSheetLength = 6;
                 playerTexture = ContentManager.Load<Texture2D>("PlayerSpriteSheet");

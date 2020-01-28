@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Robber_2D
 {
     enum Direction { ToLeft, ToRight }
+    enum GameMode { Hero, Tank }
 
     public class Robber2D : Game
     {
