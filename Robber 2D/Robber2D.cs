@@ -6,6 +6,7 @@ namespace Robber_2D
 {
     enum Direction { ToLeft, ToRight }
     enum GameMode { Hero, Tank }
+    enum GameResult { Won, Lost}
 
     public class Robber2D : Game
     {

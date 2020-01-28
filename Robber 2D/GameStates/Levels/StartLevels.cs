@@ -229,12 +229,12 @@ namespace Robber_2D
 
             if (PlayerWon)
             {
-                GameStateManager.Instance.SetCurrentState(new WinScreen(ContentManager, GraphicsDevice, Game));
+                GameStateManager.Instance.SetCurrentState(new EndScreen(ContentManager, GraphicsDevice, Game, GameResult.Won));
             }
 
             if (player.IsDead)
             {
-                GameStateManager.Instance.SetCurrentState(new EndScreen(ContentManager, GraphicsDevice, Game));
+                GameStateManager.Instance.SetCurrentState(new EndScreen(ContentManager, GraphicsDevice, Game, GameResult.Lost));
             }
 
             player.Update(gameTime);

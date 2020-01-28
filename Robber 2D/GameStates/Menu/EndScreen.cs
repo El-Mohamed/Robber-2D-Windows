@@ -10,14 +10,14 @@ namespace Robber_2D
     {
         public List<Button> AllButtons;
         SpriteFont buttonFont;
-        Button newGameButton, closeGameButton;
-        Texture2D buttonBorder, GameOverImage;
+        Texture2D buttonBorder, resultImage;
         int leftMarginGameOver;
         string endScore;
+        GameResult gameResult;
 
-        public EndScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game) : base(contentManager, graphicsDevice, game)
+        public EndScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game, GameResult gameResult) : base(contentManager, graphicsDevice, game)
         {
-
+            this.gameResult = gameResult;
         }
 
         public override void Initialize()
@@ -27,12 +27,24 @@ namespace Robber_2D
 
         public override void LoadContent()
         {
-
+            if(gameResult == GameResult.Won)
+            {
+                GameSounds.PlayGameOverSound();
+            }
+            
             GetScore();
 
             // Game Over Image
-            GameOverImage = ContentManager.Load<Texture2D>("GameOver");
-            leftMarginGameOver = (Robber2D.ScreenWidth - GameOverImage.Width) / 2;
+            if (gameResult == GameResult.Won)
+            {
+                resultImage = ContentManager.Load<Texture2D>("YouWin");
+            }
+            else
+            {
+                resultImage = ContentManager.Load<Texture2D>("GameOver");
+            }
+
+            leftMarginGameOver = (Robber2D.ScreenWidth - resultImage.Width) / 2;
 
             // Buttons
             AllButtons = new List<Button>();
@@ -41,28 +53,25 @@ namespace Robber_2D
 
             int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
 
-            newGameButton = new Button(buttonBorder, buttonFont)
+            // Create Buttons
+
+            List<String> buttonTitles = new List<string>() { "RETURN", "CLOSE GAME" };
+            int yPos = 650;
+
+            for (int i = 0; i < buttonTitles.Count; i++)
             {
-                Text = "RETURN",
-                Position = new Vector2(leftMarginButton, 650)
+                Button button = new Button(buttonBorder, buttonFont)
+                {
+                    Text = buttonTitles[i],
+                    Position = new Vector2(leftMarginButton, yPos)
+                };
 
-            };
+                AllButtons.Add(button);
+                yPos += 100;
+            }
 
-            closeGameButton = new Button(buttonBorder, buttonFont)
-            {
-                Text = "CLOSE GAME",
-                Position = new Vector2(leftMarginButton, 750)
-
-            };
-
-            AllButtons.Add(closeGameButton);
-            AllButtons.Add(newGameButton);
-
-            closeGameButton.Click += CloseGame;
-            newGameButton.Click += ReturnToMenu;
-
-            GameSounds.PlayGameOverSound();
-
+            AllButtons[0].Click += ReturnToMenu;
+            AllButtons[1].Click += CloseGame;
         }
 
         public override void UnloadContent()
@@ -97,7 +106,7 @@ namespace Robber_2D
 
         private void DrawGameOverImage(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(GameOverImage, new Vector2(leftMarginGameOver, 200), null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+            spriteBatch.Draw(resultImage, new Vector2(leftMarginGameOver, 200), null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
         }
 
         private void DrawScore(SpriteBatch spriteBatch)
