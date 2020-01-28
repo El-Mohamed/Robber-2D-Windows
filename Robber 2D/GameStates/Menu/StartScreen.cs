@@ -9,9 +9,8 @@ namespace Robber_2D
 {
     class StartScreen : GameState, IMenu
     {
-        public List<Button> AllButtons;
+        List<Button> AllButtons;
         SpriteFont buttonFont;
-        Button startHeroMode, startTankMode, androidVersionButton, exitButton;
         Texture2D buttonBorder, logo;
         int leftMarginLogo;
 
@@ -36,38 +35,26 @@ namespace Robber_2D
             int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
             leftMarginLogo = (Robber2D.ScreenWidth - logo.Width) / 2;
 
-            startHeroMode = new Button(buttonBorder, buttonFont)
-            {
-                Text = "HERO MODE",
-                Position = new Vector2(leftMarginButton, 550)
-            };
+            List<String> buttonTitles = new List<string>() { "HERO MODE", "TANK MODE", "PLAY STORE", "EXIT" };
+            int yPos = 550;
 
-            startTankMode = new Button(buttonBorder, buttonFont)
+            for (int i = 0; i < buttonTitles.Count; i++)
             {
-                Text = "TANK MODE",
-                Position = new Vector2(leftMarginButton, 650)
-            };
+                Button button = new Button(buttonBorder, buttonFont)
+                {
+                    Text = buttonTitles[i],
+                    Position = new Vector2(leftMarginButton,yPos)
+                };
 
-            androidVersionButton = new Button(buttonBorder, buttonFont)
-            {
-                Text = "GOOGLE PLAY",
-                Position = new Vector2(leftMarginButton, 750)
-            };
-            exitButton = new Button(buttonBorder, buttonFont)
-            {
-                Text = "EXIT",
-                Position = new Vector2(leftMarginButton, 850)
-            };
+                AllButtons.Add(button);
+                yPos += 100;
+            }
 
-            AllButtons.Add(startHeroMode);
-            AllButtons.Add(startTankMode);
-            AllButtons.Add(androidVersionButton);
-            AllButtons.Add(exitButton);
-
-            exitButton.Click += CloseGame;
-            androidVersionButton.Click += OpenGooglePlay;
-            startHeroMode.Click += StartGameAsHero;
-            startTankMode.Click += StartGameAsTank;
+            AllButtons[0].Click += StartGameAsHero;
+            AllButtons[1].Click += StartGameAsTank;
+            AllButtons[2].Click += OpenGooglePlay;
+            AllButtons[3].Click += CloseGame;
+ 
         }
 
         public override void UnloadContent()

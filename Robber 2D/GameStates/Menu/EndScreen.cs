@@ -8,7 +8,7 @@ namespace Robber_2D
 {
     class EndScreen : GameState, IMenu
     {
-        public List<Button> AllButtons;
+        List<Button> AllButtons;
         SpriteFont buttonFont;
         Texture2D buttonBorder, resultImage;
         int leftMarginGameOver;
