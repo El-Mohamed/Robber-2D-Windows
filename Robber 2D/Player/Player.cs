@@ -20,6 +20,7 @@ namespace Robber_2D
         public bool IsMoving, IsJumping, IsFallingDown;
         public bool CanMoveUp, CanMoveDown, CanMoveLeft, CanMoveRight;
         List<Bullet> allShootedBullets;
+        int LastTimeShooted;
 
         public bool IsDead
         {
@@ -76,6 +77,12 @@ namespace Robber_2D
             UpdateMovement(gameTime);
             UpdateCollisionRectangle();
             UpdateBullets(gameTime);
+            UpdateTimer(gameTime);
+        }
+
+        private void UpdateTimer(GameTime gameTime)
+        {
+            LastTimeShooted += 100 * gameTime.ElapsedGameTime.Milliseconds / 500;
         }
 
         private void UpdateAnimation(GameTime gameTime)
@@ -293,7 +300,7 @@ namespace Robber_2D
 
         private void Shoot()
         {
-            if(Sprite.NumberOfSprites == 1)
+            if(Sprite.NumberOfSprites == 1 && LastTimeShooted >= 250)
             {
                 Texture2D bulletTexture = Factory.CreateTexture("Bullet");
                 const int yOffset = 10; // Bullets need to shooted out of the gun
@@ -314,6 +321,7 @@ namespace Robber_2D
                 Bullet bullet = WorldFactory.CreateBullet(sprite, bulletCollisoionRectangle);
                 bullet.direction = direction;
                 allShootedBullets.Add(bullet);
+                LastTimeShooted = 0;
             }
         }
     }
