@@ -82,8 +82,8 @@ namespace Robber_2D
                 playerTexture = ContentManager.Load<Texture2D>("PlayerTank");
             }
 
-
-            Controller playerController = new Controller();
+            Output output = new Output();
+            KeyboardController playerController = new KeyboardController(output);
             Vector2 playerPosition = new Vector2();
             Vector2 playerSpeed = new Vector2(7, 0);
             Animation playerAnimation = new Animation();

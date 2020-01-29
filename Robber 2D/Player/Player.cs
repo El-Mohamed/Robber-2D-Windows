@@ -12,7 +12,7 @@ namespace Robber_2D
 
         public Sprite Sprite;
         Animation Animation;
-        Controller Controller;
+        KeyboardController Controller;
         public Inventory Inventory;
 
         public int Health = 100;
@@ -37,7 +37,7 @@ namespace Robber_2D
             }
         }
 
-        public Player(Sprite sprite, Controller controller, Animation animation, Rectangle collisionRectangle, Vector2 speed, Inventory inventory)
+        public Player(Sprite sprite, KeyboardController controller, Animation animation, Rectangle collisionRectangle, Vector2 speed, Inventory inventory)
         {
             Sprite = sprite;
             Controller = controller;
@@ -115,27 +115,27 @@ namespace Robber_2D
         {
             IsMoving = false;
 
-            if (Controller.Left)
+            if (Controller.Output.Left)
             {
                 MoveLeft();
             }
 
-            if (Controller.Right)
+            if (Controller.Output.Right)
             {
                 MoveRight();
             }
 
-            if (Controller.D)
+            if (Controller.Output.Drink)
             {
                 DrinkPotion();
             }
 
-            if (Controller.Space && IsJumping == false && !CanMoveDown)
+            if (Controller.Output.Jump && IsJumping == false && !CanMoveDown)
             {
                 IsJumping = true;
             }
 
-            if (Controller.S)
+            if (Controller.Output.Shoot)
             {
                 Shoot();
             }

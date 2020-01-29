@@ -2,9 +2,14 @@
 
 namespace Robber_2D
 {
-    class Controller
+    class KeyboardController: IController
     {
-        public bool Up, Down, Left, Right, Space, D, S;
+        public Output Output { get; set; }
+
+        public KeyboardController(Output output)
+        {
+            Output = output;
+        }
 
         public void Update()
         {
@@ -12,65 +17,65 @@ namespace Robber_2D
 
             if (stateKey.IsKeyDown(Keys.Up))
             {
-                Up = true;
+                Output.Up = true;
             }
             if (stateKey.IsKeyUp(Keys.Left))
             {
-                Up = false;
+                Output.Up = false;
             }
 
             if (stateKey.IsKeyDown(Keys.Right))
             {
-                Right = true;
+                Output.Right = true;
             }
             if (stateKey.IsKeyUp(Keys.Right))
             {
-                Right = false;
+                Output.Right = false;
             }
 
             if (stateKey.IsKeyDown(Keys.Down))
             {
-                Down = true;
+                Output.Down = true;
             }
             if (stateKey.IsKeyUp(Keys.Down))
             {
-                Down = false;
+                Output.Down = false;
             }
 
             if (stateKey.IsKeyDown(Keys.Left))
             {
-                Left = true;
+                Output.Left = true;
             }
             if (stateKey.IsKeyUp(Keys.Left))
             {
-                Left = false;
+                Output.Left = false;
             }
 
             if (stateKey.IsKeyDown(Keys.D))
             {
-                D = true;
+                Output.Drink = true;
             }
             if (stateKey.IsKeyUp(Keys.D))
             {
-                D = false;
+                Output.Drink = false;
             }
 
             if (stateKey.IsKeyDown(Keys.Space))
             {
-                Space = true;
+                Output.Jump = true;
             }
             if (stateKey.IsKeyUp(Keys.Space))
             {
-                Space = false;
+                Output.Jump = false;
             }
 
             if (stateKey.IsKeyDown(Keys.S))
             {
-                S = true;
+                Output.Shoot = true;
             }
             if (stateKey.IsKeyUp(Keys.S))
             {
-                S = false;
+                Output.Shoot = false;
             }
         }
     }
