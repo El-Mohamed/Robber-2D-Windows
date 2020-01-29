@@ -59,7 +59,7 @@ namespace Robber_2D
             buttonBorder = ContentManager.Load<Texture2D>("ButtonBorder");
             buttonFont = ContentManager.Load<SpriteFont>("ButtonFont");
 
-            int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; 
+            int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2;
 
             List<string> buttonTitles = new List<string>() { "SAVE SCORE", "BACK", "EXIT" };
             int nextYPos = 650;
@@ -135,10 +135,22 @@ namespace Robber_2D
 
         private void SaveScore(object sender, EventArgs e)
         {
+           
+            // Folder
+
+            string folderPath = @"c:\Robber2D";
+
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
+            // File
+
             DateTime currentTime = DateTime.Now;
             string fileName = "Score " + currentTime.ToString("MM-dd-yyyy_HH-mm-ss");
 
-            string path = $@"c:\temp\{fileName}.txt";
+            string path = $@"c:\Robber2D\{fileName}.txt";
 
             if (!File.Exists(path))
             {
