@@ -61,11 +61,11 @@ namespace Robber_2D
         {
             foreach (Tank tank in AllTanks)
             {
-                tank.SpriteImage.Draw(spriteBatch);
+                tank.Draw(spriteBatch);
 
                 foreach (Bullet bullet in tank.ShootedBullets)
                 {
-                    bullet.SpriteImage.Draw(spriteBatch);
+                    bullet.Draw(spriteBatch);
                 }
             }
 

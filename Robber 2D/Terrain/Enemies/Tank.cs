@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
@@ -8,6 +8,7 @@ namespace Robber_2D
     {
         public List<Bullet> ShootedBullets;
         public int Health;
+        public Direction Direction;
 
         public bool IsDestroyed
         {
@@ -28,22 +29,49 @@ namespace Robber_2D
         {
             ShootedBullets = new List<Bullet>();
             Health = 30;
+            Direction = Direction.ToRight;
         }
 
         public void Shoot()
         {
-            const int Offset = 10; // Bullets need to shooted out of the gun
             Texture2D bulletTexture = Factory.CreateTexture("Bullet");
-            Vector2 bulletPosition = Factory.CreateVector(SpriteImage.Position.X, SpriteImage.Position.Y + Offset);
+            int yOffset = 10; // Bullets need to shooted out of the gun
+            int xOffset;
+
+            if (Direction == Direction.ToLeft)
+            {
+                xOffset = -bulletTexture.Width;
+            }
+            else
+            {
+                xOffset = SpriteImage.Texture1.Width;
+            }
+
+            Vector2 bulletPosition = Factory.CreateVector(SpriteImage.Position.X + xOffset, SpriteImage.Position.Y + yOffset);
             Rectangle bulletCollisoionRectangle = Factory.CreateRectangle((int)bulletPosition.X, (int)bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
             Sprite sprite = Factory.CreateSprite(bulletTexture, 1, bulletPosition);
             Bullet bullet = WorldFactory.CreateBullet(sprite, bulletCollisoionRectangle);
+            bullet.direction = Direction;
             ShootedBullets.Add(bullet);
         }
 
         public void UpdateHealth(Bullet bullet)
         {
             Health -= bullet.Damage;
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+
+            if (Direction == Direction.ToLeft)
+            {
+                spriteBatch.Draw(SpriteImage.Texture1, SpriteImage.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
+            }
+
+            if (Direction == Direction.ToRight)
+            {
+                spriteBatch.Draw(SpriteImage.Texture1, SpriteImage.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+            }
         }
     }
 }

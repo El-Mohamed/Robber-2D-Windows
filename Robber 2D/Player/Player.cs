@@ -170,7 +170,7 @@ namespace Robber_2D
         {
             foreach (Bullet bullet in ShootedBullets)
             {
-                bullet.SpriteImage.Draw(spriteBatch);
+                bullet.Draw(spriteBatch);
             }
         }
 

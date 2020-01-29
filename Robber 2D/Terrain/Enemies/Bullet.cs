@@ -13,7 +13,7 @@ namespace Robber_2D
         {
             Speed = Factory.CreateVector(15, 0);
             Damage = 10;
-            direction = Direction.ToLeft;
+            direction = Direction.ToRight;
         }
 
         public void MoveRight()
@@ -50,5 +50,18 @@ namespace Robber_2D
             CollisionRectangle = Factory.CreateRectangle((int)SpriteImage.Position.X, (int)SpriteImage.Position.Y, SpriteImage.Texture1.Width, SpriteImage.Texture1.Height);
         }
 
+        public void Draw(SpriteBatch spriteBatch)
+        {
+
+            if (direction == Direction.ToLeft)
+            {
+                spriteBatch.Draw(SpriteImage.Texture1, SpriteImage.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
+            }
+
+            if (direction == Direction.ToRight)
+            {
+                spriteBatch.Draw(SpriteImage.Texture1, SpriteImage.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+            }
+        }
     }
 }
