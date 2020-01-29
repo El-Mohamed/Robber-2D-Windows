@@ -9,7 +9,7 @@ namespace Robber_2D
 {
     class EndScreen : GameState, IMenu
     {
-        List<Button> AllButtons;
+        List<Button> allButtons;
         SpriteFont buttonFont, scoreFont;
         Texture2D buttonBorder, resultImage;
         int leftMarginGameOver;
@@ -28,15 +28,20 @@ namespace Robber_2D
 
         public override void LoadContent()
         {
+            // Sound Effect
+
             if (gameResult == GameResult.Lost)
             {
                 GameSounds.PlayGameOverSound();
             }
 
-            GetScore();
-            scoreFont = ContentManager.Load<SpriteFont>("DefaultFont");
+            // Score
 
-            // Game Over Image
+            scoreFont = ContentManager.Load<SpriteFont>("DefaultFont");
+            CalculateScore();
+
+            // Result Image
+
             if (gameResult == GameResult.Won)
             {
                 resultImage = ContentManager.Load<Texture2D>("YouWin");
@@ -49,32 +54,31 @@ namespace Robber_2D
             leftMarginGameOver = (Robber2D.ScreenWidth - resultImage.Width) / 2;
 
             // Buttons
-            AllButtons = new List<Button>();
+
+            allButtons = new List<Button>();
             buttonBorder = ContentManager.Load<Texture2D>("ButtonBorder");
             buttonFont = ContentManager.Load<SpriteFont>("ButtonFont");
 
             int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
 
-            // Create Buttons
-
             List<string> buttonTitles = new List<string>() { "SAVE SCORE", "BACK", "EXIT" };
-            int yPos = 650;
+            int nextYPos = 650;
 
             for (int i = 0; i < buttonTitles.Count; i++)
             {
                 Button button = new Button(buttonBorder, buttonFont)
                 {
                     Text = buttonTitles[i],
-                    Position = new Vector2(leftMarginButton, yPos)
+                    Position = new Vector2(leftMarginButton, nextYPos)
                 };
 
-                AllButtons.Add(button);
-                yPos += 100;
+                allButtons.Add(button);
+                nextYPos += 100;
             }
 
-            AllButtons[0].Click += SaveScore;
-            AllButtons[1].Click += ReturnToMenu;
-            AllButtons[2].Click += CloseGame;      
+            allButtons[0].Click += SaveScore;
+            allButtons[1].Click += ReturnToMenu;
+            allButtons[2].Click += CloseGame;
         }
 
         public override void UnloadContent()
@@ -100,14 +104,14 @@ namespace Robber_2D
             spriteBatch.End();
         }
 
-        private void GetScore()
+        private void CalculateScore()
         {
             int DiamondsScore = InGame.player.Inventory.MyDiamonds * 200;
             int CoinsScore = InGame.player.Inventory.AllCoins.Count * 100;
             endScore = "TOTAL SCORE: " + Convert.ToString(DiamondsScore + CoinsScore);
         }
 
-        private void DrawGameOverImage(SpriteBatch spriteBatch)
+        private void DrawResultImage(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(resultImage, new Vector2(leftMarginGameOver, 200), null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
         }
@@ -135,6 +139,7 @@ namespace Robber_2D
             string fileName = "Score " + currentTime.ToString("MM-dd-yyyy_HH-mm-ss");
 
             string path = $@"c:\temp\{fileName}.txt";
+
             if (!File.Exists(path))
             {
                 using (StreamWriter sw = File.CreateText(path))
@@ -147,7 +152,7 @@ namespace Robber_2D
 
         public void DrawButtons(SpriteBatch spriteBatch)
         {
-            foreach (Button button in AllButtons)
+            foreach (Button button in allButtons)
             {
                 button.Draw(spriteBatch);
             }
@@ -155,7 +160,7 @@ namespace Robber_2D
 
         public void UpdateButtons(GameTime gameTime)
         {
-            foreach (Button button in AllButtons)
+            foreach (Button button in allButtons)
             {
                 button.Update(gameTime);
             }
@@ -163,7 +168,7 @@ namespace Robber_2D
 
         public void DrawImages(SpriteBatch spriteBatch)
         {
-            DrawGameOverImage(spriteBatch);
+            DrawResultImage(spriteBatch);
         }
 
         public void DrawText(SpriteBatch spriteBatch)

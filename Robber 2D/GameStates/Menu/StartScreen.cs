@@ -9,9 +9,9 @@ namespace Robber_2D
 {
     class StartScreen : GameState, IMenu
     {
-        List<Button> AllButtons;
+        List<Button> allButtons;
         SpriteFont buttonFont;
-        Texture2D buttonBorder, logo;
+        Texture2D buttonBorder, logoImage;
         int leftMarginLogo;
 
         public StartScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game) : base(contentManager, graphicsDevice, game)
@@ -26,35 +26,38 @@ namespace Robber_2D
 
         public override void LoadContent()
         {
-            AllButtons = new List<Button>();
+            // Logo
 
+            logoImage = ContentManager.Load<Texture2D>("Logo");
+            leftMarginLogo = (Robber2D.ScreenWidth - logoImage.Width) / 2;
+
+            // Buttons
+
+            allButtons = new List<Button>();
             buttonBorder = ContentManager.Load<Texture2D>("ButtonBorder");
             buttonFont = ContentManager.Load<SpriteFont>("ButtonFont");
-            logo = ContentManager.Load<Texture2D>("Logo");
 
             int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
-            leftMarginLogo = (Robber2D.ScreenWidth - logo.Width) / 2;
 
             List<String> buttonTitles = new List<string>() { "HERO MODE", "TANK MODE", "PLAY STORE", "EXIT" };
-            int yPos = 550;
+            int nextYPos = 550;
 
             for (int i = 0; i < buttonTitles.Count; i++)
             {
                 Button button = new Button(buttonBorder, buttonFont)
                 {
                     Text = buttonTitles[i],
-                    Position = new Vector2(leftMarginButton,yPos)
+                    Position = new Vector2(leftMarginButton, nextYPos)
                 };
 
-                AllButtons.Add(button);
-                yPos += 100;
+                allButtons.Add(button);
+                nextYPos += 100;
             }
 
-            AllButtons[0].Click += StartGameAsHero;
-            AllButtons[1].Click += StartGameAsTank;
-            AllButtons[2].Click += OpenGooglePlay;
-            AllButtons[3].Click += CloseGame;
- 
+            allButtons[0].Click += StartGameAsHero;
+            allButtons[1].Click += StartGameAsTank;
+            allButtons[2].Click += OpenGooglePlay;
+            allButtons[3].Click += CloseGame;
         }
 
         public override void UnloadContent()
@@ -100,12 +103,12 @@ namespace Robber_2D
 
         private void DrawLogo(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(logo, new Vector2(leftMarginLogo, 100), null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+            spriteBatch.Draw(logoImage, new Vector2(leftMarginLogo, 100), null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
         }
 
         public void DrawButtons(SpriteBatch spriteBatch)
         {
-            foreach (Button button in AllButtons)
+            foreach (Button button in allButtons)
             {
                 button.Draw(spriteBatch);
             }
@@ -113,7 +116,7 @@ namespace Robber_2D
 
         public void UpdateButtons(GameTime gameTime)
         {
-            foreach (Button button in AllButtons)
+            foreach (Button button in allButtons)
             {
                 button.Update(gameTime);
             }
