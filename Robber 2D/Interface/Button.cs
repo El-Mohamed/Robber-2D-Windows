@@ -14,7 +14,7 @@ namespace Robber_2D
         SpriteFont font;
         Texture2D border;
         public event EventHandler Click;
-        public bool Clicked, isHovering;
+        public bool Clicked, isHovering, wasHovering;
         Color fontColor, buttonColor;
         public string Text;
 
@@ -81,11 +81,18 @@ namespace Robber_2D
             {
                 isHovering = true;
 
+                if(wasHovering == false)
+                {
+                    MenuSounds.PlaySelectSound();
+                }
+
                 if (currentMouse.LeftButton == ButtonState.Released && previousMouse.LeftButton == ButtonState.Pressed)
                 {
                     Click?.Invoke(this, new EventArgs());
                 }
             }
+
+            wasHovering = isHovering;
         }
     }
 }

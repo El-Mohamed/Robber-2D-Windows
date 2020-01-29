@@ -243,6 +243,12 @@
 /processorParam:TextureFormat=Color
 /build:PlayerTank.png
 
+#begin SelectSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SelectSound.wav
+
 #begin ShootSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

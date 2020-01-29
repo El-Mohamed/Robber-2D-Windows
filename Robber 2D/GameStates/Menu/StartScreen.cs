@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -58,6 +59,11 @@ namespace Robber_2D
             allButtons[1].Click += StartGameAsTank;
             allButtons[2].Click += OpenGooglePlay;
             allButtons[3].Click += CloseGame;
+
+            // SoundEffects
+
+            MenuSounds.SelectSound = ContentManager.Load<SoundEffect>("SelectSound");
+
         }
 
         public override void UnloadContent()
