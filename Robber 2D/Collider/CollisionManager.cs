@@ -150,7 +150,7 @@ namespace Robber_2D
         {
             if (player.CollisionRectangle.Top > currentlevel.MapRange)
             {
-                player.Respawn();
+                player.Health = 0;
             }
         }
     }
