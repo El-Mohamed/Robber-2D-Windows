@@ -43,11 +43,15 @@ namespace Robber_2D
                     Vector2 tempVector = Factory.CreateVector(xPos, yPos);
                     Rectangle tempCollisonRectangle = Factory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
                     Sprite tempSprite = Factory.CreateSprite(tempTexture, 1, tempVector);
-
+                    Tank tempTank = WorldFactory.CreateTank(tempSprite, tempCollisonRectangle);
                     switch (EnemiesArray[y, x])
                     {
                         case 1:
-                            Tank tempTank = WorldFactory.CreateTank(tempSprite, tempCollisonRectangle);
+                            tempTank.Direction = Direction.ToRight;
+                            AllTanks.Add(tempTank);
+                            break;
+                        case 2:
+                            tempTank.Direction = Direction.ToLeft;
                             AllTanks.Add(tempTank);
                             break;
                         default:
