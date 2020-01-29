@@ -35,7 +35,7 @@ namespace Robber_2D
         public void Shoot()
         {
             Texture2D bulletTexture = Factory.CreateTexture("Bullet");
-            int yOffset = 10; // Bullets need to shooted out of the gun
+            int yOffset = 10;
             int xOffset;
 
             if (Direction == Direction.ToLeft)

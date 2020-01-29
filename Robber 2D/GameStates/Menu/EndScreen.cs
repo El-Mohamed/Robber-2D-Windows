@@ -59,7 +59,7 @@ namespace Robber_2D
             buttonBorder = ContentManager.Load<Texture2D>("ButtonBorder");
             buttonFont = ContentManager.Load<SpriteFont>("ButtonFont");
 
-            int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
+            int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; 
 
             List<string> buttonTitles = new List<string>() { "SAVE SCORE", "BACK", "EXIT" };
             int nextYPos = 650;

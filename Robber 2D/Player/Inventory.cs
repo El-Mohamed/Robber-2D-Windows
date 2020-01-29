@@ -36,7 +36,7 @@ namespace Robber_2D
             }
             else
             {
-                return true; // Coins && Diamonds have always place
+                return true;
             }
         }
 

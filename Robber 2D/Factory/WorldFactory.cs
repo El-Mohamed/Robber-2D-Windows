@@ -36,7 +36,7 @@ namespace Robber_2D
         {
             return new Potion(sprite, collisonRectangle)
             {
-                SpeedAcceleration = 1 // TODO CREATE RANDOM
+                SpeedAcceleration = 1
             };
         }
 
@@ -48,7 +48,6 @@ namespace Robber_2D
             };
         }
 
-        // Enemies
         static public Tank CreateTank(Sprite sprite, Rectangle collisonRectangle)
         {
             return new Tank(sprite, collisonRectangle);

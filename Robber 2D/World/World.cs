@@ -79,8 +79,8 @@ namespace Robber_2D
                         tempTexture = contentManager.Load<Texture2D>("Pickable" + ID_STRING);
                     }
 
-                    const int marginBottom = 10; // Margin between pickable and platform                                     
-                    int maginLeft = (150 - tempTexture.Width) / 2; // Calculate margin to center Pickable on the platform
+                    const int marginBottom = 10;                                    
+                    int maginLeft = (150 - tempTexture.Width) / 2; 
                     float xPos = (x * 150) + maginLeft;
                     float yPos = (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom;
                     Vector2 tempVector = Factory.CreateVector(xPos, yPos);
@@ -148,9 +148,8 @@ namespace Robber_2D
 
                             // Create Door on the platform
                             Texture2D doorTexture = contentManager.Load<Texture2D>("Block2");
-                            // Calculate margin to center the door on the platform
-                            int maginLeft = (150 - doorTexture.Width) / 2;
 
+                            int maginLeft = (150 - doorTexture.Width) / 2;
                             float xPos = (x * platformTexture.Width) + maginLeft;
                             float yPos = (y * SpaceBetweenPlatforms) - doorTexture.Height;
                             Vector2 doorVector = Factory.CreateVector(xPos, yPos);
@@ -159,7 +158,6 @@ namespace Robber_2D
                             Sprite doorSprite = Factory.CreateSprite(doorTexture, 1, doorVector);
                             Block door = WorldFactory.CreateDoor(doorSprite, doorCollisonRectangle);
 
-                            // Add Door
                             AllObstacles.Add(door);
 
                             break;

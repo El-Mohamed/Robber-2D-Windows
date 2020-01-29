@@ -37,7 +37,7 @@ namespace Robber_2D
             buttonBorder = ContentManager.Load<Texture2D>("ButtonBorder");
             buttonFont = ContentManager.Load<SpriteFont>("ButtonFont");
 
-            int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; // Center buttons on the screen
+            int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2; 
 
             List<String> buttonTitles = new List<string>() { "HERO MODE", "TANK MODE", "PLAY STORE", "EXIT" };
             int nextYPos = 550;

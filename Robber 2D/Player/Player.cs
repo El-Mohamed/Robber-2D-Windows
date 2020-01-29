@@ -293,7 +293,7 @@ namespace Robber_2D
             {
                 Speed.X += Inventory.Potion.SpeedAcceleration;
                 Animation.IncreaseSpeed();
-                Inventory.Potion = null; // Remove Drinked Potion
+                Inventory.Potion = null; 
                 GameSounds.PlayDrinkSound();
             }
         }
@@ -305,7 +305,7 @@ namespace Robber_2D
                 GameSounds.PlayShootSound();
 
                 Texture2D bulletTexture = Factory.CreateTexture("Bullet");
-                const int yOffset = 10; // Bullets need to shooted out of the gun
+                const int yOffset = 10; 
                 int xOffset;
 
                 if (direction == Direction.ToLeft)

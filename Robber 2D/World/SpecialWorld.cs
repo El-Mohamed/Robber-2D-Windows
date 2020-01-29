@@ -34,9 +34,7 @@ namespace Robber_2D
                         tempTexture = contentManager.Load<Texture2D>("Enemy" + ID_STRING);
                     }
 
-                    // Margin between pickable and platform 
                     const int marginBottom = 1;
-                    // Calculate margin to center Tank on the platform
                     int maginLeft = (150 - tempTexture.Width) / 2;
                     float xPos = (x * 150) + maginLeft;
                     float yPos = (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom;
