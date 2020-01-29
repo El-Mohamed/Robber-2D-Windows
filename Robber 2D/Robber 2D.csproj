@@ -53,7 +53,7 @@
     <Compile Include="GameStates\Menu\LevelScreen.cs" />
     <Compile Include="Interface\IBasicMenu.cs" />
     <Compile Include="Interface\IMenu.cs" />
-    <Compile Include="Other\MenuSounds.cs" />
+    <Compile Include="Sounds\MenuSounds.cs" />
     <Compile Include="Robber2D.cs" />
     <Compile Include="Interface\Button.cs" />
     <Compile Include="GameStates\Menu\EndScreen.cs" />
@@ -63,7 +63,7 @@
     <Compile Include="GameStates\Menu\StartScreen.cs" />
     <Compile Include="GameStates\GameStateManager.cs" />
     <Compile Include="Other\Clock.cs" />
-    <Compile Include="Other\GameSounds.cs" />
+    <Compile Include="Sounds\GameSounds.cs" />
     <Compile Include="Player\HealthBar.cs" />
     <Compile Include="Player\InventoryBar.cs" />
     <Compile Include="Terrain\Enemies\Bullet.cs" />

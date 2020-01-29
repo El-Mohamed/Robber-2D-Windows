@@ -15,6 +15,7 @@ namespace Robber_2D
         {
             DrinkSound.Play();
         }
+
         static public void PlayPickSound()
         {
             PickSound.Play();
