@@ -2,7 +2,7 @@
 
 namespace Robber_2D
 {
-    class KeyboardController: IController
+    class KeyboardController : IController
     {
         public Output Output { get; set; }
 

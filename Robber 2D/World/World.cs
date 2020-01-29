@@ -79,8 +79,8 @@ namespace Robber_2D
                         tempTexture = contentManager.Load<Texture2D>("Pickable" + ID_STRING);
                     }
 
-                    const int marginBottom = 10;                                    
-                    int maginLeft = (150 - tempTexture.Width) / 2; 
+                    const int marginBottom = 10;
+                    int maginLeft = (150 - tempTexture.Width) / 2;
                     float xPos = (x * 150) + maginLeft;
                     float yPos = (y * SpaceBetweenPlatforms) - tempTexture.Height - marginBottom;
                     Vector2 tempVector = Factory.CreateVector(xPos, yPos);

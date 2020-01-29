@@ -81,7 +81,7 @@ namespace Robber_2D
             {
                 isHovering = true;
 
-                if(wasHovering == false)
+                if (wasHovering == false)
                 {
                     MenuSounds.PlaySelectSound();
                 }
