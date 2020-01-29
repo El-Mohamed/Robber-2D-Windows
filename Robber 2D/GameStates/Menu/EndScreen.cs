@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,7 +10,7 @@ namespace Robber_2D
     class EndScreen : GameState, IMenu
     {
         List<Button> AllButtons;
-        SpriteFont buttonFont;
+        SpriteFont buttonFont, scoreFont;
         Texture2D buttonBorder, resultImage;
         int leftMarginGameOver;
         string endScore;
@@ -34,6 +34,7 @@ namespace Robber_2D
             }
 
             GetScore();
+            scoreFont = ContentManager.Load<SpriteFont>("DefaultFont");
 
             // Game Over Image
             if (gameResult == GameResult.Won)
@@ -56,7 +57,7 @@ namespace Robber_2D
 
             // Create Buttons
 
-            List<String> buttonTitles = new List<string>() { "SAVE SCORE", "BACK", "EXIT" };
+            List<string> buttonTitles = new List<string>() { "SAVE SCORE", "BACK", "EXIT" };
             int yPos = 650;
 
             for (int i = 0; i < buttonTitles.Count; i++)
@@ -113,9 +114,9 @@ namespace Robber_2D
 
         private void DrawScore(SpriteBatch spriteBatch)
         {
-            var x = ((Robber2D.ScreenWidth / 2)) - (buttonFont.MeasureString(endScore).X / 2);
-            var y = ((Robber2D.ScreenHeight / 2)) - (buttonFont.MeasureString(endScore).Y / 2);
-            spriteBatch.DrawString(buttonFont, endScore, new Vector2(x, y), Color.Red);
+            var x = ((Robber2D.ScreenWidth / 2)) - (scoreFont.MeasureString(endScore).X / 2);
+            var y = ((Robber2D.ScreenHeight / 2)) - (scoreFont.MeasureString(endScore).Y / 2);
+            spriteBatch.DrawString(scoreFont, endScore, new Vector2(x, y), Color.Red);
         }
 
         private void ReturnToMenu(object sender, EventArgs e)
