@@ -118,7 +118,7 @@ namespace Robber_2D
         {
             foreach (Block pickable in AllPickables)
             {
-                pickable.SpriteImage.Draw(spriteBatch);
+                pickable.Sprite.Draw(spriteBatch);
             }
         }
 
@@ -173,7 +173,7 @@ namespace Robber_2D
         {
             foreach (Block obstacle in AllObstacles)
             {
-                obstacle.SpriteImage.Draw(spriteBatch);
+                obstacle.Sprite.Draw(spriteBatch);
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Robber_2D
 
         public object Clone()
         {
-            return new Coin(this.SpriteImage, this.CollisionRectangle)
+            return new Coin(this.Sprite, this.CollisionRectangle)
             {
                 Value = this.Value
             }; ;

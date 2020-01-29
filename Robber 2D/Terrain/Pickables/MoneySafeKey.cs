@@ -13,7 +13,7 @@ namespace Robber_2D
 
         public object Clone()
         {
-            return new MoneySafeKey(this.SpriteImage, this.CollisionRectangle)
+            return new MoneySafeKey(this.Sprite, this.CollisionRectangle)
             {
                 MoneySafeID = this.MoneySafeID
             };

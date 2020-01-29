@@ -13,7 +13,7 @@ namespace Robber_2D
 
         public object Clone()
         {
-            return new Potion(this.SpriteImage, this.CollisionRectangle)
+            return new Potion(this.Sprite, this.CollisionRectangle)
             {
                 SpeedAcceleration = this.SpeedAcceleration
             };

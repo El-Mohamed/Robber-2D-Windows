@@ -44,10 +44,10 @@ namespace Robber_2D
             }
             else
             {
-                xOffset = SpriteImage.Texture1.Width;
+                xOffset = Sprite.Texture.Width;
             }
 
-            Vector2 bulletPosition = Factory.CreateVector(SpriteImage.Position.X + xOffset, SpriteImage.Position.Y + yOffset);
+            Vector2 bulletPosition = Factory.CreateVector(Sprite.Position.X + xOffset, Sprite.Position.Y + yOffset);
             Rectangle bulletCollisoionRectangle = Factory.CreateRectangle((int)bulletPosition.X, (int)bulletPosition.Y, bulletTexture.Width, bulletTexture.Height);
             Sprite sprite = Factory.CreateSprite(bulletTexture, 1, bulletPosition);
             Bullet bullet = WorldFactory.CreateBullet(sprite, bulletCollisoionRectangle);
@@ -65,12 +65,12 @@ namespace Robber_2D
 
             if (Direction == Direction.ToLeft)
             {
-                spriteBatch.Draw(SpriteImage.Texture1, SpriteImage.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
+                spriteBatch.Draw(Sprite.Texture, Sprite.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
             }
 
             if (Direction == Direction.ToRight)
             {
-                spriteBatch.Draw(SpriteImage.Texture1, SpriteImage.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(Sprite.Texture, Sprite.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
             }
         }
     }

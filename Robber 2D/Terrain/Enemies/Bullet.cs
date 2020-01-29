@@ -18,12 +18,12 @@ namespace Robber_2D
 
         public void MoveRight()
         {
-            SpriteImage.Position.X += Speed.X;
+            Sprite.Position.X += Speed.X;
         }
 
         public void MoveLeft()
         {
-            SpriteImage.Position.X -= Speed.X;
+            Sprite.Position.X -= Speed.X;
         }
 
         private void UpdateMovement()
@@ -47,7 +47,7 @@ namespace Robber_2D
 
         private void UpdateCollisionRectangle()
         {
-            CollisionRectangle = Factory.CreateRectangle((int)SpriteImage.Position.X, (int)SpriteImage.Position.Y, SpriteImage.Texture1.Width, SpriteImage.Texture1.Height);
+            CollisionRectangle = Factory.CreateRectangle((int)Sprite.Position.X, (int)Sprite.Position.Y, Sprite.Texture.Width, Sprite.Texture.Height);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -55,12 +55,12 @@ namespace Robber_2D
 
             if (direction == Direction.ToLeft)
             {
-                spriteBatch.Draw(SpriteImage.Texture1, SpriteImage.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
+                spriteBatch.Draw(Sprite.Texture, Sprite.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.FlipHorizontally, 1);
             }
 
             if (direction == Direction.ToRight)
             {
-                spriteBatch.Draw(SpriteImage.Texture1, SpriteImage.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(Sprite.Texture, Sprite.Position, null, Color.White, 0f, new Vector2(0, 0), 1, SpriteEffects.None, 1);
             }
         }
     }
