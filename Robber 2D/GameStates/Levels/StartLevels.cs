@@ -21,9 +21,7 @@ namespace Robber_2D
         Clock clock;
         Camera2D camera;
 
-        GameSounds gameSounds;
-        SpriteFont defaultFont;
-        SoundEffect pickSound, hitSound, drinkSound, jumpSound, gameOverSound, explosionSound, shootSound;
+        SpriteFont defaultFont;     
         Texture2D potionTexture, coinTexture, keyTexture, diamondTexture, healtTexture;
         List<Texture2D> allTextures;
         static public bool PlayerWon;
@@ -103,14 +101,13 @@ namespace Robber_2D
 
             // SoundEffects
 
-            pickSound = ContentManager.Load<SoundEffect>("PickSound");
-            hitSound = ContentManager.Load<SoundEffect>("HitSound");
-            drinkSound = ContentManager.Load<SoundEffect>("DrinkSound");
-            gameOverSound = ContentManager.Load<SoundEffect>("GameOverSound");
-            jumpSound = ContentManager.Load<SoundEffect>("JumpSound");
-            explosionSound = ContentManager.Load<SoundEffect>("ExplosionSound");
-            shootSound = ContentManager.Load<SoundEffect>("ShootSound");
-            gameSounds = new GameSounds(pickSound, hitSound, drinkSound, jumpSound, gameOverSound, explosionSound, shootSound);
+            GameSounds.PickSound = ContentManager.Load<SoundEffect>("PickSound");
+            GameSounds.HitSound = ContentManager.Load<SoundEffect>("HitSound");
+            GameSounds.DrinkSound = ContentManager.Load<SoundEffect>("DrinkSound");
+            GameSounds.GameOverSound = ContentManager.Load<SoundEffect>("GameOverSound");
+            GameSounds.JumpSound = ContentManager.Load<SoundEffect>("JumpSound");
+            GameSounds.ExplosionSound = ContentManager.Load<SoundEffect>("ExplosionSound");
+            GameSounds.ShootSound = ContentManager.Load<SoundEffect>("ShootSound");
 
             // Clock
 
