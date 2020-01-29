@@ -50,6 +50,8 @@
     <Compile Include="Controls\KeyboardController.cs" />
     <Compile Include="Controls\Output.cs" />
     <Compile Include="Factory\Factory.cs" />
+    <Compile Include="GameStates\Menu\WorldMenu.cs" />
+    <Compile Include="Interface\IBasicMenu.cs" />
     <Compile Include="Interface\IMenu.cs" />
     <Compile Include="Robber2D.cs" />
     <Compile Include="Interface\Button.cs" />

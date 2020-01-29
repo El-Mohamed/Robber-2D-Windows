@@ -88,12 +88,12 @@ namespace Robber_2D
 
         private void StartGameAsTank(object sender, EventArgs e)
         {
-            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game, GameMode.Tank));
+            GameStateManager.Instance.SetCurrentState(new LevelScreen(ContentManager, GraphicsDevice, Game, GameMode.Tank));
         }
 
         private void StartGameAsHero(object sender, EventArgs e)
         {
-            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game, GameMode.Hero));
+            GameStateManager.Instance.SetCurrentState(new LevelScreen(ContentManager, GraphicsDevice, Game, GameMode.Hero));
         }
 
         private void OpenGooglePlay(object sender, EventArgs e)

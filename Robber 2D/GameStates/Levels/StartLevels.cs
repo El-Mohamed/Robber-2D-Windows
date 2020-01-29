@@ -31,9 +31,10 @@ namespace Robber_2D
 
         #endregion
 
-        public InGame(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game, GameMode gameMode) : base(contentManager, graphicsDevice, game)
+        public InGame(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game, GameMode gameMode, int startWorld) : base(contentManager, graphicsDevice, game)
         {
             this.gameMode = gameMode;
+            CurrentWorld = startWorld;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -96,7 +97,6 @@ namespace Robber_2D
             // Other
 
             AllWorlds = new List<World>();
-            CurrentWorld = 0;
             collisionManager = new CollisionManager();
             PlayerWon = false;
             Factory.contentManager = ContentManager;
