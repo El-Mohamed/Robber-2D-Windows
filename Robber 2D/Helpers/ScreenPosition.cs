@@ -8,7 +8,7 @@ namespace Robber_2D
 
         public static Vector2 Top(Player player)
         {
-            const int OffSet =- 40;
+            const int OffSet = -40;
             float xPos = player.Sprite.Position.X + OffSet;
             float yPos = player.Sprite.Position.Y - (Robber2D.ScreenHeight / 2) + marginTop;
             return Factory.CreateVector(xPos, yPos);

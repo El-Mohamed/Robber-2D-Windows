@@ -6,7 +6,7 @@ namespace Robber_2D
     {
         static public SoundEffect PickSound, HitSound, DrinkSound, JumpSound, GameOverSound, ExplosionSound, ShootSound;
 
-        public GameSounds(SoundEffect pickupSound, SoundEffect hitSound, SoundEffect drinkSound, SoundEffect jumpSound, SoundEffect gameOverSound, SoundEffect explosionSound,SoundEffect shootSound )
+        public GameSounds(SoundEffect pickupSound, SoundEffect hitSound, SoundEffect drinkSound, SoundEffect jumpSound, SoundEffect gameOverSound, SoundEffect explosionSound, SoundEffect shootSound)
         {
             PickSound = pickupSound;
             HitSound = hitSound;
