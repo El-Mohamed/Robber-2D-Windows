@@ -20,20 +20,13 @@ namespace Robber_2D
 
         private void CreateTanks(ContentManager contentManager)
         {
-            Texture2D tempTexture = contentManager.Load<Texture2D>("Enemy1");
 
             for (int x = 0; x < MapWidth; x++)
             {
                 for (int y = 0; y < LevelHeight; y++)
                 {
-                    int BLOCK_ID = EnemiesArray[y, x];
-                    string ID_STRING = Convert.ToString(BLOCK_ID);
-
-                    if (ID_STRING != "0")
-                    {
-                        tempTexture = contentManager.Load<Texture2D>("Enemy" + ID_STRING);
-                    }
-
+                          
+                    Texture2D tempTexture = contentManager.Load<Texture2D>("Enemy1"); 
                     const int marginBottom = 1;
                     int maginLeft = (150 - tempTexture.Width) / 2;
                     float xPos = (x * 150) + maginLeft;
@@ -42,6 +35,7 @@ namespace Robber_2D
                     Rectangle tempCollisonRectangle = Factory.CreateRectangle((int)tempVector.X, (int)tempVector.Y, tempTexture.Width, tempTexture.Height);
                     Sprite tempSprite = Factory.CreateSprite(tempTexture, 1, tempVector);
                     Tank tempTank = WorldFactory.CreateTank(tempSprite, tempCollisonRectangle);
+                    
                     switch (EnemiesArray[y, x])
                     {
                         case 1:

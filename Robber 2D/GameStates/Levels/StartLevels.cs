@@ -214,11 +214,53 @@ namespace Robber_2D
 
             World world3 = new SpecialWorld(ObstaclesWorld3, PickablesWorld3, MoneySafeIdentiefiers3, EnemiesWorld3);
             world3.Create(ContentManager);
-            world3.NextWorld = GAMEISDONECODE;
+            world3.NextWorld = AllWorlds.Count + 1;
             AllWorlds.Add(world3);
 
             #endregion
 
+
+            #region World4
+
+            byte[,] ObstaclesWorld4 = new byte[,]
+            {
+                 {1,0,0,1,0,0,1,0,1,0 },
+                 {1,1,0,1,1,0,0,1,1,1 },
+                 {1,1,1,0,0,1,0,0,0,1 },
+                 {1,2,1,0,0,1,1,0,1,1 },
+                 {1,1,1,1,1,1,0,0,1,1 },
+                 {1,1,0,1,0,1,1,1,1,1 },
+            };
+
+            byte[,] PickablesWorld4 = new byte[,]
+            {
+                 {0,0,0,1,0,0,0,0,4,0 },
+                 {2,0,0,0,0,0,0,0,0,0 },
+                 {0,0,4,0,0,1,0,0,2,0 },
+                 {0,0,0,0,0,0,2,0,0,4 },
+                 {0,2,0,0,0,0,0,0,0,1 },
+                 {0,4,0,1,0,0,0,0,0,2 },
+            };
+
+
+            byte[,] EnemiesWorld4 = new byte[,]
+            {
+                 {0,0,0,0,0,0,2,0,0,0 },
+                 {0,0,0,1,0,0,0,0,0,0 },
+                 {0,0,0,0,0,0,0,0,0,2 },
+                 {1,0,0,0,0,0,0,0,0,0 },
+                 {0,0,0,1,0,0,0,0,0,0 },
+                 {1,0,0,0,0,1,0,0,0,0 },
+            };
+
+            List<int> MoneySafeIdentiefiers4 = new List<int>() { 10000, 10000, 10000, 10000 };
+
+            World world4 = new SpecialWorld(ObstaclesWorld4, PickablesWorld4, MoneySafeIdentiefiers4, EnemiesWorld4);
+            world4.Create(ContentManager);
+            world4.NextWorld = GAMEISDONECODE;
+            AllWorlds.Add(world4);
+
+            #endregion
         }
 
         public override void UnloadContent()

@@ -11,7 +11,7 @@ namespace Robber_2D
 
         public Bullet(Sprite sprite, Rectangle collisionRectangle) : base(sprite, collisionRectangle)
         {
-            Speed = Factory.CreateVector(15, 0);
+            Speed = Factory.CreateVector(20, 0);
             Damage = 10;
             direction = Direction.ToRight;
         }
