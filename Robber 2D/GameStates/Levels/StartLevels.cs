@@ -21,7 +21,7 @@ namespace Robber_2D
         Clock clock;
         Camera2D camera;
 
-        SpriteFont defaultFont;     
+        SpriteFont defaultFont;
         Texture2D potionTexture, coinTexture, keyTexture, diamondTexture, healtTexture;
         List<Texture2D> allTextures;
         static public bool PlayerWon;
@@ -136,14 +136,14 @@ namespace Robber_2D
             byte[,] ObstaclesWorld1 = new byte[,]
             {
                  {1,1,0,0,0,0,1,1 },
-                 {1,1,1,1,0,1,0,0 },
+                 {1,1,1,0,0,1,0,0 },
                  {2,1,1,1,1,1,0,0 }
             };
 
             byte[,] PickablesWorld1 = new byte[,]
             {
                  {0,0,0,0,0,0,0,4 },
-                 {0,0,0,1,0,0,0,0 },
+                 {0,0,1,0,0,0,0,0 },
                  {0,0,2,0,0,0,0,0 }
             };
 
@@ -161,9 +161,9 @@ namespace Robber_2D
             byte[,] ObstaclesWorld2 = new byte[,]
             {
                  {1,0,0,0,1,0,0,1,0,0 },
-                 {1,0,0,0,1,1,1,1,0,1},
-                 {1,1,2,1,1,1,1,0,1,1},
-                 {1,1,0,1,0,1,1,1,0,1}
+                 {1,0,0,0,1,1,1,0,0,1 },
+                 {1,1,2,1,1,1,0,0,1,1 },
+                 {1,1,0,1,0,1,1,1,0,1 }
             };
 
             byte[,] PickablesWorld2 = new byte[,]
@@ -188,13 +188,13 @@ namespace Robber_2D
             byte[,] ObstaclesWorld3 = new byte[,]
             {
                  {1,0,0,1,0,0,1,0,1,0 },
-                 {1,1,1,1,1,1,0,1,1,1 },
+                 {1,1,1,1,1,0,0,1,1,1 },
                  {0,1,2,1,0,1,1,1,1,1 },
             };
 
             byte[,] PickablesWorld3 = new byte[,]
             {
-                 {0,0,0,0,0,0,2,0,4,0 },
+                 {0,0,0,3,0,0,2,0,4,0 },
                  {2,0,0,0,0,0,0,0,0,0 },
                  {0,0,0,0,0,1,0,0,0,2 },
             };
@@ -203,8 +203,8 @@ namespace Robber_2D
             byte[,] EnemiesWorld3 = new byte[,]
             {
                  {0,0,0,0,0,0,0,0,0,0 },
-                 {0,0,0,1,0,0,0,0,0,0 },
-                 {0,0,0,0,0,0,0,0,1,0 },
+                 {0,0,0,2,0,0,0,0,0,0 },
+                 {0,0,0,0,0,0,0,0,2,0 },
             };
 
             List<int> MoneySafeIdentiefiers3 = new List<int>() { 10009 };
@@ -222,7 +222,7 @@ namespace Robber_2D
             byte[,] ObstaclesWorld4 = new byte[,]
             {
                  {1,0,0,1,0,0,1,0,1,0 },
-                 {1,1,0,1,1,0,0,1,1,1 },
+                 {1,0,0,1,1,0,0,1,1,1 },
                  {1,1,1,0,0,1,0,0,0,1 },
                  {1,2,1,0,0,1,1,0,1,1 },
                  {1,1,1,1,1,1,0,0,1,1 },
