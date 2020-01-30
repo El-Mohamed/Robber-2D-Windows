@@ -300,7 +300,7 @@ namespace Robber_2D
 
         private void Shoot()
         {
-            if (Sprite.NumberOfSprites == 1 && LastTimeShooted >= 250)
+            if (Sprite.NumberOfSprites == 1 && LastTimeShooted >= 190)
             {
                 GameSounds.PlayShootSound();
 
