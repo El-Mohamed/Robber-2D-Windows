@@ -53,6 +53,8 @@
     <Compile Include="GameStates\Menu\LevelScreen.cs" />
     <Compile Include="Interface\IBasicMenu.cs" />
     <Compile Include="Interface\IMenu.cs" />
+    <Compile Include="Other\ILogger.cs" />
+    <Compile Include="Other\ScoreLogger.cs" />
     <Compile Include="Sounds\MenuSounds.cs" />
     <Compile Include="Robber2D.cs" />
     <Compile Include="Interface\Button.cs" />

@@ -15,6 +15,7 @@ namespace Robber_2D
         int leftMarginGameOver;
         string endScore;
         GameResult gameResult;
+        ScoreLogger scoreLogger;
 
         public EndScreen(ContentManager contentManager, GraphicsDevice graphicsDevice, Robber2D game, GameResult gameResult) : base(contentManager, graphicsDevice, game)
         {
@@ -79,6 +80,10 @@ namespace Robber_2D
             allButtons[0].Click += SaveScore;
             allButtons[1].Click += ReturnToMenu;
             allButtons[2].Click += CloseGame;
+
+            // Score Logger
+
+            scoreLogger = new ScoreLogger();
         }
 
         public override void UnloadContent()
@@ -135,31 +140,7 @@ namespace Robber_2D
 
         private void SaveScore(object sender, EventArgs e)
         {
-
-            // Folder
-
-            string folderPath = @"c:\Robber2D";
-
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
-
-            // File
-
-            DateTime currentTime = DateTime.Now;
-            string fileName = "Score " + currentTime.ToString("MM-dd-yyyy_HH-mm-ss");
-
-            string path = $@"c:\Robber2D\{fileName}.txt";
-
-            if (!File.Exists(path))
-            {
-                using (StreamWriter sw = File.CreateText(path))
-                {
-                    sw.WriteLine("Robber 2D Score:");
-                    sw.WriteLine(endScore);
-                }
-            }
+            scoreLogger.Save(endScore);
         }
 
         public void DrawButtons(SpriteBatch spriteBatch)
