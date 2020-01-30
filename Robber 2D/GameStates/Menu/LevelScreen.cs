@@ -89,7 +89,7 @@ namespace Robber_2D
 
         private void StartHardWorld(object sender, EventArgs e)
         {
-            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game, GameMode.Tank, 3));
+            GameStateManager.Instance.SetCurrentState(new InGame(ContentManager, GraphicsDevice, Game, selectedGameMode, 3));
         }
 
 
