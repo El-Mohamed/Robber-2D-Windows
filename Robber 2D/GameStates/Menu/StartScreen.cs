@@ -40,7 +40,7 @@ namespace Robber_2D
 
             int leftMarginButton = (Robber2D.ScreenWidth - buttonBorder.Width) / 2;
 
-            List<String> buttonTitles = new List<string>() { "HERO MODE", "TANK MODE", "PLAY STORE", "EXIT" };
+            List<String> buttonTitles = new List<string>() { "THIEF MODE", "TANK MODE", "PLAY STORE", "EXIT" };
             int nextYPos = 550;
 
             for (int i = 0; i < buttonTitles.Count; i++)
