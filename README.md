@@ -7,6 +7,12 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/ElMoufid-Mohamed/Robber-2D-Windows)
 ![GitHub contributors](https://img.shields.io/github/contributors/ElMoufid-Mohamed/Robber-2D-Windows)
 
+## Preview
+</br>
+
+![DellXPS15](https://raw.githubusercontent.com/ElMoufid-Mohamed/Robber-2D-Windows/master/Robber%202D/Logo/Dell-XPS-15.png)
+
+</br>
 
 ## Game Modes
 * Tank
