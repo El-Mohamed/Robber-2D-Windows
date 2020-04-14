@@ -19,10 +19,11 @@
 * Thief
 
 ## Controls
-* Movement 🠖 Arrows
-* Jump 🠖 Space
-* Drink 🠖 D
-* Shoot 🠖 S
+* Movement 🠖 <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> <kbd>←</kbd>
+* Jump 🠖 <kbd>SPACE</kbd>
+* Drink Potion 🠖 <kbd>D</kbd>
+* Shoot 🠖 <kbd>S</kbd>
+* Quit Game 🠖 <kbd>ESC</kbd>
 
 ## Saved Scores
 * Path 🠖 C:\Robber2D\
