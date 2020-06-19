@@ -1,4 +1,4 @@
-![Logo](https://raw.githubusercontent.com/ElMoufid-Mohamed/Robber-2D-Windows/master/Robber%202D/Logo/Logo%20HQ.png)
+<img src="Robber%202D/Logo/Logo%20HQ.png">
 
 ## Description
 2D Platformer Game For Windows
@@ -10,7 +10,7 @@
 ## Preview
 </br>
 
-![DellXPS15](https://raw.githubusercontent.com/ElMoufid-Mohamed/Robber-2D-Windows/master/Robber%202D/Logo/Dell-XPS-15.png)
+<img src="Robber%202D/Logo/Dell-XPS-15.png">
 
 </br>
 
